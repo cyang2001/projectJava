@@ -6,8 +6,8 @@
 \geometry{a4paper, margin=1in}
 
 \title{Document de Spécification des Besoins pour l'Application de Gestion de Portefeuilles Financiers}
-\date{}
-
+\date{29/11/2023}
+\author{YANG Chen}
 \begin{document}
 
 \maketitle
@@ -51,6 +51,24 @@ Ce document vise à définir et décrire les besoins de développement de l'appl
 \subsection{Sécurité}
 \begin{itemize}
     \item Cryptage des données : Les données sensibles doivent être cryptées lors du stockage local.
+    \item Sécurité d'accès : Nécessiter un mot de passe utilisateur pour accéder à l'application.
+\end{itemize}
+
+\section{Fonctionnalités Avancées (Bonus)}
+\subsection{Fonctions d'Analyse}
+\begin{itemize}
+    \item Fournir des outils d'analyse de la performance des actifs et des portefeuilles.
+    \item Encourager l'innovation et les fonctionnalités d'analyse personnalisées.
+\end{itemize}
+
+\subsection{Suivi des Transactions}
+\begin{itemize}
+    \item Suivre les transactions importantes sur la blockchain, en particulier les transactions de grande valeur (connues sous le nom de "traque des baleines").
+\end{itemize}
+
+\subsection{Choix de la Devise}
+\begin{itemize}
+    \item Permettre aux utilisateurs de choisir la devise de référence pour afficher la valeur des actifs (par exemple, EUR, USD, etc.).
 \end{itemize}
 
 \section{Besoins de l'Interface Utilisateur}
@@ -61,9 +79,10 @@ Ce document vise à définir et décrire les besoins de développement de l'appl
 
 \section{Contraintes Système}
 \begin{itemize}
-    \item Limitations techniques : N'utilisez pas chatgpt pour coder, chatgpt ne peut pas comprendre de grands projets, et il y a une probabilité que le modèle généré soit erroné. Le code généré par chatgpt est très peu sûr, et il sera plus difficile de le remanier par la suite.
+    \item Limitations techniques : L'application doit être compatible avec les systèmes d'exploitation et dispositifs principaux.
     \item Conformité légale : Respecter les lois et réglementations relatives aux données financières et à la vie privée.
 \end{itemize}
+
 \section{Spécification Du Code}
 \begin{itemize}
     \item Langage de programmation : Java
@@ -94,7 +113,6 @@ Ce document vise à définir et décrire les besoins de développement de l'appl
     \item Contrôle de version
     \subitem Gérez le code à l'aide d'un système de contrôle de version tel que Github
     \subitem Suivez un processus clair de gestion des branches et de demande de fusion
-  
 \end{itemize}
 
 \section{Annexes}
