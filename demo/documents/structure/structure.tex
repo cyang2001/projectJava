@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{Document de l'architecture logicielle pour une Application de Gestion de Portefeuille Financier}
+\date{29/11/2023}
+\author{YANG Chen}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+Ce document présente l'architecture logicielle proposée pour une application de gestion de portefeuille financier. L'architecture suit le modèle MVC (Modèle-Vue-Contrôleur) pour une séparation claire des préoccupations et une meilleure maintenabilité du code.
+
+\section{Couche Frontale (Côté Client):}
+\subsection{Interface Utilisateur (UI) :}
+\begin{itemize}
+  \item Développez avec JavaFX pour créer une interface graphique utilisateur réactive et intuitive. L'UI suivra le modèle MVC et inclura :
+  \subitem Une interface de création et de gestion de portefeuille (Vue).
+  \subitem Un affichage de la valeur des actifs en temps réel (Vue).
+  \subitem Une fonctionnalité de consultation de données historiques (Vue).
+  \subitem Une visualisation graphique des actifs et des valeurs du portefeuille (Vue).
+  \subitem Des paramètres utilisateur pour la personnalisation et la gestion des préférences (Contrôleur).
+\end{itemize}
+\subsection{Modèle MVC :}
+\begin{itemize}
+  \item Le modèle MVC sera utilisé pour séparer les préoccupations dans l'interface utilisateur :
+  \subitem \textbf{Modèle :} Gère les données et la logique de l'application. Interagit avec la base de données et effectue des opérations telles que les requêtes et les mises à jour des données.
+  \subitem \textbf{Vue :} Présente les données à l'utilisateur dans un format spécifique et s'occupe de l'affichage de l'interface utilisateur.
+  \subitem \textbf{Contrôleur :} Fait le lien entre l'utilisateur et le système, gérant l'entrée de l'utilisateur, les interactions avec le modèle et la mise à jour de la vue.
+\end{itemize}
+
+\section{Couche Backend (Côté Serveur) :}
+\subsection{Interface de Programmation d'Application (API) :}
+\begin{itemize}
+  \item Utilisez le framework Java Spring pour construire des API RESTful qui :
+  \subitem Gèrent l'inscription des utilisateurs, la connexion et la gestion des profils (Contrôleur).
+  \subitem Prendent en charge les opérations de portefeuille telles que la création, la gestion, le clonage, l'ajout/suppression d'actifs (Modèle).
+  \subitem Intègrent avec des fournisseurs de données de marché financier externes via des API publiques (Modèle).
+  \subitem Permettent l'importation de données à partir de plateformes de transaction externes (par exemple, Coinbase, Binance) (Modèle).
+\end{itemize}
+
+\section{Couche de Stockage des Données :}
+\subsection{Base de Données : }
+\begin{itemize}
+  \item Utilisez SQLite pour stocker les informations utilisateur, les données de portefeuille, les actifs et les enregistrements de transactions. Ce choix offre une solution légère et facile à déployer pour les applications de petite à moyenne taille.
+\end{itemize}
+\subsection{Cache Local :}
+\begin{itemize}
+  \item Implémentez des mécanismes de mise en cache pour stocker temporairement les données fréquemment accédées afin d'améliorer la performance et l'efficacité. Le cache sera géré par le Modèle, fournissant un accès rapide aux données pour la Vue.
+\end{itemize}
+
+\section{Couche Intermédiaire :}
+\subsection{Middleware de Sécurité :}
+\begin{itemize}
+  \item Incluez des mesures de sécurité telles que :
+  \subitem Le chiffrement des données sensibles au repos et en transit pour protéger les informations financières et personnelles des utilisateurs.
+  \subitem Une authentification et une autorisation sécurisées pour l'accès à l'application, utilisant des mécanismes tels que les jetons JWT ou OAuth.
+\end{itemize}
+\subsection{Middleware de Performance :}
+\begin{itemize}
+  \item Intégrez des outils pour assurer :
+  \subitem Des temps de réponse rapides pour les interactions de l'UI, en utilisant des techniques telles que le chargement paresseux et l'optimisation des requêtes.
+  \subitem Des mises à jour régulières et ponctuelles des données financières, idéalement avec un délai d'une minute, grâce à des systèmes de messagerie ou de file d'attente asynchrone.
+\end{itemize}
+
+\section{Infrastructure de Développement \& Déploiement :}
+\subsection{Système de Contrôle de Version : }
+\begin{itemize}
+  \item Emploie Git avec une plateforme comme GitHub pour la gestion du code source, avec une stratégie claire de branching et de pull request. Cela facilite la collaboration entre les développeurs et le suivi des changements.
+\end{itemize}
+\subsection{Intégration Continue/Déploiement Continu (CI/CD) :}
+\begin{itemize}
+  \item Mettez en place des pipelines CI/CD pour les tests automatisés et le déploiement. Cela permettra d'assurer la qualité du code et de faciliter les déploiements réguliers sur les environnements de production.
+\end{itemize}
+
+\section{Tests \& Documentation :}
+\subsection{Tests Unitaires :}
+\begin{itemize}
+  \item Utilisez JUnit ou des cadres similaires pour écrire des tests unitaires couvrant les fonctionnalités principales et les cas limites. Les tests unitaires seront essentiels pour le Modèle et le Contrôleur, garantissant que la logique métier et les interactions de l'utilisateur fonctionnent comme prévu.
+\end{itemize}
+\subsection{Documentation :}
+\begin{itemize}
+  \item Maintenez une documentation de code complète en utilisant Javadoc et des commentaires en ligne pour les segments de logique complexes. Cela aidera les nouveaux développeurs à comprendre rapidement le code et facilitera la maintenance à long terme de l'application.
+\end{itemize}
+
+\end{document}
