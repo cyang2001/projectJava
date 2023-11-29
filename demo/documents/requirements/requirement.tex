@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{Document de Spécification des Besoins pour l'Application de Gestion de Portefeuilles Financiers}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Ce document vise à définir et décrire les besoins de développement de l'application de gestion de portefeuilles financiers. L'application offrira des outils pour créer, gérer et analyser des portefeuilles financiers personnels ou multiples, couvrant les investissements en actions et cryptomonnaies.
+
+\section{Besoins Fonctionnels}
+\subsection{Gestion de Portefeuille}
+\begin{itemize}
+    \item Création et gestion de portefeuille : Permettre aux utilisateurs de créer et de gérer plusieurs portefeuilles.
+    \item Ajout/Suppression d'actifs : Soutenir l'ajout ou la suppression d'actions et de cryptomonnaies dans le portefeuille.
+\end{itemize}
+
+\subsection{Suivi des Données en Temps Réel}
+\begin{itemize}
+    \item Suivi de la valeur en temps réel : Afficher en temps réel la valeur de chaque actif dans le portefeuille.
+    \item Consultation des données historiques : Fournir une fonction pour consulter la valeur et la performance du portefeuille à des moments passés.
+\end{itemize}
+
+\subsection{Intégration et Stockage des Données}
+\begin{itemize}
+    \item Intégration API : Obtenir des données en temps réel des marchés financiers via des API publiques.
+    \item Importation de données : Permettre aux utilisateurs d'importer des données de plateformes de transactions externes (comme Coinbase ou Binance).
+    \item Cache de données local : Pour améliorer la vitesse et l'efficacité d'accès, stocker les données localement.
+\end{itemize}
+
+\subsection{Interface Utilisateur}
+\begin{itemize}
+    \item Interface graphique : Offrir une interface intuitive et facile à utiliser.
+    \item Visualisation des données : Présenter les actifs et la valeur du portefeuille sous forme de graphiques.
+\end{itemize}
+
+\section{Besoins Non Fonctionnels}
+\subsection{Performance}
+\begin{itemize}
+    \item Réactivité rapide : Le temps de réponse de l'interface ne doit pas dépasser quelques secondes.
+    \item Fréquence de mise à jour des données : La mise à jour des données financières ne devrait pas avoir plus d'une minute de retard.
+\end{itemize}
+
+\subsection{Sécurité}
+\begin{itemize}
+    \item Cryptage des données : Les données sensibles doivent être cryptées lors du stockage local.
+\end{itemize}
+
+\section{Besoins de l'Interface Utilisateur}
+\begin{itemize}
+    \item Intuitivité : L'interface doit être intuitive et facile à comprendre, simplifiant l'opération pour l'utilisateur.
+    \item Personnalisation : Offrir une certaine mesure de personnalisation de l'interface et des options fonctionnelles.
+\end{itemize}
+
+\section{Contraintes Système}
+\begin{itemize}
+    \item Limitations techniques : N'utilisez pas chatgpt pour coder, chatgpt ne peut pas comprendre de grands projets, et il y a une probabilité que le modèle généré soit erroné. Le code généré par chatgpt est très peu sûr, et il sera plus difficile de le remanier par la suite.
+    \item Conformité légale : Respecter les lois et réglementations relatives aux données financières et à la vie privée.
+\end{itemize}
+\section{Spécification Du Code}
+\begin{itemize}
+    \item Langage de programmation : Java
+    \item Style de codage 
+    \subitem Suivez les conventions de code Java d'Oracle
+    \subitem Utilisez une indentation appropriée (généralement quatre espaces)
+    \item Structure du projet
+    \subitem Suivez la structure standard des projets Maven
+    \subitem Le code source est placé dans src/main/java et le code de test dans src/test/java
+    \item Conventions de dénomination
+    \subitem Les noms de classes et d'interfaces sont nommés en CamelCase
+    \subitem Les noms de méthodes et de variables sont nommés en camelCase
+    \subitem Les constantes sont séparées par des lettres majuscules et des traits de soulignement (par exemple, MAX\_VALUE)
+    \item Spécification des annotations
+    \subitem Utilisez Javadoc pour annoter les classes, les méthodes et les champs publics
+    \subitem Utilisez des commentaires de ligne pour les segments de code logiques complexes
+    \item Gestion des erreurs
+    \subitem Préférez la gestion des exceptions au renvoi de codes d'erreur
+    \subitem Les exceptions personnalisées doivent être claires et significatives
+    \subitem Évitez les blocs catch vides
+    \item Meilleures pratiques en matière de performances
+    \subitem Évitez de créer des objets inutiles dans les boucles
+    \subitem Utilisez des structures de données appropriées
+    \subitem Optimisez les interactions avec les bases de données et les appels au réseau
+    \item Spécification des tests
+    \subitem Écrivez des tests unitaires qui couvrent les principales fonctionnalités et les conditions limites
+    \subitem Utilisez JUnit ou d'autres cadres de test
+    \item Contrôle de version
+    \subitem Gérez le code à l'aide d'un système de contrôle de version tel que Github
+    \subitem Suivez un processus clair de gestion des branches et de demande de fusion
+  
+\end{itemize}
+
+\section{Annexes}
+\begin{itemize}
+    \item Glossaire
+    \item Références
+\end{itemize}
+
+\section{Révision et Approbation}
+Ce document doit être révisé et approuvé par l'équipe de projet et les parties prenantes concernées.
+
+\end{document}
