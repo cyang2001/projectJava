@@ -1,0 +1,7 @@
+module-info.class
+com/isep/eleve/javaproject/model/Portfolio.class
+com/isep/eleve/javaproject/model/User.class
+com/isep/eleve/javaproject/controller/LoginController.class
+com/isep/eleve/javaproject/service/AuthenticationService.class
+com/isep/eleve/javaproject/App.class
+com/isep/eleve/javaproject/service/SecurityService.class
