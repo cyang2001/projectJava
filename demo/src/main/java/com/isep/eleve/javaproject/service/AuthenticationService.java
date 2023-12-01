@@ -17,7 +17,7 @@ public class AuthenticationService {
     public User authenticate(String userName, String password) {
         // authentication logic, if authentication succeeds return User object, otherwise return null
         // here should use securityService.encryptPassword to encrypt password, then compare with the hash in the database
-        return new User(); // simulated for now
+        return new User(userName, encryptPassword(password)); // simulated for now
     }
     /**
      * encryptPassword

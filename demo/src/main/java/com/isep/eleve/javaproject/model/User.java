@@ -1,6 +1,10 @@
 package com.isep.eleve.javaproject.model;
 
 import java.util.List;
+
+import com.isep.eleve.javaproject.Tools.*;
+
+
 /**
  * UserModel
  * @author: Chen YANG
@@ -8,13 +12,31 @@ import java.util.List;
  */
 public class User {
   // user ID
-  private Long userId;
+  private Integer userId;
+  public Integer getUserId() {
+    return this.userId;
+  }
   // user name
   private String userName;
+  public String getUserName() {
+    return this.userName;
+  }
   // user password hashed
   private String passwordHash;
+  public String getPasswordHash() {
+    return this.passwordHash;
+  }
   // all portfolios of the user
   private List<Portfolio> portfolios;
+
+  public User(String userName, String passwordHash) {
+      this.userName = userName;
+      this.passwordHash = passwordHash;
+      this.portfolios = null;
+      this.userId = UUIDUtils.getUUIDInOrderId();
+
+  }
+  
   /**
    * Login
    * @param userName user name

@@ -1,9 +1,11 @@
 /Users/gregyoungforever/Documents/ISEP2023-2024/projectJava/demo/src/main/java/module-info.java
+/Users/gregyoungforever/Documents/ISEP2023-2024/projectJava/demo/src/main/java/com/isep/eleve/javaproject/Tools/JsonReader.java
 /Users/gregyoungforever/Documents/ISEP2023-2024/projectJava/demo/src/main/java/com/isep/eleve/javaproject/model/Portfolio.java
 /Users/gregyoungforever/Documents/ISEP2023-2024/projectJava/demo/src/main/java/com/isep/eleve/javaproject/App.java
 /Users/gregyoungforever/Documents/ISEP2023-2024/projectJava/demo/src/main/java/com/isep/eleve/javaproject/model/User.java
 /Users/gregyoungforever/Documents/ISEP2023-2024/projectJava/demo/src/main/java/com/isep/eleve/javaproject/config/DatabaseConfig.java
 /Users/gregyoungforever/Documents/ISEP2023-2024/projectJava/demo/src/main/java/com/isep/eleve/javaproject/repository/UserRespository.java
 /Users/gregyoungforever/Documents/ISEP2023-2024/projectJava/demo/src/main/java/com/isep/eleve/javaproject/controller/LoginController.java
+/Users/gregyoungforever/Documents/ISEP2023-2024/projectJava/demo/src/main/java/com/isep/eleve/javaproject/Tools/UUIDUtils.java
 /Users/gregyoungforever/Documents/ISEP2023-2024/projectJava/demo/src/main/java/com/isep/eleve/javaproject/service/SecurityService.java
 /Users/gregyoungforever/Documents/ISEP2023-2024/projectJava/demo/src/main/java/com/isep/eleve/javaproject/service/AuthenticationService.java

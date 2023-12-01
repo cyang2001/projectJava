@@ -13,6 +13,8 @@ Examen du code : aucun
 **30/11/2023** Chen  
 Fini la première version des diagrammes de classe UML et commencé à écrire la première phase des documents de développement, il y a encore des choses inachevées, nous en discuterons ensemble vendredi  
 
+Crée une fenêtre de connexion simple et remplace l'ID utilisateur par un entier au lieu d'un Long.
+
 Examen du code : aucun  
 
 
