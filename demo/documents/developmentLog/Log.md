@@ -24,4 +24,6 @@ Changement du framework back-end, pas d'utilisation de spring, à la place de sp
 
 Ajout de quelques ToDos, veuillez utiliser la fonction de recherche de l'IDE pour trouver les ToDos et les lire.  
 
+Ajout de documents technique, merci de le voir  
+
 Examen du code : aucun
