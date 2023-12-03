@@ -2,22 +2,21 @@ package com.isep.eleve.javaproject.Tools;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.IOException;
 /**
- * support class for read an object from Json file
+ * support class for write un object in Json file
  * @version V1.0
  * @author Chen YANG
  */
-public class JsonReader {
+public class JsonWriter {
 
-    public static <T> T readJsonFromStream(InputStream inputStream, Class<T> clazz) {
+    public static <T> void writeJsonToStream(OutputStream outputStream, T object) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            return mapper.readValue(inputStream, clazz);
+            mapper.writeValue(outputStream, object);
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
     }
 }

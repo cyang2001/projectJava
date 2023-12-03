@@ -1,47 +1,62 @@
 package com.isep.eleve.javaproject.service;
 import com.isep.eleve.javaproject.model.User;
+import com.isep.eleve.javaproject.repository.*;
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 /**
- * AuthenticationService
+ * Authentication service
+ * @version V1.2
  * @author Chen YANG
- * @version 1.0
- */ 
+ */
+@Service
 public class AuthenticationService {
-  // use SecurityService to encrypt and decrypt passwords
-  private SecurityService securityService; 
-    /**
-     * Authenticate
-     * @param userName user name
-     * @param password password without hash
-     * @return User
-     */
-    public User authenticate(String userName, String password) {
-        // authentication logic, if authentication succeeds return User object, otherwise return null
-        // here should use securityService.encryptPassword to encrypt password, then compare with the hash in the database
-        return new User(userName, encryptPassword(password)); // simulated for now
+    private final UserRepository userRepository;
+    private final SecurityService securityService;
+    @Autowired
+    public AuthenticationService(SecurityService securityService, UserRepository userRepository){
+      this.securityService = securityService;
+      this.userRepository = userRepository;
     }
     /**
-     * encryptPassword
-     * @param userName user name
-     * @param password password without hash
-     * @return encrypted password
+     * Authenticate user
+     * @param userName
+     * @param password
+     * @return User
+     * @throws IOException
+     */
+    // ToDo create a new class for authentication result just like RegistrationResult
+    public User authenticate(String userName, String password) throws IOException {
+      // ToDo: check if the password is empty
+      // check if the user name already exists
+
+        List<User> users = userRepository.findAll();
+            for (User user : users) {
+                if (user.getUserName().equals(userName) && checkPassword(user.getPasswordHash(), encryptPassword(password))) {
+                    return user;
+                }
+            }
+        return null; // Authentication failed
+    }
+    /**
+     * Encrypt password
+     * @param password
+     * @return String
      */
     public String encryptPassword(String password) {
-        // encrypt password logic
-        // should call securityService.encryptData
         return securityService.encryptData(password);
     }
     /**
-     * checkPassword
+     * Check password
      * @param passwordHash
      * @param password
-     * @return if password matches
+     * @return boolean
      */
     public boolean checkPassword(String passwordHash, String password) {
-        // check if password matches logic
-        // should call securityService.decryptData
         String decryptedPassword = securityService.decryptData(passwordHash);
         return decryptedPassword.equals(password);
     }
-    
-    // pls add getters and setters
+
 }

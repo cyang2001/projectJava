@@ -1,0 +1,116 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tocbibind} 
+\usepackage{hyperref}[colorlinks,linkcolor=blue]
+\usepackage{listings}
+\geometry{a4paper, margin=1in}
+
+\title{Documentation technique}
+\date{30/11/2023}
+\author{YANG Chen}
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Intégration de JavaFX et Spring Boot et résolution de problèmes}
+\subsection{Vue d'ensemble}
+  Dans notre projet actuel, où nous utilisons JavaFX comme framework front-end et Spring comme framework back-end, nous avons rencontré un problème critique : malgré le fait que nous voulions implémenter l'injection de dépendances à travers Spring, les composants Controller et Service ont des références `null` au moment de l'exécution. Cela indique que ces composants ne sont pas correctement identifiés et gérés par le conteneur Spring.
+\subsection{La nécessité de l'injection de dépendances}
+L'injection de dépendances (DI) est un modèle de conception logicielle qui permet de gérer les dépendances d'une classe de manière externe (par exemple, fichiers de configuration ou annotations) plutôt que de les coder en dur à l'intérieur de la classe :
+\begin{itemize}
+  \item \textbf{Découplage} : réduit le couplage étroit entre les classes et améliore la modularité et la maintenabilité du code.
+  \item \textbf{Testabilité} : facilite les tests unitaires car les dépendances peuvent être facilement modélisées ou remplacées.
+  \item \textbf{Flexibilité et extensibilité} : permet une plus grande flexibilité dans l'extension et la modification des applications en changeant l'injection des dépendances.
+\end{itemize}
+\subsection{Solution : Intégrer Spring Boot et JavaFX}
+Pour résoudre le problème de l'injection de dépendances, nous avons décidé d'intégrer Spring Boot et JavaFX :
+\begin{itemize}
+  \item \textbf{Créer un projet principal Spring Boot} : nous avons configuré Spring Boot comme cadre de base pour le projet afin de profiter de ses capacités d'auto-configuration et de gestion des dépendances.
+  \item \textbf{Intégrer JavaFX} : Dans le projet Spring Boot, nous intégrons JavaFX en ajoutant les dépendances Maven appropriées.
+  \item \textbf{Configurer la classe principale} : Spécifiez la classe principale de votre application Spring Boot explicitement dans le fichier `pom.xml` pour éviter les échecs de construction dus à de multiples méthodes `main`.
+\end{itemize}
+\subsection{Dépendances Maven et changements de version}
+Pendant la construction du projet, nous avons ajusté les dépendances et les versions Maven pour assurer la compatibilité avec Spring Boot et JavaFX :
+\begin{itemize}
+  \item  Mise à jour de la version de Spring Boot pour correspondre à JavaFX.
+  \item Suppression du fichier `module-info.java` car le projet ne nécessite pas l'encapsulation et la modularité du système de modules Java.
+\end{itemize}
+\subsection{Résolution des problèmes rencontrés}
+\subsubsection{Échec du démarrage du serveur Tomcat}
+Le serveur Tomcat ne démarre pas parce que le projet a été construit à l'origine pour Java 11 et qu'il utilise actuellement Java 19. La solution consiste à reconstruire le projet en utilisant Java 19.
+\subsubsection{Choix du stockage des données}
+Le plan initial était d'utiliser une base de données SQLite, mais en raison du manque de support des serveurs distants et de la nécessité de la conteneurisation Docker, nous avons décidé d'émuler la base de données en utilisant des fichiers JSON. Comme les fichiers contenus dans le fichier Jar sont en lecture seule, nous avons créé une nouvelle méthode de création de fichiers JSON dans un répertoire externe pour nous assurer que le projet fonctionnerait correctement dans différents environnements et systèmes.
+\subsection{Conclusion}
+Avec l'intégration profonde de Spring Boot et JavaFX, nous avons résolu avec succès le problème de l'injection de dépendances et amélioré la flexibilité et la maintenabilité du projet. En outre, les ajustements de la configuration Maven et les modifications du schéma de stockage des données ont permis d'assurer le bon fonctionnement et la compatibilité multiplateforme du projet.
+\subsection{Exemple}
+
+\subsubsection{Initialisation de l'application Spring Boot}
+\begin{lstlisting}[language=Java]
+@SpringBootApplication
+@ComponentScan(basePackages = {"com.isep.eleve.javaproject"})
+public class App extends Application {
+    private static ConfigurableApplicationContext context;
+    private static Stage primaryStage;
+
+    @Override
+    public void init() throws Exception {
+        context = SpringApplication.run(App.class);
+    }
+}
+\end{lstlisting}
+\textbf{Commentaire:} Ce code montre comment initialiser une application Spring Boot avec l'annotation \texttt{@SpringBootApplication} et comment scanner les composants Spring dans des packages spécifiques avec \texttt{@ComponentScan}.
+
+\subsubsection{Configuration de l'intégration JavaFX et Spring}
+\begin{lstlisting}[language=Java]
+FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(LOGIN_VIEW_PATH));
+fxmlLoader.setControllerFactory(context::getBean);
+Parent root = fxmlLoader.load();
+primaryStage.setScene(new Scene(root));
+\end{lstlisting}
+\textbf{Commentaire:} Cette section explique comment intégrer JavaFX avec Spring, permettant ainsi à Spring de gérer les contrôleurs JavaFX via l'injection de dépendances.
+
+\subsubsection{Création du contrôleur de connexion}
+\begin{lstlisting}[language=Java]
+@Controller
+public class LoginController {
+    @Autowired
+    private AuthenticationService authenticationService;
+}
+\end{lstlisting}
+\textbf{Commentaire:} Ici, un contrôleur de connexion est défini avec l'annotation \texttt{@Controller}, et l'authentification est gérée automatiquement par Spring à l'aide de \texttt{@Autowired}.
+
+\subsubsection{Mise en œuvre du service d'authentification}
+\begin{lstlisting}[language=Java]
+@Service
+public class AuthenticationService {
+    private final UserRepository userRepository;
+    private final SecurityService securityService;
+
+    @Autowired
+    public AuthenticationService(UserRepository userRepository, 
+    SecurityService securityService) {
+        this.userRepository = userRepository;
+        this.securityService = securityService;
+    }
+}
+\end{lstlisting}
+\textbf{Commentaire:} Ce code illustre un service d'authentification marqué avec \texttt{@Service}, indiquant qu'il fait partie de la couche logique métier. Le constructeur injecte \texttt{UserRepository} et \texttt{SecurityService}.
+
+\subsubsection{Définition du dépôt utilisateur}
+\begin{lstlisting}[language=Java]
+@Repository
+public class UserRepository {
+}
+\end{lstlisting}
+\textbf{Commentaire:} \texttt{UserRepository} est annoté avec \texttt{@Repository}, indiquant qu'il fait partie de la couche d'accès aux données, géré par Spring pour l'intégration avec d'autres services et contrôleurs.
+
+\subsection{Références}
+\href{https://www.cnblogs.com/lingkang/p/16698421.html}{https://www.cnblogs.com/lingkang/p/16698421.html}
+\section{}
+\end{document}

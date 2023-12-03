@@ -26,4 +26,7 @@
     <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <Button text="Sign in" onAction="#handleLoginAction"/>
     </HBox>
+    <HBox spacing="10" alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="5">
+        <Button text="Sign up" onAction="#handleChageRegistrationPageAction"/>
+    </HBox>
 </GridPane>

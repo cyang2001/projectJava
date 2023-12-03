@@ -198,10 +198,10 @@ Voici le plan détaillé du projet et la chronologie prévue :
     \item Système d'exploitation : MacOS Ventura 13.4 \& Windows 11
     \item IDE : Visual Studio Code \& IntelliJ IDEA
     \item Langage de programmation : Java 19.0.2
-    \item Cadre Back-End : Spring 5.0.2.RELEASE
+    \item Cadre Back-End : Spring boot 2.7.0
     \item Cadre Front-End : JavaFx 17.0.1
-    \item Base de données : SQLite 3.43.2.0
-    \item Autre : Maven 11 \& GitHub \& Draw.io \& LaTex
+    \item Base de données : Simuler le stockage d'une base de données à l'aide de fichiers json
+    \item Autre : Maven \& GitHub \& Draw.io \& LaTex
 \end{itemize}
 \section{Technologie d'architecture et de conception}
 
@@ -223,7 +223,7 @@ Les contrôleurs servent de médiateurs entre la vue et le modèle. Ils interpr�
 La couche de services offre une abstraction de la logique métier, exposant un ensemble de services de haut niveau utilisés par les contrôleurs. Elle facilite la réutilisation du code métier et décore le modèle avec des opérations complexes. Le dossier \texttt{service} encapsule les processus métier tels que l'analyse financière et la synchronisation des données.
 
 \subsubsection{Accès aux données (Repository)}
-La couche d'accès aux données abstrait la persistance et la récupération des données. Elle fournit une interface pour interagir avec les sources de données, garantissant l'isolation entre la logique métier et les détails de la base de données. Le dossier \texttt{repository} implémente les interactions avec la base de données SQLite et autres mécanismes de stockage.
+La couche d'accès aux données abstrait la persistance et la récupération des données. Elle fournit une interface pour interagir avec les sources de données, garantissant l'isolation entre la logique métier et les détails de la base de données. Le dossier \texttt{repository} implémente les interactions avec la base de données.
 
 \subsubsection{Configuration (Config)}
 La configuration de l'application est gérée dans la couche de configuration. Elle inclut les paramètres de démarrage, les configurations de la base de données, les clés API pour les services externes et les détails de l'injection de dépendance. Le dossier \texttt{config} contient des classes de configuration et du code d'initialisation.

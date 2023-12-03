@@ -17,4 +17,11 @@ Crée une fenêtre de connexion simple et remplace l'ID utilisateur par un entie
 
 Examen du code : aucun  
 
+**02/12/2023** Chen
+Une démo MVC complète pour la connexion ou l'enregistrement d'un utilisateur, qui permet de comprendre le fonctionnement interne du code.
+Et encapsuler certains des outils qui peuvent être utilisés, rendra le développement ultérieur plus simple.
+Changement du framework back-end, pas d'utilisation de spring, à la place de springboot, les changements spécifiques seront reflétés dans la documentation technique.  
 
+Ajout de quelques ToDos, veuillez utiliser la fonction de recherche de l'IDE pour trouver les ToDos et les lire.  
+
+Examen du code : aucun

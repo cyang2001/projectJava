@@ -4,6 +4,9 @@ import java.util.UUID;
 
 /**
  * support class for generating UUID
+ * @version V1.0
+ * @see https://fr.wikipedia.org/wiki/Universally_unique_identifier
+ * @author Chen YANG
  */
 public class UUIDUtils {
   public static String getUUID(){
