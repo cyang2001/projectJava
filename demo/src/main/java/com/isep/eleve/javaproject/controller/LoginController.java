@@ -1,17 +1,17 @@
 package com.isep.eleve.javaproject.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
+
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.fxml.FXMLLoader;
+
 
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.isep.eleve.javaproject.*;
+
 import com.isep.eleve.javaproject.App;
 import com.isep.eleve.javaproject.model.User;
 import com.isep.eleve.javaproject.service.*;

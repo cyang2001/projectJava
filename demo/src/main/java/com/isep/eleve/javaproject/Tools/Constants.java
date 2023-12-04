@@ -1,6 +1,5 @@
 package com.isep.eleve.javaproject.Tools;
 
-import java.net.PasswordAuthentication;
 
 public class Constants {
   public static final String LOGIN_VIEW_PATH = "/com/isep/eleve/javaproject/view/LoginView.fxml"; // path to the login view

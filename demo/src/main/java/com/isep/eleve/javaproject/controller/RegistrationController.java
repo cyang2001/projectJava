@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.isep.eleve.javaproject.*;
-import com.isep.eleve.javaproject.model.User;
+//import com.isep.eleve.javaproject.model.User;
 import com.isep.eleve.javaproject.service.*;
 import com.isep.eleve.javaproject.Tools.*;
 /**
@@ -57,7 +57,7 @@ public class RegistrationController {
       }
     } else {
       App.showAlert("Registration Success", "You have successfully registered", "Welcome!");
-      User user = result.getUser();
+      //User user = result.getUser();
     }
   }
 
