@@ -45,15 +45,12 @@ public class RegistrationService {
             }
         }
         // create new user
-        User newUser = new User(userName, encryptPassword(password));
+        User newUser = new User(userName, securityService.encryptData(password));
         // save new user
         userRepository.save(newUser);
         return new RegistrationResult(true, null, newUser);
     }
 
-    private String encryptPassword(String password) {
-        return securityService.encryptData(password);
-    }
 
     public class RegistrationResult {
         private boolean success;

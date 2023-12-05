@@ -34,19 +34,11 @@ public class AuthenticationService {
 
         List<User> users = userRepository.findAll();
             for (User user : users) {
-                if (user.getUserName().equals(userName) && checkPassword(user.getPasswordHash(), encryptPassword(password))) {
+                if (user.getUserName().equals(userName) && checkPassword(user.getPasswordHash(), securityService.encryptData(password))) {
                     return user;
                 }
             }
         return null; // Authentication failed
-    }
-    /**
-     * Encrypt password
-     * @param password
-     * @return String
-     */
-    public String encryptPassword(String password) {
-        return securityService.encryptData(password);
     }
     /**
      * Check password
@@ -54,7 +46,7 @@ public class AuthenticationService {
      * @param password
      * @return boolean
      */
-    public boolean checkPassword(String passwordHash, String password) {
+    private boolean checkPassword(String passwordHash, String password) {
         String decryptedPassword = securityService.decryptData(passwordHash);
         return decryptedPassword.equals(password);
     }

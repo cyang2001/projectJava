@@ -1,0 +1,181 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tocbibind} 
+\geometry{a4paper, margin=1in}
+
+\title{Documentation sur le développement}
+\date{04/12/2023}
+\author{YANG Chen}
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Introduction}
+Ce document décrit la conception détaillée du système de gestion de portefeuille, mais ne reflète pas la conception des vues et des contrôleurs dans le document, car ceux-ci n'ont pas été conçus jusqu'à présent dans notre processus de développement. Certains outils et constantes encapsulés ne sont pas non plus reflétés dans ce document. De même, la gestion des exceptions n'est que partiellement couverte.
+\section{Conception détaillée}
+\subsection{Service}
+\subsubsection{Registration Service (Service d'Enregistrement)}
+\paragraph{Responsabilités:} Traite la logique d'enregistrement des nouveaux utilisateurs.
+\paragraph{Méthodes:}
+\begin{itemize}
+  \item \textbf{register}(userName: String, password: String, passwordEnsurance: String): RegistrationResult
+\end{itemize}
+\paragraph{Exceptions:}
+\begin{itemize}
+  \item \textbf{IOException} : Si le fichier de stockage des utilisateurs n'est pas accessible. 
+\end{itemize}
+\subsubsection{Authentication Service (Service d'Authentification)}
+\paragraph{Responsabilités:} Traite la logique d'authentification des utilisateurs.
+\paragraph{Méthodes:}
+\begin{itemize}
+  \item \textbf{authenticate}(userName: String, password: String): AuthenticationResult
+  \item \textbf{checkPassword}(passwordHash: String, password: String): Boolean
+\end{itemize}
+\subsubsection{Security Service (Service de Sécurité)}
+\paragraph{Responsabilités:} Gère les opérations de sécurité et d'autorisation.
+\paragraph{Méthodes:}
+\begin{itemize}
+  \item \textbf{encryptData}(plainData: String): String
+  \item \textbf{decryptData}(encryptedData: String): String
+\end{itemize}
+\subsubsection{Portfolio Service (Service de Portefeuille)}
+\paragraph{Responsabilités:} Gère les services de portefeuille d'investissement.
+\paragraph{Méthodes:}
+\begin{itemize}
+  \item \textbf{getPortfolio}(portfolioId: int): Portfolio
+  \item \textbf{updatePortfolio}(portfolio: Portfolio): Boolean
+  \item \textbf{addPortfolio}(portfolio: Portfolio): Boolean
+\end{itemize}
+
+
+\subsubsection{Transaction Service (Service de Transaction)}
+\paragraph{Responsabilités:} Gère la logique des transactions.
+\paragraph{Méthodes:}
+\begin{itemize}
+  \item \textbf{recordTransaction}(transaction: Transaction): void
+  \item \textbf{getTransactionHistory}(portfolioId: int): List<Transaction>
+\end{itemize}
+\subsubsection{Market Data Service (Service des Données du Marché)}
+\paragraph{Responsabilités:} Fournit des services de données de marché.
+\paragraph{Méthodes:}
+\begin{itemize}
+  \item \textbf{fetchData}(assetId: int): List<Asset>
+  \item \textbf{fetchHistoricalData}(startTime: Time, endTime: Time): List<Asset>
+\end{itemize}
+\paragraph{Exceptions:}
+\begin{itemize}
+  \item \textbf{IOException} : Si l'API externe est inaccessible.
+\end{itemize}
+\subsection{Repository}
+\subsubsection{User Repository (Dépôt Utilisateur)}
+\paragraph{Responsabilités:} Gère le stockage et la récupération des données utilisateur.
+\paragraph{Méthodes:}
+\begin{itemize}
+  \item \textbf{findAll}(): List<User>
+  \item \textbf{save}(user: User): Boolean
+  \item \textbf{findByUserName}(userName: String): User
+  \item \textbf{writeUsersToFile}(users: List<User>): void
+\end{itemize}
+
+\subsubsection{Data Repository (Dépôt de Données)}
+\paragraph{Responsabilités:} Gère le stockage et la récupération des données d'application.
+\paragraph{Méthodes:}
+\begin{itemize}
+  \item \textbf{findAll}(): List<Asset>
+  \item \textbf{save}(Data: data): Boolean
+  \item \textbf{findByDataTimeStamp}(dataTimeStamp: Time): Data
+  \item \textbf{findByDataTimeStamp}(startTime: Time, endTime: Time): List<Data>
+  \item \textbf{writeDatasToFile}(datas: List<Data>): void 
+\end{itemize}
+\subsubsection{Transaction Repository (Dépôt de Transaction)}
+\paragraph{Responsabilités:} Gère le stockage et la récupération des données de transaction.
+\paragraph{Méthodes:}
+\begin{itemize}
+  \item \textbf{findAll}(): List<Transaction>
+  \item \textbf{save}(transaction: Transaction): Boolean
+  \item \textbf{findByPortfolioId}(portfolioId: int): List<Transaction>
+  \item \textbf{writeTransactionsToFile}(transactions: List<Transaction>): void
+\end{itemize}
+\subsubsection{Portfolio Repository (Dépôt de Portefeuille)}
+\paragraph{Responsabilités:} Gère le stockage et la récupération des données de portefeuille d'investissement.
+\paragraph{Méthodes:}
+\begin{itemize}
+  \item \textbf{findAll}(): List<Portfolio>
+  \item \textbf{save}(portfolio: Portfolio): Boolean
+  \item \textbf{findByPortfolioId}(portfolioId: int): Portfolio
+  \item \textbf{writePortfoliosToFile}(portfolios: List<Portfolio>): void
+\end{itemize}
+\subsection{Model}
+\subsubsection{Analytics Tool (Outil d'Analyse)}
+\paragraph{Responsabilités:} Fournit des outils d'analyse de données.
+\subsubsection{Performance Monitor (Surveillance de la Performance)}
+\paragraph{Responsabilités:} Surveille la performance du Service des Données du Marché pour déterminer si l'API externe est trop lente.
+\subsubsection{User (Utilisateur)}
+\paragraph{Responsabilités:} Représente un utilisateur.
+\paragraph{Propriétés:}
+\begin{itemize}
+  \item \textbf{userName}: String
+  \item \textbf{userId}: int
+  \item \textbf{passwordHash}: String
+  \item \textbf{portfolios}: List<Portfolio>
+\end{itemize}
+\subsubsection{Data (Donnée)}
+\paragraph{Responsabilités:} Représente une donnée collecté.
+\paragraph{Propriétés:}
+\begin{itemize}
+  \item \textbf{price}: BigDecimal
+  \item \textbf{timeStamp}: Time
+\end{itemize}
+\subsubsection{Authentication Result (Résultat d'Authentification)}
+\paragraph{Responsabilités:} Représente le résultat d'une tentative d'authentification.
+\paragraph{Propriétés:}
+\begin{itemize}
+  \item \textbf{sucess}: Boolean
+  \item \textbf{failureType}: AUTHENTICATION\_FAILIURE\_TYPE
+  \item \textbf{user}: User
+\end{itemize}
+\subsubsection{Registration Result (Résultat d'Inscription)}
+\paragraph{Responsabilités:} Représente le résultat d'une tentative d'inscription.
+\paragraph{Propriétés:}
+\begin{itemize}
+  \item \textbf{sucess}: Boolean
+  \item \textbf{failureType}: REGISTRATION\_FAILIURE\_TYPE
+  \item \textbf{user}: User
+\end{itemize}
+\subsubsection{Portfolio (Portefeuille)}
+\paragraph{Responsabilités:} Représente un portefeuille d'investissement.
+\paragraph{Propriétés:}
+\begin{itemize}
+  \item \textbf{portfolioId}: int
+  \item \textbf{ownerId}: int
+  \item \textbf{assets}: List<Asset>
+\end{itemize}
+\subsubsection{Asset (Actif)}
+\paragraph{Responsabilités:} Représente un actif.
+\paragraph{Propriétés:}
+\begin{itemize}
+  \item \textbf{assetId}: int
+  \item \textbf{assetName}: String
+  \item \textbf{assetType}: ASSET\_TYPE
+  \item \textbf{quantity}: int
+  \item \textbf{price}: BigDecimal
+  \item \textbf{value}: BigDecimal
+\end{itemize}
+\subsubsection{Transaction (Transaction)}
+\paragraph{Responsabilités:} Représente une transaction.
+\paragraph{Propriétés:}
+\begin{itemize}
+  \item \textbf{transactionId}: int
+  \item \textbf{portfolioId}: int
+  \item \textbf{assetId}: int
+  \item \textbf{quantity}: int
+  \item \textbf{transactionType}: TRANSACTION\_TYPE
+  \item \textbf{timeStamp}: Time
+\end{itemize}
+\end{document}
