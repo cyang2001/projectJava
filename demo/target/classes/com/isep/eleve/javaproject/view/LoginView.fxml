@@ -15,13 +15,13 @@
         <Insets top="25" right="25" bottom="10" left="25"/>
     </padding>
 
-    <Text text="Login" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+    <Text text="Login" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" />
 
     <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <TextField fx:id="usernameField" promptText="User name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
     <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <PasswordField fx:id="passwordField" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
     <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <Button text="Sign in" onAction="#handleLoginAction"/>
