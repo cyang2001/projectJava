@@ -33,4 +33,6 @@ Fini UML et écrire un document de conception détaillée.
 
 Examen du code : aucun  
 
-
+**07/12/2023** Rémi  
+Mis à jour le V1.0 UI  
+Examen du code : aucun  
