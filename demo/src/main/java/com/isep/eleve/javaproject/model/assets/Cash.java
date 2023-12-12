@@ -4,8 +4,8 @@ package com.isep.eleve.javaproject.model.assets;
 import java.math.BigDecimal;
 
 public class Cash extends LiquidAssets {
-    public Cash(String assetName, int portfolioId, int quantity, BigDecimal price) {
-        super(assetName, portfolioId, quantity, price);
+    public Cash(int portfolioId, int quantity, BigDecimal price) {
+        super(portfolioId, quantity, price);
     }
 
     @Override

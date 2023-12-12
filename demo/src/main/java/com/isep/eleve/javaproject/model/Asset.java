@@ -13,9 +13,8 @@ public abstract class Asset {
   private BigDecimal value;
   private int quantity;
   private BigDecimal price;
-
-  public Asset(String assetName, int portfolioId, int quantity, BigDecimal price) {
-    this.assetName = assetName;
+  private int ownerId;
+  public Asset(int portfolioId, int quantity, BigDecimal price) {
     this.portfolioId = portfolioId;
     this.quantity = quantity;
     this.price = price;
@@ -62,7 +61,14 @@ public abstract class Asset {
   protected void setValue(BigDecimal value) {
     this.value = value;
   }
-
+@JsonProperty("ownerId")
+  public int getOwnerId() {
+    return this.ownerId;
+  }
+@JsonProperty("ownerId")
+  public void setOwnerId(int ownerId) {
+    this.ownerId = ownerId;
+  }
   // Abstract method to be implemented by subclasses to calculate the asset's value
   public abstract void calculateValue();
 }

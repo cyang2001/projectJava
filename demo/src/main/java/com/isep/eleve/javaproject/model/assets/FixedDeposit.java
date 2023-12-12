@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 public class FixedDeposit extends LiquidAssets {
     private BigDecimal interestRate;
 
-    public FixedDeposit(String assetName, int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate) {
-        super(assetName, portfolioId, quantity, price);
+    public FixedDeposit(int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate) {
+        super(portfolioId, quantity, price);
         this.interestRate = interestRate;
     }
 

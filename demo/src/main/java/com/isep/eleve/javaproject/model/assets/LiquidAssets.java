@@ -4,8 +4,8 @@ import com.isep.eleve.javaproject.model.Asset;
 
 public abstract class LiquidAssets extends Asset {
     // Constructor matching super
-    public LiquidAssets(String assetName, int portfolioId, int quantity, BigDecimal price) {
-        super(assetName, portfolioId, quantity, price);
+    public LiquidAssets(int portfolioId, int quantity, BigDecimal price) {
+        super(portfolioId, quantity, price);
     }
 
     // Additional properties or methods common to all liquid assets can be added here

@@ -16,7 +16,7 @@ import com.isep.eleve.javaproject.model.Portfolio;
 
 @Repository
 public class PortfolioRepository {
-    private static final String EXTERNAL_FILE_PATH = System.getProperty("user.home") + File.separator + "App" + File.separator + "databaseUser.json";
+    private static final String EXTERNAL_FILE_PATH = System.getProperty("user.home") + File.separator + "App" + File.separator + "databasePortfolios.json";
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     /**
@@ -39,9 +39,9 @@ public class PortfolioRepository {
      * @throws IOException
      */
     public void save(Portfolio portfolio) throws IOException {
-        List<Portfolio> users = findAll();
-        users.add(portfolio);
-        writePortfoliosToFile(users);
+        List<Portfolio> portfolios = findAll();
+        portfolios.add(portfolio);
+        writePortfoliosToFile(portfolios);
     }
     /**
      * Find portfolio by portfolio id
