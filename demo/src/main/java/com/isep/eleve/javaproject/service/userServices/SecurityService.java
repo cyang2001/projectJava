@@ -1,4 +1,4 @@
-package com.isep.eleve.javaproject.service;
+package com.isep.eleve.javaproject.service.userServices;
 
 import org.springframework.stereotype.Service;
 

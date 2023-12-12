@@ -20,7 +20,7 @@ import java.util.List;
 @Repository
 public class UserRepository {
     // File path
-    private static final String EXTERNAL_FILE_PATH = System.getProperty("user.home") + File.separator + "yourApp" + File.separator + "databaseUser.json";
+    private static final String EXTERNAL_FILE_PATH = System.getProperty("user.home") + File.separator + "App" + File.separator + "databaseUser.json";
     private final ObjectMapper objectMapper = new ObjectMapper();
     /**
      * Find all users

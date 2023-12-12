@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import com.isep.eleve.javaproject.App;
 import com.isep.eleve.javaproject.model.User;
 import com.isep.eleve.javaproject.service.*;
+import com.isep.eleve.javaproject.service.userServices.AuthenticationService;
 /**
  * Login controller
  * @version V1.2
