@@ -7,6 +7,7 @@ import com.isep.eleve.javaproject.Tools.UUIDUtils;
 
 
 public abstract class Asset {
+  // Todo add assetType
   private int assetId;
   private String assetName;
   private int portfolioId;

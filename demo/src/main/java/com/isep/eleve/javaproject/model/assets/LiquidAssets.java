@@ -8,5 +8,4 @@ public abstract class LiquidAssets extends Asset {
         super(portfolioId, quantity, price);
     }
 
-    // Additional properties or methods common to all liquid assets can be added here
 }

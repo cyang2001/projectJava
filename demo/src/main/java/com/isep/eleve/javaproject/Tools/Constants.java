@@ -1,11 +1,6 @@
 package com.isep.eleve.javaproject.Tools;
 
-import java.util.HashMap;
-import java.util.Map;
 
-
-import com.isep.eleve.javaproject.model.Asset;
-import com.isep.eleve.javaproject.model.assets.*;
 
 public class Constants {
   public static final String LOGIN_VIEW_PATH = "/com/isep/eleve/javaproject/view/LoginView.fxml"; // path to the login view
@@ -20,10 +15,5 @@ public class Constants {
     PASSWORD_NOT_SAME,
     USERNAME_ALREADY_EXIST,
   };
-  public static final Map<String, Class<? extends Asset>> ASSET_TYPE;
-  static{
-    ASSET_TYPE = new HashMap<>();
-    ASSET_TYPE.put("Cash", Cash.class);
-    ASSET_TYPE.put("FixedDeposit", FixedDeposit.class);
-  }
+
 }

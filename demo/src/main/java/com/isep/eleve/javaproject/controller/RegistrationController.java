@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 
 import com.isep.eleve.javaproject.*;
 //import com.isep.eleve.javaproject.model.User;
-import com.isep.eleve.javaproject.service.*;
 import com.isep.eleve.javaproject.service.userServices.RegistrationService;
 import com.isep.eleve.javaproject.Tools.*;
 /**
