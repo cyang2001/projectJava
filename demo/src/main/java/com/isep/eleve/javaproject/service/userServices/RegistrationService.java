@@ -45,7 +45,7 @@ public class RegistrationService {
             }
         }
         // create new user
-        User newUser = new User(userName, securityService.encryptData(password));
+        User newUser = new User(userName, securityService.encryptData(password, Constants.ENCRYPT_TYPE.MD5));
         // save new user
         userRepository.save(newUser);
         return new RegistrationResult(true, null, newUser);

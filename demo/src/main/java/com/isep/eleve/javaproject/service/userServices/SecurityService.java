@@ -13,9 +13,9 @@ public class SecurityService {
   // encryption type
   //public String type; 
   // if need more encryption type, add here
-  public String encryptData(String plainData) {
+  public String encryptData(String plainData, Constants.ENCRYPT_TYPE type) {
       // encrypt data logic
-      return Md5Util.md5(plainData);
+      return EncryptUtils.encrypt(plainData, type);
   }
 
   public String decryptData(String encryptedData) {

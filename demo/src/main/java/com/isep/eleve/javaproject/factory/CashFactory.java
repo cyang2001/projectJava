@@ -7,12 +7,23 @@ import org.springframework.stereotype.Component;
 import com.isep.eleve.javaproject.model.Asset;
 import com.isep.eleve.javaproject.model.assets.Cash;
 
+
 @Component
 public class CashFactory implements AssetFactory{
-
+  /**
+  * Creates a Cash asset with the given parameters.
+  *
+  * @param assetName the name of the asset
+  * @param portfolioId the ID of the portfolio
+  * @param quantity the quantity of the asset
+  * @param price the price of the asset
+  * @param interestRate the interest rate of the asset
+  * @param ownerId the ID of the owner
+  * @return the created Cash asset
+  */
   @Override
-  public Asset createAsset(int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate) {
-    return new Cash(portfolioId, quantity, price);
+  public Asset createAsset(String assetName,int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate, int ownerId) {
+    return new Cash(assetName, portfolioId, quantity, price, ownerId);
   }
   
 }

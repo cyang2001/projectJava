@@ -3,14 +3,33 @@ package com.isep.eleve.javaproject.model.assets;
 
 import java.math.BigDecimal;
 
+/**
+ * Represents a cash asset.
+ * Extends the LiquidAssets class.
+ * @version 1.0
+ * @see LiquidAssets
+ * @author Chen YANG
+ */
 public class Cash extends LiquidAssets {
-    public Cash(int portfolioId, int quantity, BigDecimal price) {
-        super(portfolioId, quantity, price);
-    }
+  /**
+   * Constructs a Cash object with the specified parameters.
+   *
+   * @param assetName   the name of the asset
+   * @param portfolioId the ID of the portfolio
+   * @param quantity    the quantity of cash
+   * @param price       the price of the cash
+   * @param ownerId     the ID of the owner
+   */
+  public Cash(String assetName, int portfolioId, int quantity, BigDecimal price, int ownerId) {
+    super(assetName, portfolioId, quantity, price, ownerId);
+  }
 
-    @Override
-    public void calculateValue() {
-        // For cash, value might simply be the amount of cash available
-        this.setValue(new BigDecimal(this.getQuantity()));
-    }
+  /**
+   * Calculates the value of the cash asset.
+   * For cash, the value is simply the amount of cash available.
+   */
+  @Override
+  public void calculateValue() {
+    this.setValue(new BigDecimal(this.getQuantity()));
+  }
 }

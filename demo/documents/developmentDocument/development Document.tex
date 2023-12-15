@@ -4,7 +4,7 @@
 \usepackage[french]{babel}
 \usepackage{geometry}
 \usepackage{graphicx}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{tocbibind} 
 
 \geometry{a4paper, margin=1in}
@@ -253,9 +253,10 @@ Chaque couche est conçue pour être indépendante mais interopérable, permetta
     \label{fig:UML}
 \end{figure}
 
-\subsection{Autres considérations de conception}
+\subsection{Changement de Modèle de Conception}
+\subsubsection{Introduction}
 
-Abordez d'autres aspects importants tels que l'extensibilité, la maintenance, la gestion des exceptions et la journalisation.
+
 
 
 \section{Conception détaillée}
@@ -291,8 +292,18 @@ Abordez d'autres aspects importants tels que l'extensibilité, la maintenance, l
   \item \textbf{getPortfolio}(portfolioId: int): Portfolio
   \item \textbf{updatePortfolio}(portfolio: Portfolio): Boolean
   \item \textbf{addPortfolio}(portfolio: Portfolio): Boolean
+  \item \textbf{createPortfolio}(portfolioName : String, ownerId: int): Portfolio
 \end{itemize}
-
+\subsubsection{Asset Service (Service d'Actif)}
+\paragraph{Responsabilités:} Gère les services d'actif.
+\paragraph{Méthodes:}
+\begin{itemize}
+  \item \textbf{getAsset}(assetId: int): Asset
+  \item \textbf{updateAsset}(asset: Asset): Boolean
+  \item \textbf{addAsset}(asset: Asset): Boolean
+  \item \textbf{createAsset}(assetName: String, portfolioId: int, quantity: int,
+  price: BigDecimal, assetType: ASSET\_TYPE,  interestRate: BigDecimal): Asset
+\end{itemize}
 
 \subsubsection{Transaction Service (Service de Transaction)}
 \paragraph{Responsabilités:} Gère la logique des transactions.
@@ -320,7 +331,6 @@ Abordez d'autres aspects importants tels que l'extensibilité, la maintenance, l
   \item \textbf{findAll}(): List<User>
   \item \textbf{save}(user: User): Boolean
   \item \textbf{findByUserName}(userName: String): User
-  \item \textbf{writeUsersToFile}(users: List<User>): void
 \end{itemize}
 
 \subsubsection{Data Repository (Dépôt de Données)}
@@ -331,7 +341,6 @@ Abordez d'autres aspects importants tels que l'extensibilité, la maintenance, l
   \item \textbf{save}(Data: data): Boolean
   \item \textbf{findByDataTimeStamp}(dataTimeStamp: Time): Data
   \item \textbf{findByDataTimeStamp}(startTime: Time, endTime: Time): List<Data>
-  \item \textbf{writeDatasToFile}(datas: List<Data>): void 
 \end{itemize}
 \subsubsection{Transaction Repository (Dépôt de Transaction)}
 \paragraph{Responsabilités:} Gère le stockage et la récupération des données de transaction.
@@ -340,7 +349,6 @@ Abordez d'autres aspects importants tels que l'extensibilité, la maintenance, l
   \item \textbf{findAll}(): List<Transaction>
   \item \textbf{save}(transaction: Transaction): Boolean
   \item \textbf{findByPortfolioId}(portfolioId: int): List<Transaction>
-  \item \textbf{writeTransactionsToFile}(transactions: List<Transaction>): void
 \end{itemize}
 \subsubsection{Portfolio Repository (Dépôt de Portefeuille)}
 \paragraph{Responsabilités:} Gère le stockage et la récupération des données de portefeuille d'investissement.
@@ -349,7 +357,15 @@ Abordez d'autres aspects importants tels que l'extensibilité, la maintenance, l
   \item \textbf{findAll}(): List<Portfolio>
   \item \textbf{save}(portfolio: Portfolio): Boolean
   \item \textbf{findByPortfolioId}(portfolioId: int): Portfolio
-  \item \textbf{writePortfoliosToFile}(portfolios: List<Portfolio>): void
+\end{itemize}
+\subsubsection{Asset Repository (Dépôt d'Actif)}
+\paragraph{Responsabilités:} Gère le stockage et la récupération des données d'actif.
+\paragraph{Méthodes:}
+\begin{itemize}
+  \item \textbf{findAll}(): List<Asset>
+  \item \textbf{save}(asset: Asset): Boolean
+  \item \textbf{findByAssetId}(assetId: int): Asset
+  \item \textbf{findByOwnerId}(ownerId: int): List<Asset>
 \end{itemize}
 \subsection{Model}
 \subsubsection{Analytics Tool (Outil d'Analyse)}

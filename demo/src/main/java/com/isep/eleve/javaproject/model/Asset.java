@@ -15,12 +15,14 @@ public abstract class Asset {
   private int quantity;
   private BigDecimal price;
   private int ownerId;
-  public Asset(int portfolioId, int quantity, BigDecimal price) {
+  public Asset(String assetName, int portfolioId, int quantity, BigDecimal price, int ownerId) {
     this.portfolioId = portfolioId;
     this.quantity = quantity;
     this.price = price;
     this.assetId = UUIDUtils.getUUIDInOrderId();
     this.calculateValue(); // Initialize the value of the asset
+    this.ownerId = ownerId;
+    this.assetName = assetName;
   }
 
 @JsonProperty("assetId")

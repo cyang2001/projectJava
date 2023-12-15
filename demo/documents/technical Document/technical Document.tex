@@ -4,7 +4,7 @@
 \usepackage[french]{babel}
 \usepackage{geometry}
 \usepackage{graphicx}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{tocbibind} 
 \usepackage{hyperref}[colorlinks,linkcolor=blue]
 \usepackage{listings}
@@ -112,5 +112,119 @@ public class UserRepository {
 
 \subsection{Références}
 \href{https://www.cnblogs.com/lingkang/p/16698421.html}{https://www.cnblogs.com/lingkang/p/16698421.html}
-\section{}
+\section{Classe Outils(Tools)}
+\subsection{Vue d'ensemble}
+La classe Tools est une classe utilitaire qui fournit des méthodes statiques pour effectuer des opérations de base sur les chaînes de caractères, les fichiers et les images.
+\subsection{Constants}
+\subsubsection{Chemin des Vues}
+\begin{itemize}
+  \item \textbf{\texttt{LOGIN\_VIEW\_PATH}}: Chemin d'accès à la vue de connexion.\\ Valeur:  \texttt{"\textbackslash com\textbackslash isep\textbackslash eleve\textbackslash javaproject\textbackslash view\textbackslash LoginView.fxml"}.
+  \item \textbf{\texttt{REGISTRATION\_VIEW\_PATH}}: Chemin d'accès à la vue d'inscription. \\ Valeur:
+  \texttt{"\textbackslash com\textbackslash isep\textbackslash eleve\textbackslash javaproject\textbackslash view\textbackslash RegistrationView.fxml"}.
+\end{itemize}
+
+\subsubsection{Types d'Encryptage}
+\begin{itemize}
+  \item \textbf{\texttt{MD5}}: Utilisé pour l'encryptage en MD5.
+  \item \textbf{\texttt{SHA1}}: Utilisé pour l'encryptage en SHA1.
+  \item \textbf{\texttt{SHA256}}: Utilisé pour l'encryptage en SHA256.
+  \item \textbf{\texttt{SHA512}}: Utilisé pour l'encryptage en SHA512.
+\end{itemize}
+
+\subsubsection{Types d'Échec d'Inscription}
+\begin{itemize}
+  \item \textbf{\texttt{PASSWORD\_NOT\_SAME}}: Indique que les mots de passe entrés ne sont pas identiques.
+  \item \textbf{\texttt{USERNAME\_ALREADY\_EXIST}}: Indique que le nom d'utilisateur choisi existe déjà.
+\end{itemize}
+\subsection{UUIDUtils}
+\subsubsection{Introduction}
+UUIDUtils est une classe utilitaire qui fournit des méthodes statiques pour générer des UUID aléatoires.
+\subsubsection{Méthodes}
+\begin{itemize}
+  \item \textbf{\texttt{getUUID()}}: Génère un UUID aléatoire.\\
+  \textbf{Paramètres:} Aucun.\\
+  \textbf{Valeur de retour:} \texttt{String} - UUID aléatoire.
+  \item \textbf{\texttt{getUUIDInOrderID()}}: Génère un UUID aléatoire qui contiant que des chiffres.\\
+  \textbf{Valeur de retour:} \texttt{int} - UUID aléatoire.
+\end{itemize}
+\subsubsection{Exemple}
+\begin{lstlisting}[language=Java]
+String uuid = UUIDUtils.getUUID();
+int uuidInOrderID = UUIDUtils.getUUIDInOrderID();
+\end{lstlisting}
+\subsection{EncryptUtils}
+\subsubsection{Introduction}
+EncryptUtils est une classe utilitaire qui fournit des méthodes statiques pour effectuer des opérations d'encryptage sur les chaînes de caractères.
+\subsubsection{Méthodes}
+\begin{itemize}
+  \item \textbf{\texttt{encrypt(String str, String type)}}: Effectue un encryptage sur la chaîne de caractères spécifiée.\\
+  \textbf{Paramètres:}
+  \begin{itemize}
+    \item \texttt{str} - Chaîne de caractères à encrypter.
+    \item \texttt{type} - Type d'encryptage.\\
+    Valeurs possibles: \texttt{MD5}, \texttt{SHA1}, \texttt{SHA256}, \texttt{SHA512}.
+  \end{itemize}
+  \textbf{Valeur de retour:} \texttt{String} - Chaîne de caractères encryptée.
+\end{itemize}
+\subsubsection{Exemple}
+\begin{lstlisting}[language=Java]
+encryptedP = EncryptUtils.encrypt(password, Constants.EncryptType.MD5);
+\end{lstlisting}
+\subsection{FileOperation}
+\subsubsection{Introduction}
+La classe FileOperation fournit un ensemble d'outils pour gérer les opérations de lecture et d'écriture de fichiers, en particulier pour les données au format JSON. Cette classe utilise la bibliothèque Jackson pour sérialiser et désérialiser des listes d'objets.
+\subsubsection{Constructeur}
+\begin{itemize}
+  \item \textbf{\texttt{FileOperation(ObjectMapper objectMapper)}}: Crée un objet FileOperation avec le objectMapper.\\
+  \textbf{Paramètres:}
+  \begin{itemize}
+    \item \texttt{objectMapper} - Instance de Jackson ObjectMapper pour le traitement JSON.
+  \end{itemize}
+\end{itemize}
+\subsubsection{Méthodes}
+\begin{itemize}
+  \item \textbf{\texttt{public <T> List<T> readListFromFile(String filePath, Class<T> clazz)} }: Lit une liste d'objets à partir d'un fichier JSON.
+  \begin{itemize}
+    \item \textbf{Paramètres:}
+    \begin{itemize}
+      \item \texttt{filePath} - Chemin d'accès au fichier JSON.
+      \item \texttt{clazz} - Classe de l'objet à lire.
+    \end{itemize}
+    \item \textbf{Valeur de retour:} \texttt{List<T>} - Liste d'objets lus.
+    \item \textbf{Exceptions:} \texttt{IOException} - Si une erreur d'entrée/sortie se produit lors de la lecture du fichier.
+  \end{itemize}
+  \item \textbf{\texttt{public <T> void writeListToFile(String filePath, List<T> list)} }: Écrit une liste d'objets dans un fichier JSON.
+  \begin{itemize}
+    \item \textbf{Paramètres:}
+    \begin{itemize}
+      \item \texttt{filePath} - Chemin d'accès au fichier JSON.
+      \item \texttt{list} - Liste d'objets à écrire.
+    \end{itemize}
+    \item \textbf{Exceptions:} \texttt{IOException} - Si une erreur d'entrée/sortie se produit lors de l'écriture du fichier.
+  \end{itemize}
+\end{itemize}
+\subsubsection{Exemple}
+Dans les applications Spring Boot, la classe FileOperation est automatiquement assemblée. Par conséquent, les instances de cette classe peuvent être injectées directement dans le service ou le contrôleur.
+\begin{lstlisting}[language=Java]
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class MyService {
+
+    private final FileOperation fileOperation;
+
+    @Autowired
+    public MyService(FileOperation fileOperation) {
+        this.fileOperation = fileOperation;
+    }
+
+    public void exampleMethod() {
+        List<User> users = fileOperation.
+        readListFromFile("users.json", User.class);
+        fileOperation.writeListToFile("users.json", users);
+    }
+}
+
+\end{lstlisting}
 \end{document}

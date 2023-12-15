@@ -2,27 +2,57 @@ package com.isep.eleve.javaproject.model.assets;
 
 import java.math.BigDecimal;
 
+/**
+ * Represents a fixed deposit asset.
+ * Inherits from the LiquidAssets class.
+ * @version 1.0
+ * @see LiquidAssets
+ * @author Chen YANG
+ */
 public class FixedDeposit extends LiquidAssets {
-    private BigDecimal interestRate;
+  private BigDecimal interestRate;
 
-    public FixedDeposit(int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate) {
-        super(portfolioId, quantity, price);
-        this.interestRate = interestRate;
-    }
+  /**
+   * Constructs a FixedDeposit object with the specified parameters.
+   *
+   * @param assetName   the name of the asset
+   * @param portfolioId the ID of the portfolio
+   * @param quantity    the quantity of the asset
+   * @param price       the price of the asset
+   * @param interestRate the interest rate of the fixed deposit
+   * @param ownerId     the ID of the owner
+   */
+  public FixedDeposit(String assetName, int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate, int ownerId) {
+    super(assetName, portfolioId, quantity, price, ownerId);
+    this.interestRate = interestRate;
+  }
 
-    public BigDecimal getInterestRate() {
-        return interestRate;
-    }
+  /**
+   * Gets the interest rate of the fixed deposit.
+   *
+   * @return the interest rate
+   */
+  public BigDecimal getInterestRate() {
+    return interestRate;
+  }
 
-    public void setInterestRate(BigDecimal interestRate) {
-        this.interestRate = interestRate;
-    }
+  /**
+   * Sets the interest rate of the fixed deposit.
+   *
+   * @param interestRate the interest rate to set
+   */
+  public void setInterestRate(BigDecimal interestRate) {
+    this.interestRate = interestRate;
+  }
 
-    @Override
-    public void calculateValue() {
-        // Calculate the value of the fixed deposit based on the interest rate
-        BigDecimal baseValue = new BigDecimal(this.getQuantity()).multiply(this.getPrice());
-        BigDecimal interest = baseValue.multiply(this.interestRate);
-        this.setValue(baseValue.add(interest));
-    }
+  /**
+   * Calculates the value of the fixed deposit based on the interest rate.
+   * Overrides the calculateValue method in the LiquidAssets class.
+   */
+  @Override
+  public void calculateValue() {
+    BigDecimal baseValue = new BigDecimal(this.getQuantity()).multiply(this.getPrice());
+    BigDecimal interest = baseValue.multiply(this.interestRate);
+    this.setValue(baseValue.add(interest));
+  }
 }

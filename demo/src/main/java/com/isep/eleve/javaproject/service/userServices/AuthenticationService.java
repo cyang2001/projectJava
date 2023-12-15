@@ -3,7 +3,7 @@ import com.isep.eleve.javaproject.model.User;
 import com.isep.eleve.javaproject.repository.*;
 import java.io.IOException;
 import java.util.List;
-
+import com.isep.eleve.javaproject.Tools.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 /**
@@ -34,7 +34,7 @@ public class AuthenticationService {
 
         List<User> users = userRepository.findAll();
             for (User user : users) {
-                if (user.getUserName().equals(userName) && checkPassword(user.getPasswordHash(), securityService.encryptData(password))) {
+                if (user.getUserName().equals(userName) && checkPassword(user.getPasswordHash(), securityService.encryptData(password, Constants.ENCRYPT_TYPE.MD5))) {
                     return user;
                 }
             }

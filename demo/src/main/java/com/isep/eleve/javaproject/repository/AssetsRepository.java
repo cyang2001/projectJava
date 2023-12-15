@@ -1,76 +1,90 @@
 package com.isep.eleve.javaproject.repository;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
-
+import com.isep.eleve.javaproject.Tools.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+
 import com.isep.eleve.javaproject.model.Asset;
 
+/**
+ * Asset repository
+ * @version V1.3
+ * @author Chen YANG
+ */
 @Repository
 public class AssetsRepository {
   private static final String EXTERNAL_FILE_PATH = System.getProperty("user.home") + File.separator + "App" + File.separator + "databaseAssets.json";
-    private final ObjectMapper objectMapper = new ObjectMapper();
+  private final FileOperation fileOperation;
 
-    /**
-     * Find all assets
-     * @return List<Asset>
-     * @throws IOException
-     */
-    public List<Asset> findAll() throws IOException {
-        File file = new File(EXTERNAL_FILE_PATH);
-        if (file.exists()) {
-            try (FileInputStream fis = new FileInputStream(file)) {
-                return objectMapper.readValue(fis, TypeFactory.defaultInstance().constructCollectionType(List.class, Asset.class));
-            }
-        }
-        return new ArrayList<>();
-    }
-    /**
-     * Save asset
-     * @param portfolio
-     * @throws IOException
-     */
-    public void save(Asset asset) throws IOException {
-        List<Asset> assets = findAll();
-        assets.add(asset);
-        writeAssetsToFile(assets);
-    }
-    /**
-     * Find asset by asset id
-     * @param assetId
-     * @return asset
-     * @throws IOException
-     */
-    public Asset findByAssetId(int assetId) throws IOException {
-        List<Asset> assets = findAll();
-        return assets.stream().filter(a -> a.getAssetId() == assetId).findFirst().orElse(null);
-    }
-    /**
-     * Find assets by owner id
-     * @param ownerId
-     * @return List<Asset>
-     * @throws IOException
-     */
-    public List<Asset> findByOwnerId(int ownerId) throws IOException {
-        List<Asset> assets = findAll();
-        return assets.stream().filter(a -> a.getOwnerId() == ownerId).collect(Collectors.toList());
-    }
-    private void writeAssetsToFile(List<Asset> assets) throws IOException {
-        File file = new File(EXTERNAL_FILE_PATH);
-        File parentDir = file.getParentFile();
-        if (!parentDir.exists() && !parentDir.mkdirs()) {
-            throw new IOException("Failed to create directory: " + parentDir);
-        }
-        try (FileOutputStream fos = new FileOutputStream(file)) {
-            objectMapper.writeValue(fos, assets);
-        }
-    }
+  /**
+   * Constructs a new AssetsRepository with the specified FileOperation.
+   *
+   * @param fileOperation the FileOperation used for file operations.
+   */
+  @Autowired
+  public AssetsRepository(FileOperation fileOperation) {
+    this.fileOperation = fileOperation;
+  }
+
+  /**
+   * Retrieves all assets from the file.
+   *
+   * @return a list of Asset objects.
+   * @throws IOException if an I/O error occurs.
+   */
+  public List<Asset> findAll() throws IOException {
+    return fileOperation.readListFromFile(EXTERNAL_FILE_PATH, Asset.class);
+  }
+
+  /**
+   * Saves the specified asset to the file.
+   *
+   * @param asset the asset to be saved.
+   * @throws IOException if an I/O error occurs.
+   */
+  public void save(Asset asset) throws IOException {
+    List<Asset> assets = findAll();
+    assets.add(asset);
+    fileOperation.writeListToFile(EXTERNAL_FILE_PATH, assets);
+  }
+
+  /**
+   * Retrieves the asset with the specified assetId from the file.
+   *
+   * @param assetId the ID of the asset to be retrieved.
+   * @return the Asset object with the specified assetId, or null if not found.
+   * @throws IOException if an I/O error occurs.
+   */
+  public Asset findByAssetId(int assetId) throws IOException {
+    List<Asset> assets = findAll();
+    return assets.stream().filter(a -> a.getAssetId() == assetId).findFirst().orElse(null);
+  }
+
+  /**
+   * Retrieves all assets owned by the specified ownerId from the file.
+   *
+   * @param ownerId the ID of the owner.
+   * @return a list of Asset objects owned by the specified ownerId.
+   * @throws IOException if an I/O error occurs.
+   */
+  public List<Asset> findByOwnerId(int ownerId) throws IOException {
+    List<Asset> assets = findAll();
+    return assets.stream().filter(a -> a.getOwnerId() == ownerId).collect(Collectors.toList());
+  }
+  
+  /**
+   * Returns the external file path where the assets are stored.
+   *
+   * @return the external file path.
+   */
+  public String getExternalFilePath() {
+    return EXTERNAL_FILE_PATH;
+  }
 }
