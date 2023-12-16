@@ -27,7 +27,10 @@ public class Portfolio {
   public int getOwnerId() {
     return this.ownerId;
   }
-
+  @JsonProperty("ownerId")
+  public void setOwnerId(int ownerId) {
+    this.ownerId = ownerId;
+  }
   private List<Integer> assetIds;
 
   @JsonProperty("assetIds")
@@ -57,7 +60,13 @@ public class Portfolio {
   public void setValue(BigDecimal value) {
     this.value = value;
   }
-
+  /**
+   * Constructs a new Portfolio with the specified portfolio name and owner ID.
+   * @param portfolioName
+   * @param onwerId
+   * @param assets
+   * @param assetIds
+   */
   public Portfolio(String portfolioName, int onwerId, List<Asset> assets, List<Integer> assetIds) {
     this.portfolioName = portfolioName;
     this.ownerId = onwerId;

@@ -1,45 +1,60 @@
 package com.isep.eleve.javaproject.service.portfolioService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+
+import java.io.IOException;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.repository.PortfolioRepository;
 import com.isep.eleve.javaproject.service.portfolioServices.PortfolioService;
 
-import java.io.IOException;
-import java.util.ArrayList;
+@RunWith(MockitoJUnitRunner.class)
+public class PortfolioServiceTest {
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
-
-class PortfolioServiceTest {
+    @InjectMocks
+    private PortfolioService portfolioService;
 
     @Mock
     private PortfolioRepository portfolioRepository;
 
-    private PortfolioService portfolioService;
+@Test
+public void testCreatePortfolio() throws IOException {
+    // Arrange
+    String portfolioName = "My Portfolio";
+    int ownerId = 1;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-        portfolioService = new PortfolioService(portfolioRepository);
-    }
+    // Act
+    portfolioService.createPortfolio(portfolioName, ownerId);
 
-    @Test
-    void testCreatePortfolio() throws IOException {
+    // Assert
+    // Verify that the repository's save method was called with a portfolio having the expected properties
+    verify(portfolioRepository).save(argThat(portfolio -> 
+        portfolio.getPortfolioName().equals(portfolioName) && portfolio.getOwnerId() == ownerId
+    ));
+}
+
+
+    @Test(expected = RuntimeException.class)
+    public void testCreatePortfolioThrowsException() throws IOException {
         // Arrange
-        String portfolioName = "My Portfolio";
-        int ownerId = 1;
-        Portfolio newPortfolio = new Portfolio(portfolioName, ownerId, new ArrayList<>(), new ArrayList<>());
+        doThrow(new RuntimeException()).when(portfolioRepository).save(any(Portfolio.class));
 
         // Act
-        //when(portfolioRepository.save(newPortfolio)).thenReturn(newPortfolio);
-        Portfolio createdPortfolio = portfolioService.createPortfolio(portfolioName, ownerId);
+        portfolioService.createPortfolio("My Portfolio", 1);
 
         // Assert
-        assertEquals(newPortfolio, createdPortfolio);
-        verify(portfolioRepository, times(1)).save(newPortfolio);
+        // The test will fail if the exception is not thrown
+
     }
 }
