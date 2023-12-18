@@ -21,7 +21,7 @@ public abstract class Asset {
     this.quantity = quantity;
     this.price = price;
     this.assetId = UUIDUtils.getUUIDInOrderId();
-    //this.calculateValue(); // Initialize the value of the asset
+    this.calculateValue(); // Initialize the value of the asset
     this.ownerId = ownerId;
     this.assetName = assetName;
   }

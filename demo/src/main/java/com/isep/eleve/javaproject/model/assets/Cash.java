@@ -33,6 +33,6 @@ public class Cash extends LiquidAssets {
    */
   @Override
   public void calculateValue() {
-    this.setValue(new BigDecimal(this.getQuantity()));
+    this.setValue(this.getPrice());
   }
 }

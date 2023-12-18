@@ -51,8 +51,10 @@ public class FixedDeposit extends LiquidAssets {
    */
   @Override
   public void calculateValue() {
-    BigDecimal baseValue = new BigDecimal(this.getQuantity()).multiply(this.getPrice());
-    BigDecimal interest = baseValue.multiply(this.interestRate);
-    this.setValue(baseValue.add(interest));
+    this.setValue(this.getPrice());
+    // ToDo 
+    //BigDecimal baseValue = new BigDecimal(this.getQuantity()).multiply(this.getPrice());
+    //BigDecimal interest = baseValue.multiply(this.interestRate);
+    //this.setValue(baseValue.add(interest));
   }
 }

@@ -1,5 +1,6 @@
 package com.isep.eleve.javaproject.factory;
 
+
 import java.math.BigDecimal;
 
 import org.junit.Assert;
@@ -14,7 +15,6 @@ import com.isep.eleve.javaproject.model.Asset;
 public class FixedDepositFactoryTest {
   @InjectMocks
   private FixedDepositFactory fixedDepositFactory;
-
   @Test
   public void testCreateAsset() {
     // Arrange
@@ -24,7 +24,6 @@ public class FixedDepositFactoryTest {
     int ownerId = 1;
     BigDecimal price = new BigDecimal(1);
     BigDecimal interestRate = new BigDecimal(1);
-    
     // Act
     Asset asset = fixedDepositFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId);
     // Assert
