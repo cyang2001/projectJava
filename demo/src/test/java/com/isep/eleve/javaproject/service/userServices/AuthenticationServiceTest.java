@@ -1,5 +1,6 @@
 package com.isep.eleve.javaproject.service.userServices;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -51,6 +52,8 @@ public class AuthenticationServiceTest {
     authenticationService.authenticate(username2, password2);
     authenticationService.authenticate(username1, password1);
     // Assert
+    assertEquals(authenticationService.authenticate(username2, password2), user2);
+    assertEquals(authenticationService.authenticate(username1, password1), user);
   }
 
 }
