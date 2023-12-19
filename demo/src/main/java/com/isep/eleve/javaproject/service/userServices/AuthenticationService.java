@@ -47,8 +47,7 @@ public class AuthenticationService {
      * @return boolean
      */
     private boolean checkPassword(String passwordHash, String password) {
-        String decryptedPassword = securityService.decryptData(passwordHash);
-        return decryptedPassword.equals(password);
+        return passwordHash.equals(password);
     }
 
 }
