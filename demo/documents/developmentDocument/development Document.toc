@@ -1,0 +1,112 @@
+\babel@toc {french}{}\relax 
+\contentsline {section}{Table des mati\`eres}{1}{section*.1}%
+\contentsline {section}{\numberline {1}Besoins du projet}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Introduction}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Besoins Fonctionnels}{3}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Gestion de Portefeuille}{3}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}Suivi des Données en Temps Réel}{3}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.3}Intégration et Stockage des Données}{3}{subsubsection.1.2.3}%
+\contentsline {subsubsection}{\numberline {1.2.4}Interface Utilisateur}{3}{subsubsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.3}Besoins Non Fonctionnels}{3}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Performance}{3}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Sécurité}{3}{subsubsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.4}Fonctionnalités Avancées}{3}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}Fonctions d'Analyse}{3}{subsubsection.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.4.2}Suivi des Transactions}{3}{subsubsection.1.4.2}%
+\contentsline {subsubsection}{\numberline {1.4.3}Choix de la Devise}{4}{subsubsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.5}Besoins de l'Interface Utilisateur}{4}{subsection.1.5}%
+\contentsline {subsection}{\numberline {1.6}Contraintes Système}{4}{subsection.1.6}%
+\contentsline {subsection}{\numberline {1.7}Spécification Du Code}{4}{subsection.1.7}%
+\contentsline {section}{\numberline {2}Méthodologie de développement et gestion de projet}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Choix du modèle en cascade}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Planification du projet et chronologie}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Remarques}{5}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Environnement et outils de développement}{5}{section.3}%
+\contentsline {section}{\numberline {4}Technologie d'architecture et de conception}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Architecture logicielle de haut niveau}{6}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Modèle (Model)}{6}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Vue (View)}{6}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}Contrôleur (Controller)}{6}{subsubsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.4}Couche de services (Service)}{6}{subsubsection.4.1.4}%
+\contentsline {subsubsection}{\numberline {4.1.5}Accès aux données (Repository)}{6}{subsubsection.4.1.5}%
+\contentsline {subsubsection}{\numberline {4.1.6}Configuration (Config)}{6}{subsubsection.4.1.6}%
+\contentsline {subsection}{\numberline {4.2}Interaction du système}{6}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Considérations de sécurité et de performance}{6}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Diagramme de processus métier}{6}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Diagramme de UML}{7}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Changement de Modèle de Conception}{7}{subsection.4.6}%
+\contentsline {subsubsection}{\numberline {4.6.1}Introduction}{7}{subsubsection.4.6.1}%
+\contentsline {section}{\numberline {5}Conception détaillée}{7}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Service}{7}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Registration Service (Service d'Enregistrement)}{7}{subsubsection.5.1.1}%
+\contentsline {paragraph}{Responsabilités:}{7}{section*.2}%
+\contentsline {paragraph}{Méthodes:}{7}{section*.3}%
+\contentsline {paragraph}{Exceptions:}{8}{section*.4}%
+\contentsline {subsubsection}{\numberline {5.1.2}Authentication Service (Service d'Authentification)}{8}{subsubsection.5.1.2}%
+\contentsline {paragraph}{Responsabilités:}{8}{section*.5}%
+\contentsline {paragraph}{Méthodes:}{8}{section*.6}%
+\contentsline {subsubsection}{\numberline {5.1.3}Security Service (Service de Sécurité)}{8}{subsubsection.5.1.3}%
+\contentsline {paragraph}{Responsabilités:}{8}{section*.7}%
+\contentsline {paragraph}{Méthodes:}{8}{section*.8}%
+\contentsline {subsubsection}{\numberline {5.1.4}Portfolio Service (Service de Portefeuille)}{8}{subsubsection.5.1.4}%
+\contentsline {paragraph}{Responsabilités:}{8}{section*.9}%
+\contentsline {paragraph}{Méthodes:}{8}{section*.10}%
+\contentsline {subsubsection}{\numberline {5.1.5}Asset Service (Service d'Actif)}{8}{subsubsection.5.1.5}%
+\contentsline {paragraph}{Responsabilités:}{8}{section*.11}%
+\contentsline {paragraph}{Méthodes:}{8}{section*.12}%
+\contentsline {subsubsection}{\numberline {5.1.6}Transaction Service (Service de Transaction)}{8}{subsubsection.5.1.6}%
+\contentsline {paragraph}{Responsabilités:}{8}{section*.13}%
+\contentsline {paragraph}{Méthodes:}{8}{section*.14}%
+\contentsline {subsubsection}{\numberline {5.1.7}Market Data Service (Service des Données du Marché)}{8}{subsubsection.5.1.7}%
+\contentsline {paragraph}{Responsabilités:}{8}{section*.15}%
+\contentsline {paragraph}{Méthodes:}{8}{section*.16}%
+\contentsline {paragraph}{Exceptions:}{8}{section*.17}%
+\contentsline {subsection}{\numberline {5.2}Repository}{9}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}User Repository (Dépôt Utilisateur)}{9}{subsubsection.5.2.1}%
+\contentsline {paragraph}{Responsabilités:}{9}{section*.18}%
+\contentsline {paragraph}{Méthodes:}{9}{section*.19}%
+\contentsline {subsubsection}{\numberline {5.2.2}Data Repository (Dépôt de Données)}{9}{subsubsection.5.2.2}%
+\contentsline {paragraph}{Responsabilités:}{9}{section*.20}%
+\contentsline {paragraph}{Méthodes:}{9}{section*.21}%
+\contentsline {subsubsection}{\numberline {5.2.3}Transaction Repository (Dépôt de Transaction)}{9}{subsubsection.5.2.3}%
+\contentsline {paragraph}{Responsabilités:}{9}{section*.22}%
+\contentsline {paragraph}{Méthodes:}{9}{section*.23}%
+\contentsline {subsubsection}{\numberline {5.2.4}Portfolio Repository (Dépôt de Portefeuille)}{9}{subsubsection.5.2.4}%
+\contentsline {paragraph}{Responsabilités:}{9}{section*.24}%
+\contentsline {paragraph}{Méthodes:}{9}{section*.25}%
+\contentsline {subsubsection}{\numberline {5.2.5}Asset Repository (Dépôt d'Actif)}{9}{subsubsection.5.2.5}%
+\contentsline {paragraph}{Responsabilités:}{9}{section*.26}%
+\contentsline {paragraph}{Méthodes:}{9}{section*.27}%
+\contentsline {subsection}{\numberline {5.3}Model}{9}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Analytics Tool (Outil d'Analyse)}{9}{subsubsection.5.3.1}%
+\contentsline {paragraph}{Responsabilités:}{9}{section*.28}%
+\contentsline {subsubsection}{\numberline {5.3.2}Performance Monitor (Surveillance de la Performance)}{9}{subsubsection.5.3.2}%
+\contentsline {paragraph}{Responsabilités:}{9}{section*.29}%
+\contentsline {subsubsection}{\numberline {5.3.3}User (Utilisateur)}{10}{subsubsection.5.3.3}%
+\contentsline {paragraph}{Responsabilités:}{10}{section*.30}%
+\contentsline {paragraph}{Propriétés:}{10}{section*.31}%
+\contentsline {subsubsection}{\numberline {5.3.4}Data (Donnée)}{10}{subsubsection.5.3.4}%
+\contentsline {paragraph}{Responsabilités:}{10}{section*.32}%
+\contentsline {paragraph}{Propriétés:}{10}{section*.33}%
+\contentsline {subsubsection}{\numberline {5.3.5}Authentication Result (Résultat d'Authentification)}{10}{subsubsection.5.3.5}%
+\contentsline {paragraph}{Responsabilités:}{10}{section*.34}%
+\contentsline {paragraph}{Propriétés:}{10}{section*.35}%
+\contentsline {subsubsection}{\numberline {5.3.6}Registration Result (Résultat d'Inscription)}{10}{subsubsection.5.3.6}%
+\contentsline {paragraph}{Responsabilités:}{10}{section*.36}%
+\contentsline {paragraph}{Propriétés:}{10}{section*.37}%
+\contentsline {subsubsection}{\numberline {5.3.7}Portfolio (Portefeuille)}{10}{subsubsection.5.3.7}%
+\contentsline {paragraph}{Responsabilités:}{10}{section*.38}%
+\contentsline {paragraph}{Propriétés:}{10}{section*.39}%
+\contentsline {subsubsection}{\numberline {5.3.8}Asset (Actif)}{10}{subsubsection.5.3.8}%
+\contentsline {paragraph}{Responsabilités:}{10}{section*.40}%
+\contentsline {paragraph}{Propriétés:}{10}{section*.41}%
+\contentsline {subsubsection}{\numberline {5.3.9}Transaction (Transaction)}{10}{subsubsection.5.3.9}%
+\contentsline {paragraph}{Responsabilités:}{10}{section*.42}%
+\contentsline {paragraph}{Propriétés:}{11}{section*.43}%
+\contentsline {section}{\numberline {6}Guide de développement et de déploiement}{11}{section.6}%
+\contentsline {section}{\numberline {7}Test Plan et Test Cases}{11}{section.7}%
+\contentsline {section}{\numberline {8}Manuel de l'utilisateur}{11}{section.8}%
+\contentsline {section}{\numberline {9}Évaluation des performances}{11}{section.9}%
+\contentsline {section}{\numberline {10}Exemple de code}{11}{section.10}%
+\contentsline {section}{\numberline {11}Journal des modifications}{11}{section.11}%
+\contentsline {section}{\numberline {12}Annexe}{11}{section.12}%
