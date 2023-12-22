@@ -82,4 +82,9 @@ public class PortfolioRepository {
     return portfolios.stream().filter(p -> p.getOwnerId() == ownerId).collect(Collectors.toList());
   }
 
+  public void delete(Portfolio portfolio) throws IOException {
+    List<Portfolio> portfolios = findAll();
+    portfolios.remove(portfolio);
+    fileOperation.writeListToFile(EXTERNAL_FILE_PATH, portfolios);
+  }
 }

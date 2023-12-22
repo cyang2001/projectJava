@@ -25,6 +25,7 @@ public class Cash extends LiquidAssets {
    */
   public Cash(String assetName, int portfolioId, int quantity, BigDecimal price, int ownerId) {
     super(assetName, portfolioId, quantity, price, ownerId);
+    
     this.setAssetType(ASSET_TYPE.CASH);
   }
 

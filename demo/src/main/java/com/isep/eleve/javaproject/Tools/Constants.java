@@ -50,6 +50,7 @@ public class Constants {
 
   public static enum changeType {
     ADD,
-    SUBTRACT;
+    SUBTRACT,
+    SET
   }
 }

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 public class Block {
   private Queue<Transaction> transactions;
-  public static LinkedList<Block> blockChain = new LinkedList<>();// ?
+  public static LinkedList<Block> blockChain = new LinkedList<>();
   public Block(){
     this.transactions = new LinkedList<>();
   }

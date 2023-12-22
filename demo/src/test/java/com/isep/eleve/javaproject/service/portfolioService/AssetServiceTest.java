@@ -1,5 +1,7 @@
 package com.isep.eleve.javaproject.service.portfolioService;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
@@ -20,7 +22,7 @@ import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.repository.AssetsRepository;
 import com.isep.eleve.javaproject.repository.PortfolioRepository;
 import com.isep.eleve.javaproject.service.portfolioServices.AssetsService;
-
+import com.isep.eleve.javaproject.Tools.Constants;
 @RunWith(MockitoJUnitRunner.class)
 public class AssetServiceTest {
 
@@ -78,5 +80,35 @@ public class AssetServiceTest {
     assertEquals(mockAsset, createdAsset);
     verify(mockPortfolio).addAsset(mockAsset);
   }
+  @Test(expected = IllegalArgumentException.class)
+  public void testCreateAssetWithInvalidName() throws IOException {
+      assetsService.createAsset("", 1, 10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
+  }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testCreateAssetWithInvalidQuantity() throws IOException {
+      assetsService.createAsset("Test Asset", 1, -10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
+}
+  @Test(expected = Exception.class)
+  public void testCreateAssetWhenPortfolioNotFound() throws IOException {
+      when(portfolioRepository.findByPortfolioId(anyInt())).thenReturn(null);
+      assetsService.createAsset("Test Asset", 1, 10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
+  }
+  @Test
+  public void testChangeAssetQuantity() throws IOException {
+      Asset mockAsset = mock(Asset.class);
+      when(assetsRepository.findByAssetId(anyInt())).thenReturn(mockAsset);
+      doNothing().when(mockAsset).setQuantity(anyInt());
+
+      assetsService.changeAssetQuantity(1, 5, Constants.changeType.ADD, ASSET_TYPE.CASH);
+
+      verify(mockAsset).setQuantity(anyInt());
+      verify(assetsRepository).save(mockAsset);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangeAssetQuantityWithInvalidAsset() throws IOException {
+      when(assetsRepository.findByAssetId(anyInt())).thenReturn(null);
+      assetsService.changeAssetQuantity(1, 5, Constants.changeType.ADD, ASSET_TYPE.CASH);
+  }
 }

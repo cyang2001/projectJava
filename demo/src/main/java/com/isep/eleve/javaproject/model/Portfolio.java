@@ -60,6 +60,26 @@ public class Portfolio {
   public void setValue(BigDecimal value) {
     this.value = value;
   }
+  
+  private int cashId;
+  @JsonProperty("cashId")
+  public int getCashId() {
+    return this.cashId;
+  }
+  @JsonProperty("cashId")
+  public void setCashId(int cashId) {
+    this.cashId = cashId;
+  }
+  private int fixedDepositId;
+  @JsonProperty("fixedDepositId")
+  public int getFixedDepositId() {
+    return this.fixedDepositId;
+  }
+  @JsonProperty("fixedDepositId")
+  public void setFixedDepositId(int fixedDepositId) {
+    this.fixedDepositId = fixedDepositId;
+  }
+
   /**
    * Constructs a new Portfolio with the specified portfolio name and owner ID.
    * @param portfolioName
