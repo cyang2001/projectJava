@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 
+import ch.qos.logback.core.joran.action.Action;
+
 /**
  * Represents a cash asset.
  * Extends the LiquidAssets class.
@@ -35,4 +37,15 @@ public class Cash extends LiquidAssets {
   public void calculateValue() {
     this.setValue(this.getPrice());
   }
+
+  public Enum changeType{
+
+
+  }
+
+  public void change(BigDecimal price, ) {
+    
+  }
+
+
 }
