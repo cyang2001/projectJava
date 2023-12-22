@@ -49,7 +49,7 @@ public class AssetServiceTest {
     ASSET_TYPE assetType = ASSET_TYPE.CASH; // or ASSET_TYPE.FIXED_DEPOSIT for different tests
     BigDecimal interestRate = new BigDecimal("0.05");
     int ownerId = 1;
-
+    int assetId = 1;
     Asset mockAsset = mock(Asset.class);
     when(mockAsset.getAssetName()).thenReturn(assetName);
     when(mockAsset.getPortfolioId()).thenReturn(portfolioId);
@@ -57,6 +57,7 @@ public class AssetServiceTest {
     when(mockAsset.getPrice()).thenReturn(price);
     // when(mockAsset.getInterestRate()).thenReturn(interestRate);
     when(mockAsset.getOwnerId()).thenReturn(ownerId);
+    when(mockAsset.getAssetId()).thenReturn(assetId);
     Portfolio mockPortfolio = mock(Portfolio.class);
     when(mockPortfolio.getPortfolioId()).thenReturn(portfolioId);
     when(mockPortfolio.getOwnerId()).thenReturn(ownerId);
@@ -72,10 +73,10 @@ public class AssetServiceTest {
 
     // Act
     Asset createdAsset = assetsService.createAsset(assetName, portfolioId, quantity, price, assetType, interestRate);
-
     // Assert
     verify(assetsRepository).save(mockAsset);
     assertEquals(mockAsset, createdAsset);
     verify(mockPortfolio).addAsset(mockAsset);
   }
+
 }
