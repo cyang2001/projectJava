@@ -4,10 +4,11 @@ import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.isep.eleve.javaproject.Tools.UUIDUtils;
+import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 
 
 public abstract class Asset {
-  // Todo add assetType
+  private ASSET_TYPE assetType;
   private int assetId;
   private String assetName;
   private int portfolioId;
@@ -71,6 +72,14 @@ public abstract class Asset {
 @JsonProperty("ownerId")
   public void setOwnerId(int ownerId) {
     this.ownerId = ownerId;
+  }
+@JsonProperty("assetType")
+  public ASSET_TYPE getAssetType() {
+    return this.assetType;
+  }
+@JsonProperty("assetType")
+  public void setAssetType(ASSET_TYPE assetType) {
+    this.assetType = assetType;
   }
   // Abstract method to be implemented by subclasses to calculate the asset's value
   public abstract void calculateValue();

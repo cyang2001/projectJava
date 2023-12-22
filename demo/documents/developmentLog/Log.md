@@ -39,5 +39,15 @@ Examen du code : aucun
 
 **12/12/2023** Chen  
 Ajout le serviec et repository de portfolio. Au lieu d'utiliser la réflexion pour créer un nouvel objet au début, changer à le modèle de la fabrique.  
+
 Examen du code : Opérations de découplage sur les repository.
 
+**15/12/2023** Chen
+Fini les tests unitair de AssetService et PortfolioService  
+
+Examen du code : aucun
+
+**14/12/2023** Chen
+Fini les tests unitair de factory
+
+Examen du code : aucun

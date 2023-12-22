@@ -3,6 +3,10 @@ package com.isep.eleve.javaproject.model.assets;
 
 import java.math.BigDecimal;
 
+import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
+
+import ch.qos.logback.core.joran.action.Action;
+
 /**
  * Represents a cash asset.
  * Extends the LiquidAssets class.
@@ -22,6 +26,7 @@ public class Cash extends LiquidAssets {
    */
   public Cash(String assetName, int portfolioId, int quantity, BigDecimal price, int ownerId) {
     super(assetName, portfolioId, quantity, price, ownerId);
+    this.setAssetType(ASSET_TYPE.CASH);
   }
 
   /**
@@ -30,6 +35,17 @@ public class Cash extends LiquidAssets {
    */
   @Override
   public void calculateValue() {
-    this.setValue(new BigDecimal(this.getQuantity()));
+    this.setValue(this.getPrice());
   }
+
+  public Enum changeType{
+
+
+  }
+
+  public void change(BigDecimal price, ) {
+    
+  }
+
+
 }

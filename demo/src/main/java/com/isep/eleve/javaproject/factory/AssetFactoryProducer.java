@@ -2,13 +2,15 @@ package com.isep.eleve.javaproject.factory;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 
 /**
  * The AssetFactoryProducer class is responsible for producing asset factories based on the asset type.
  */
 public class AssetFactoryProducer {
-
+  
   private final Map<ASSET_TYPE, AssetFactory> factories;
 
   /**
@@ -16,6 +18,7 @@ public class AssetFactoryProducer {
    *
    * @param factories the map of asset factories
    */
+  @Autowired
   public AssetFactoryProducer(Map<ASSET_TYPE, AssetFactory> factories) {
     this.factories = factories;
   }

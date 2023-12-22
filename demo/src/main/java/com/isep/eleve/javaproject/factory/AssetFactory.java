@@ -21,4 +21,5 @@ public interface AssetFactory {
    * @return the created asset
    */
   Asset createAsset(String assetName, int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate, int ownerId);
+  
 }

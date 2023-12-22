@@ -24,10 +24,10 @@
     <PasswordField fx:id="passwordField" promptText="Enter your password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
     <Label text="Ensure your password:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
     <PasswordField fx:id="passwordField2" promptText="Please ensure your password" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-    <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="1" GridPane.rowIndex="4">
+    <HBox spacing="10" alignment="bottom_left" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <Button text="Sign up" onAction="#handleRegistrationAction"/>
     </HBox>
-    <HBox spacing="10" alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="5">
+    <HBox spacing="10" alignment="bottom_left" GridPane.columnIndex="1" GridPane.rowIndex="5">
         <Button text="Back to login" onAction="#handleChageLoginPageAction"/>
     </HBox>
 </GridPane>
