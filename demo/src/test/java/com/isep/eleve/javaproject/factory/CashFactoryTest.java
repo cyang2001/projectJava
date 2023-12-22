@@ -8,8 +8,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
-
 import com.isep.eleve.javaproject.model.Asset;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class CashFactoryTest {
@@ -33,4 +33,5 @@ public class CashFactoryTest {
     Assert.assertEquals(price, asset.getPrice());
     Assert.assertEquals(ownerId, asset.getOwnerId());
   }
+  
 }

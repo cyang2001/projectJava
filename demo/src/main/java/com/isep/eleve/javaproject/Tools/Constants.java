@@ -36,4 +36,8 @@ public class Constants {
     CASH,
     FIXED_DEPOSIT,
   };
+  public static enum changeType{
+    ADD,
+    SUBTRACT;
+  }
 }
