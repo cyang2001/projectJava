@@ -16,19 +16,19 @@ import com.isep.eleve.javaproject.App;
 @Controller
 public class PortfoliosInformationController {
     // ToDo : add needed service
-    protected void handleUserInformationAction(Action event){
+    protected void handleUserInformationAction(ActionEvent event){
         //Switch to the UserInformation view
     }
 
-    protected void handlePortfolio1InformationAction(Action event){
+    protected void handlePortfolio1InformationAction(ActionEvent event){
         //Switch to the Portfolio1Information view
     }
 
-    protected void handlePortfolio2InformationAction(Action event){
+    protected void handlePortfolio2InformationAction(ActionEvent event){
         //Switch to the Portfolio2Information view
     }
 
-    protected void handlePortfolioNInformationAction(Actione event){
+    protected void handlePortfolioNInformationAction(ActioneEvent event){
         //Switch to the PortfolioNInformation view
     }
 }

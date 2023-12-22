@@ -15,9 +15,9 @@ import com.isep.eleve.javaproject.App;
 @Controller
 public class MenuController {
     // ToDo : add needed service
-    protected void handleChangeHomePageAction(Action event) {
+    protected void handleChangeHomePageAction(ActionEvent event) {
         //Switch to the home view
-        public static void switchToLogin() throws Exception {
+        public static void switchToHome() throws Exception {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.HOME_VIEW_PATH));
             fxmlLoader.setControllerFactory(context::getBean);
             Parent root = fxmlLoader.load();
@@ -25,44 +25,44 @@ public class MenuController {
         }
 
     }
-    protected void handleChangePortfolioPageAction(Action event){
+    protected void handleChangePortfolioPageAction(ActionEvent event){
         //Switch to the portfolio view
-        public static void switchToLogin() throws Exception {
+        public static void switchToHome() throws Exception {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.PORTFOLIO_VIEW_PATH));
             fxmlLoader.setControllerFactory(context::getBean);
             Parent root = fxmlLoader.load();
             primaryStage.setScene(new Scene(root, 300, 275));
         }
     }
-    protected void handleChangeNewPortfolioPageAction(Action event){
+    protected void handleChangeNewPortfolioPageAction(ActionEvent event){
         //Switch to the Newportfolio view
     }
 
-    protected void handleAssetsPageAction(Action event){
+    protected void handleAssetsPageAction(ActionEvent event){
         //Switch to the Assets view
     }
 
-    protected void handleChangeBuyAssetsPageAction(Action event){
+    protected void handleChangeBuyAssetsPageAction(ActionEvent event){
         //Switch to the BuyAssets view
     }
 
-    protected void handleChangeSellAssetsPageAction(Action event){
+    protected void handleChangeSellAssetsPageAction(ActionEvent event){
         //Switch to the SellAssets view
     }
 
-    protected void handleChangeCryptoPageAction(Action event){
+    protected void handleChangeCryptoPageAction(ActionEvent event){
         //Switch to the Crypto view
     }
 
-    protected void handleChangeBuyCryptoPageAction(Action event){
+    protected void handleChangeBuyCryptoPageAction(ActionEvent event){
         //Switch to the BuyCrypto view
     }
 
-    protected void handleChangeSellCryptoPageAction(Action event){
+    protected void handleChangeSellCryptoPageAction(ActionEvent event){
         //Switch to the SellCrypto view
     }
 
-    protected void handleChangeAnalysisPageAction(Action event){
+    protected void handleChangeAnalysisPageAction(ActionEvent event){
         //Switch to the Analysis view
     }
 
