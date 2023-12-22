@@ -17,22 +17,12 @@ public class MenuController {
     // ToDo : add needed service
     protected void handleChangeHomePageAction(ActionEvent event) {
         //Switch to the home view
-        public static void switchToHome() throws Exception {
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.HOME_VIEW_PATH));
-            fxmlLoader.setControllerFactory(context::getBean);
-            Parent root = fxmlLoader.load();
-            primaryStage.setScene(new Scene(root, 300, 275));
-        }
+        
 
     }
     protected void handleChangePortfolioPageAction(ActionEvent event){
         //Switch to the portfolio view
-        public static void switchToHome() throws Exception {
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.PORTFOLIO_VIEW_PATH));
-            fxmlLoader.setControllerFactory(context::getBean);
-            Parent root = fxmlLoader.load();
-            primaryStage.setScene(new Scene(root, 300, 275));
-        }
+
     }
     protected void handleChangeNewPortfolioPageAction(ActionEvent event){
         //Switch to the Newportfolio view

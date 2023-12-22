@@ -1,7 +1,7 @@
 package com.isep.eleve.javaproject.Tools;
 
 /**
- * This class contains constant values used 
+ * This class contains constant values used
  * in the application.
  */
 public class Constants {
@@ -14,6 +14,15 @@ public class Constants {
    * The path to the registration view FXML file.
    */
   public static final String REGISTRATION_VIEW_PATH = "/com/isep/eleve/javaproject/view/RegistrationView.fxml";
+  /**
+   * The path to the home view FXML file.
+   */
+  public static final String HOME_VIEW_PATH = "/com/isep/eleve/javaproject/view/HomeView.fxml";
+
+  /**
+   * The path to the home view FXML file.
+   */
+  public static final String PORTFOLIO_VIEW_PATH = "/com/isep/eleve/javaproject/view/NewPortfolioPage.fxml";
 
   /**
    * The encryption types available.
@@ -32,11 +41,13 @@ public class Constants {
     PASSWORD_NOT_SAME,
     USERNAME_ALREADY_EXIST,
   };
+
   public static enum ASSET_TYPE {
     CASH,
     FIXED_DEPOSIT,
   };
-  public static enum changeType{
+
+  public static enum changeType {
     ADD,
     SUBTRACT;
   }

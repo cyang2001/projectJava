@@ -28,7 +28,7 @@ public class PortfoliosInformationController {
         //Switch to the Portfolio2Information view
     }
 
-    protected void handlePortfolioNInformationAction(ActioneEvent event){
+    protected void handlePortfolioNInformationAction(ActionEvent event){
         //Switch to the PortfolioNInformation view
     }
 }
