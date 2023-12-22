@@ -1,4 +1,4 @@
-package com.isep.eleve.javaproject.model.assets;
+package com.isep.eleve.javaproject.model.assets.Cypto;
 
 import java.math.BigDecimal;
 
