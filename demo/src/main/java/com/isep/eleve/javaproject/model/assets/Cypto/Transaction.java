@@ -9,9 +9,9 @@ public class Transaction{
   public Wallet getDestinationWallet(){
     return destinationWallet;
   }
-  private int isepCoin;
-  public int getIsepCoin(){
-    return isepCoin;
+  private int coin;
+  public int getCoin(){
+    return coin;
   }
   private boolean payed = false;
   public boolean getPayed(){
@@ -20,22 +20,22 @@ public class Transaction{
   public void setPayed(boolean payed){
     this.payed = payed;
   }
-  public Transaction(Wallet originWallet, Wallet destinationWallet, int isepCoin){
+  public Transaction(Wallet originWallet, Wallet destinationWallet, int coin){
     this.originWallet = originWallet;
     this.destinationWallet = destinationWallet;
-    this.isepCoin = isepCoin;
+    this.coin = coin;
   }
   public boolean pay(){
-    if (this.getOriginWallet().getIsepCoin() < isepCoin){
-      System.out.println("You don't have enough ISEP Coin!");
+    if (this.getOriginWallet().getCoin() < coin){
+      System.out.println("You don't have enough coin!");
       return false;
     }
     if(this.getOriginWallet().equals(this.getDestinationWallet())){
       System.out.println("You can't pay yourself!");
       return false;
     }
-    this.getOriginWallet().setIsepCoin(this.getOriginWallet().getIsepCoin() - isepCoin);
-    this.getDestinationWallet().setIsepCoin(this.getDestinationWallet().getIsepCoin() + isepCoin);
+    this.getOriginWallet().setCoin(this.getOriginWallet().getCoin() - coin);
+    this.getDestinationWallet().setCoin(this.getDestinationWallet().getCoin() + coin);
     this.setPayed(true);
     System.out.println("Transaction success!");
     return true;
@@ -45,7 +45,7 @@ public class Transaction{
     return "Transaction{" +
                 "originWallet=" + originWallet.getToken() +
                 ", destinationWallet=" + destinationWallet.getToken() +
-                ", isepCoin=" + isepCoin +
+                ", isepCoin=" + coin +
                 ", payed=" + payed +
                 '}';
   }

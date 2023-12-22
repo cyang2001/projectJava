@@ -45,6 +45,7 @@ public class Constants {
   public static enum ASSET_TYPE {
     CASH,
     FIXED_DEPOSIT,
+    CRYPTO,
   };
 
   public static enum changeType {
