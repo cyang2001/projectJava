@@ -47,7 +47,11 @@ Fini les tests unitair de AssetService et PortfolioService
 
 Examen du code : aucun
 
-**14/12/2023** Chen
+**16/12/2023** Chen
 Fini les tests unitair de factory
 
 Examen du code : aucun
+
+**22/12/2023** Chen
+Ajouter un userSession pour conserver les données en mémoire  
+Cependant, un nouveau problème se pose : les données de la mémoire et du fichier ne sont pas synchronisées. J'ai donc choisi de créer une nouvelle classe de service pour synchroniser les données  
