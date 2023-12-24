@@ -1,4 +1,4 @@
-package com.isep.eleve.javaproject.model.assets.Cypto;
+package com.isep.eleve.javaproject.model.assets.cypto;
 
 public class Transaction{
   private Wallet originWallet;

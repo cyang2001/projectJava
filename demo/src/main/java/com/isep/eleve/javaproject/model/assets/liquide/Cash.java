@@ -1,5 +1,5 @@
 
-package com.isep.eleve.javaproject.model.assets;
+package com.isep.eleve.javaproject.model.assets.liquide;
 
 import java.math.BigDecimal;
 

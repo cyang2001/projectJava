@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import org.springframework.stereotype.Component;
 
 import com.isep.eleve.javaproject.model.Asset;
-import com.isep.eleve.javaproject.model.assets.Cash;
+import com.isep.eleve.javaproject.model.assets.liquide.Cash;
 
 
 @Component

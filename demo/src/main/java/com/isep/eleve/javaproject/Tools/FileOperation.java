@@ -40,5 +40,15 @@ public class FileOperation {
             objectMapper.writeValue(fos, list);
         }
     }
+    public <T> void writeObjectToFile(String filePath, T object) throws IOException{
+        File file = new File(filePath);
+        File parentDir = file.getParentFile();
+        if (!parentDir.exists() && !parentDir.mkdirs()) {
+            throw new IOException("Failed to create directory: " + parentDir);
+        }
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            objectMapper.writeValue(fos, object);
+        }
+    }
 }
 

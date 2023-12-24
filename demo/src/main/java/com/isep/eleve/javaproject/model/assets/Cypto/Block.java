@@ -1,4 +1,4 @@
-package com.isep.eleve.javaproject.model.assets.Cypto;
+package com.isep.eleve.javaproject.model.assets.cypto;
 
 import java.util.LinkedList;
 import java.util.Queue;
