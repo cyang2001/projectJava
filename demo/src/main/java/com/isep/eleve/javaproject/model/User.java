@@ -42,6 +42,15 @@ public class User {
   public void setPasswordHash(String passwordHash) {
     this.passwordHash = passwordHash;
   }
+  private List<Integer> portfoliosId;
+  @JsonProperty("portfoliosId")
+  public List<Integer> getPortfoliosId(){
+    return this.portfoliosId;
+  }
+  @JsonProperty("portfoliosId")
+  public void setPortfoliosId(List<Integer> portfoliosId){
+    this.portfoliosId = portfoliosId;
+  }
   // all portfolios of the user
   private List<Portfolio> portfolios;
   @JsonProperty("portfolios")
@@ -74,9 +83,13 @@ public class User {
    * @Description: add a portfolio to the user
    */
   public boolean addPortfolio(Portfolio portfolio) {
-      // add portfolio logic
-      this.portfolios.add(portfolio);
+    // add portfolio logic
+    if (!this.getPortfolios().contains(portfolio)) {
+      this.getPortfolios().add(portfolio);
+      this.getPortfoliosId().add(portfolio.getPortfolioId());
       return true;
+    }
+    return false;
   }
   /**
    * updateProfile
@@ -84,8 +97,8 @@ public class User {
    * @Description: update profile
    */
   public boolean updateProfile() {
-      // update profile logic
-      return true;
+    // update profile logic
+    return true;
   }
 
 }

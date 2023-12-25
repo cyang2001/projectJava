@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import com.isep.eleve.javaproject.model.Asset;
@@ -17,10 +18,12 @@ import com.isep.eleve.javaproject.repository.PortfolioRepository;
 public class PortfolioService {
 
     private final PortfolioRepository portfolioRepository;
-
+    
+    private final ApplicationEventPublisher eventApplication;
     @Autowired
-    public PortfolioService(PortfolioRepository portfolioRepository){
+    public PortfolioService(PortfolioRepository portfolioRepository, ApplicationEventPublisher eventApplication){
         this.portfolioRepository = portfolioRepository;
+        this.eventApplication = eventApplication;
     }
 
     /**
@@ -38,7 +41,7 @@ public class PortfolioService {
 
         // Persist the new portfolio
         portfolioRepository.save(newPortfolio);
-
+        eventApplication.publishEvent(newPortfolio);
         // Return the newly created portfolio
         return newPortfolio;
     }

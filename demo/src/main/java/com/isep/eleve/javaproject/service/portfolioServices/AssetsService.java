@@ -8,6 +8,7 @@ import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import com.isep.eleve.javaproject.factory.AssetFactory;
@@ -26,11 +27,13 @@ public class AssetsService {
   private final PortfolioRepository portfolioRepository;
   private final AssetsRepository assetsRepository;
   private final AssetFactoryProducer factoryProducer;
+  private final ApplicationEventPublisher eventApplication;
   @Autowired
-  public AssetsService(PortfolioRepository portfolioRepository, AssetsRepository assetsRepository, AssetFactoryProducer factoryProducer){
+  public AssetsService(PortfolioRepository portfolioRepository, AssetsRepository assetsRepository, AssetFactoryProducer factoryProducer, ApplicationEventPublisher eventApplication){
     this.portfolioRepository = portfolioRepository;
     this.assetsRepository = assetsRepository;
     this.factoryProducer = factoryProducer;
+    this.eventApplication = eventApplication;
   }
 
   /**
@@ -60,7 +63,7 @@ public class AssetsService {
       AssetFactory factory = factoryProducer.getFactory(assetType);
       Portfolio portfolio = portfolioRepository.findByPortfolioId(portfolioId);
       Asset newAsset = factory.createAsset(assetName, portfolioId, quantity, price, interestRate, portfolio.getOwnerId());
-      portfolio.addAsset(newAsset);
+      eventApplication.publishEvent(newAsset);
       // Persist the new asset
       logger.info("Asset created: {}", assetName);
       assetsRepository.save(newAsset);

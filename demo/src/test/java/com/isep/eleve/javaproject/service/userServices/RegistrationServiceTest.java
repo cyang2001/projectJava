@@ -35,7 +35,7 @@ public class RegistrationServiceTest {
   @Mock
   private User user2;
   @Test
-  public void testRegistrationServiceTest() throws IOException {
+  public void testRegistrationService() throws IOException {
     // Arrange
     String username1 = "My Username1";
     String password1 = "My Password1";

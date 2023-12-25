@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import com.isep.eleve.javaproject.App;
 import com.isep.eleve.javaproject.model.User;
 import com.isep.eleve.javaproject.service.userServices.AuthenticationService;
+import com.isep.eleve.javaproject.session.UserSession;
 /**
  * Login controller
  * @version V1.2
@@ -22,8 +23,13 @@ import com.isep.eleve.javaproject.service.userServices.AuthenticationService;
  */
 @Controller
 public class LoginController {
+    private final AuthenticationService authenticationService;
+    private final UserSession userSession;
     @Autowired
-    private AuthenticationService authenticationService;
+    public LoginController(AuthenticationService authenticationService, UserSession userSession) {
+        this.authenticationService = authenticationService;
+        this.userSession = userSession;
+    }
     @FXML
     private TextField usernameField;
 
@@ -45,6 +51,7 @@ public class LoginController {
             return;
         }
         App.showAlert("Login Success", "You have successfully logged in", "Welcome!");
+        userSession.setCurrentUser(user);
     }
 
     @FXML

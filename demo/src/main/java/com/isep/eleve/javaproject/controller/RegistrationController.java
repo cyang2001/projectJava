@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import com.isep.eleve.javaproject.*;
 //import com.isep.eleve.javaproject.model.User;
 import com.isep.eleve.javaproject.service.userServices.RegistrationService;
+import com.isep.eleve.javaproject.session.UserSession;
 import com.isep.eleve.javaproject.Tools.*;
 /**
  * Registration controller
@@ -21,8 +22,13 @@ import com.isep.eleve.javaproject.Tools.*;
  */
 @Controller
 public class RegistrationController {
-  @Autowired
+  private final UserSession userSession;
   private RegistrationService registrationService;
+  @Autowired
+  public RegistrationController(UserSession userSession, RegistrationService registrationService) {
+    this.userSession = userSession;
+    this.registrationService = registrationService;
+  }
   @FXML
   private TextField usernameField;
 
@@ -57,6 +63,7 @@ public class RegistrationController {
       }
     } else {
       App.showAlert("Registration Success", "You have successfully registered", "Welcome!");
+      this.userSession.setCurrentUser(result.getUser());
       //User user = result.getUser();
     }
   }
