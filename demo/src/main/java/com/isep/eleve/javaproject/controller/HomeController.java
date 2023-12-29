@@ -16,6 +16,7 @@ import com.isep.eleve.javaproject.App;
 @Controller
 public class HomeController {
     //// ToDo : add needed service
+    @FXML
     protected void handleUserInformationAction(ActionEvent event){
         //Switch to the UserInformation view
     }

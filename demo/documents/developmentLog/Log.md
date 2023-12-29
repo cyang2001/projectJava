@@ -55,3 +55,9 @@ Examen du code : aucun
 **22/12/2023** Chen
 Ajouter un userSession pour conserver les données en mémoire  
 Cependant, un nouveau problème se pose : les données de la mémoire et du fichier ne sont pas synchronisées. J'ai donc choisi de créer une nouvelle classe de service pour synchroniser les données  
+
+**22/12/2023** Rémi
+Début du FXML
+
+**29/12/2023** Rémi
+Fxml HomePage, NewPortfolio fini, controller à compléter
