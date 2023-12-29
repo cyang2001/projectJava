@@ -69,6 +69,7 @@
                 <Button fx:id="userInformation" layoutX="298.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleUserInformationAction" text="User Information" />
             <Label layoutX="21.0" layoutY="124.0" text="New Portfolio Name" />
             <TextField fx:id="newPortfolioName" layoutX="21.0" layoutY="152.0" promptText="NewPorfolioName" />
+                <Button fx:id="confirmation" layoutX="308.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
             </children></AnchorPane>
     </items>
 </SplitPane>
