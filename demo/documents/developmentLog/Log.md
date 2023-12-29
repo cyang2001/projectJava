@@ -66,6 +66,6 @@ Ajouter event et lisenter dans ce project pour le synchronisation des données e
 Examen du code: Passed
 
 **29/12/2023** Rémi
-Fxml HomePage, NewPortfolio, ClonePortfolio, PortfolioInformation, AssetInformation, fini, controller à compléter
-Les pages Buy et SellAsset sont à modifier et la page Analysis est à faire
+Fxml HomePage, NewPortfolio, ClonePortfolio, PortfolioInformation, AssetInformation, et autres finies, controller à compléter
 Le menuController est aussi à compléter
+peut etre modifier les pages pour que le menu contienne les boutons sell et buy asset / crypto distinct
