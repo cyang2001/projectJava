@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.eleve.javaproject.controller.ClonePortfolioController">
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.eleve.javaproject.controller.AssetInformationPageController">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
             <children>
@@ -63,12 +63,12 @@
             </children></AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="445.0">
             <children>
-                <TextField alignment="BOTTOM_CENTER" editable="false" layoutX="111.0" layoutY="53.0" text="Clone Portfolio" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="53.0" />
+                <TextField alignment="BOTTOM_CENTER" editable="false" layoutX="111.0" layoutY="53.0" text="Asset Information Page" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="53.0" />
                 <Button fx:id="userInformation" layoutX="298.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleUserInformationAction" text="User Information" />
-                <ChoiceBox fx:id="portfolioChoiceBox" layoutX="209.0" layoutY="152.0" prefWidth="150.0" />
-                <Label layoutX="35.0" layoutY="155.0" prefHeight="18.0" prefWidth="150.0" text="Choose Portfiolio to Clone" />
-                <TextField editable="false" layoutX="59.0" layoutY="108.0" prefHeight="26.0" prefWidth="258.0" text="Select a portfolio in the ChoiceBox to clone it" />
+                <ChoiceBox fx:id="AssetChoiceBox" layoutX="209.0" layoutY="152.0" prefWidth="150.0" />
+                <Label layoutX="96.0" layoutY="155.0" prefHeight="18.0" prefWidth="79.0" text="Choose Asset" />
                 <Button fx:id="confirmation" layoutX="298.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
+            <TextField editable="false" layoutX="43.0" layoutY="108.0" prefHeight="26.0" prefWidth="337.0" text="Select asset in the ChoiceBox to have access to it information" />
             </children></AnchorPane>
     </items>
 </SplitPane>
