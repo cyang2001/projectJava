@@ -59,10 +59,13 @@ Cependant, un nouveau problème se pose : les données de la mémoire et du fich
 **22/12/2023** Rémi
 Début du FXML
 
-**29/12/2023** Rémi
-Fxml HomePage, NewPortfolio fini, controller à compléter
 **24/12/2023** Chen  
 Ajouter un class pour API(pas encore test)  
 Ajouter event et lisenter dans ce project pour le synchronisation des données en mémoire et des fichiers  
 
 Examen du code: Passed
+
+**29/12/2023** Rémi
+Fxml HomePage, NewPortfolio, ClonePortfolio, PortfolioInformation, AssetInformation, fini, controller à compléter
+Les pages Buy et SellAsset sont à modifier et la page Analysis est à faire
+Le menuController est aussi à compléter
