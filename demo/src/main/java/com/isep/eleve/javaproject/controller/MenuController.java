@@ -27,7 +27,7 @@ public class MenuController {
         //Switch to the Newportfolio view
     }
 
-    protected void handleAssetsPageAction(ActionEvent event){
+    protected void handleChangeAssetsPageAction(ActionEvent event){
         //Switch to the Assets view
     }
 
