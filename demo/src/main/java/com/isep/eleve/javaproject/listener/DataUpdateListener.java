@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.isep.eleve.javaproject.events.AssetCreatedEvent;
 import com.isep.eleve.javaproject.events.PortfolioCreatedEvent;
+import com.isep.eleve.javaproject.events.UserCreatedEvent;
 import com.isep.eleve.javaproject.session.PortfolioSession;
 import com.isep.eleve.javaproject.session.UserSession;
 
@@ -27,5 +28,9 @@ public class DataUpdateListener {
     @EventListener
     public void onAssetCreated(AssetCreatedEvent event) {
         portfolioSession.getCurrentPortfolio().addAsset(event.getAsset());
+    }
+    @EventListener
+    public void onUserCreated(UserCreatedEvent event) {
+        userSession.setCurrentUser(event.getUser());
     }
 }

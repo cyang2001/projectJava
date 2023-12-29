@@ -61,3 +61,8 @@ Début du FXML
 
 **29/12/2023** Rémi
 Fxml HomePage, NewPortfolio fini, controller à compléter
+**24/12/2023** Chen  
+Ajouter un class pour API(pas encore test)  
+Ajouter event et lisenter dans ce project pour le synchronisation des données en mémoire et des fichiers  
+
+Examen du code: Passed

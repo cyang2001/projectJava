@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import com.isep.eleve.javaproject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 /**
  * Registration service
@@ -16,10 +17,12 @@ public class RegistrationService {
 
     private final SecurityService securityService;
     private final UserRepository userRepository;
+    private final ApplicationEventPublisher eventApplication;
     @Autowired
-    public RegistrationService(SecurityService securityService, UserRepository userRepository) {
+    public RegistrationService(SecurityService securityService, UserRepository userRepository, ApplicationEventPublisher eventApplication) {
         this.securityService = securityService;
         this.userRepository = userRepository;
+        this.eventApplication = eventApplication;
     }
     /**
      * Register
@@ -47,6 +50,7 @@ public class RegistrationService {
         // create new user
         User newUser = new User(userName, securityService.encryptData(password, Constants.ENCRYPT_TYPE.MD5));
         // save new user
+        eventApplication.publishEvent(newUser);
         userRepository.save(newUser);
         return new RegistrationResult(true, null, newUser);
     }
