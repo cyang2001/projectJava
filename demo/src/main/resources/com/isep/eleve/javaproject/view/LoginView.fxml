@@ -23,7 +23,7 @@
     <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
     <PasswordField fx:id="passwordField" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-    <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="1" GridPane.rowIndex="4">
+    <HBox spacing="10" alignment="BASELINE_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <Button text="Sign in" onAction="#handleLoginAction"/>
     </HBox>
     <HBox spacing="10" alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="5">

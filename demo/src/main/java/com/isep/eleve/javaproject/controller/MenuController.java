@@ -17,9 +17,8 @@ public class MenuController {
     // ToDo : add needed service
     protected void handleChangeHomePageAction(ActionEvent event) {
         //Switch to the home view
-        
-
     }
+
     protected void handleChangePortfolioPageAction(ActionEvent event){
         //Switch to the portfolio view
 
