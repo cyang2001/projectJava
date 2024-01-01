@@ -3,10 +3,20 @@ package com.isep.eleve.javaproject.model;
 import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.isep.eleve.javaproject.Tools.UUIDUtils;
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
-
-
+import com.isep.eleve.javaproject.model.assets.liquide.Cash;
+import com.isep.eleve.javaproject.model.assets.stock.Stock;
+import com.isep.eleve.javaproject.model.assets.liquide.FixedDeposit;
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "assetType")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Cash.class, name = "CASH"),
+    @JsonSubTypes.Type(value = Stock.class, name = "STOCK"),
+    @JsonSubTypes.Type(value = Crypto.class, name = "CRYPTO"),
+    @JsonSubTypes.Type(value = FixedDeposit.class, name = "FIXED_DEPOSIT")
+})
 public abstract class Asset {
   private ASSET_TYPE assetType;
   private int assetId;

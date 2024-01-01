@@ -13,13 +13,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 import com.isep.eleve.javaproject.model.Asset;
 import com.isep.eleve.javaproject.model.Portfolio;
-import com.isep.eleve.javaproject.model.User;
 import com.isep.eleve.javaproject.service.portfolioServices.AssetsService;
 import com.isep.eleve.javaproject.service.portfolioServices.PortfolioService;
 import com.isep.eleve.javaproject.service.userServices.*;
 import com.isep.eleve.javaproject.service.userServices.RegistrationService.RegistrationResult;
 import com.isep.eleve.javaproject.session.PortfolioSession;
-import com.isep.eleve.javaproject.session.UserSession;;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApplicationIntegrationTest {
@@ -35,7 +33,7 @@ public class ApplicationIntegrationTest {
 
     @Test
     public void testUserAssetPortfolioIntegration() throws IOException{
-      String userName = "chen11";
+      String userName = "chen14";
       String password = "ycc";
       String passwordEnsurance = "ycc";
       RegistrationResult registrationResult = registrationService.register(userName, password, passwordEnsurance);

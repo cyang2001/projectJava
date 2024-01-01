@@ -2,6 +2,8 @@ package com.isep.eleve.javaproject.model.assets.liquide;
 
 import java.math.BigDecimal;
 
+import com.isep.eleve.javaproject.model.Asset;
+
 /**
  * Represents a fixed deposit asset.
  * Inherits from the LiquidAssets class.
@@ -9,7 +11,7 @@ import java.math.BigDecimal;
  * @see LiquidAssets
  * @author Chen YANG
  */
-public class FixedDeposit extends LiquidAssets {
+public class FixedDeposit extends Asset {
   private BigDecimal interestRate;
 
   /**

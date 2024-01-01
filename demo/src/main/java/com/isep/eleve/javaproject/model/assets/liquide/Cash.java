@@ -4,16 +4,17 @@ package com.isep.eleve.javaproject.model.assets.liquide;
 import java.math.BigDecimal;
 
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
+import com.isep.eleve.javaproject.model.Asset;
 
 
 /**
  * Represents a cash asset.
  * Extends the LiquidAssets class.
  * @version 1.0
- * @see LiquidAssets
+ * @see Assets
  * @author Chen YANG
  */
-public class Cash extends LiquidAssets {
+public class Cash extends Asset {
   /**
    * Constructs a Cash object with the specified parameters.
    *
