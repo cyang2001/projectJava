@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.context.ApplicationEventPublisher;
 
 import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.model.User;
@@ -29,6 +30,8 @@ public class AuthenticationServiceTest {
   private User user;
   @Mock
   private User user2;
+  @Mock
+  private ApplicationEventPublisher eventApplication;
   @Test
   public void testAuthenticate() throws IOException {
     // Arrange

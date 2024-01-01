@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
+import com.isep.eleve.javaproject.events.AssetCreatedEvent;
+import com.isep.eleve.javaproject.events.AssetQuantityChangedEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -17,6 +19,8 @@ import com.isep.eleve.javaproject.model.Asset;
 import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.repository.AssetsRepository;
 import com.isep.eleve.javaproject.repository.PortfolioRepository;
+import com.isep.eleve.javaproject.session.AssetSession;
+import com.isep.eleve.javaproject.session.PortfolioSession;
 
 /**
  * This class represents a service for managing assets in a portfolio.
@@ -28,12 +32,16 @@ public class AssetsService {
   private final AssetsRepository assetsRepository;
   private final AssetFactoryProducer factoryProducer;
   private final ApplicationEventPublisher eventApplication;
+  private final PortfolioSession portfolioSession;
+  private final AssetSession assetSession;
   @Autowired
-  public AssetsService(PortfolioRepository portfolioRepository, AssetsRepository assetsRepository, AssetFactoryProducer factoryProducer, ApplicationEventPublisher eventApplication){
+  public AssetsService(PortfolioRepository portfolioRepository, AssetsRepository assetsRepository, AssetFactoryProducer factoryProducer, ApplicationEventPublisher eventApplication, PortfolioSession portfolioSession, AssetSession assetSession){
     this.portfolioRepository = portfolioRepository;
     this.assetsRepository = assetsRepository;
     this.factoryProducer = factoryProducer;
     this.eventApplication = eventApplication;
+    this.portfolioSession = portfolioSession;
+    this.assetSession = assetSession;
   }
 
   /**
@@ -49,7 +57,8 @@ public class AssetsService {
    * @throws IOException              if an I/O error occurs
    * @throws IllegalArgumentException if the asset name is null or empty, quantity is less than or equal to 0, or price is less than or equal to 0
    */
-  public Asset createAsset(String assetName,int portfolioId, int quantity, BigDecimal price, ASSET_TYPE assetType, BigDecimal interestRate) throws IOException, IllegalArgumentException{
+  public Asset createAsset(String assetName,int quantity, BigDecimal price, ASSET_TYPE assetType, BigDecimal interestRate) throws IOException, IllegalArgumentException{
+    int portfolioId = portfolioSession.getCurrentPortfolio().getPortfolioId();
     if (assetName == null || assetName.isEmpty()) {
       throw new IllegalArgumentException("Asset name cannot be null or empty");
     }
@@ -63,7 +72,7 @@ public class AssetsService {
       AssetFactory factory = factoryProducer.getFactory(assetType);
       Portfolio portfolio = portfolioRepository.findByPortfolioId(portfolioId);
       Asset newAsset = factory.createAsset(assetName, portfolioId, quantity, price, interestRate, portfolio.getOwnerId());
-      eventApplication.publishEvent(newAsset);
+      eventApplication.publishEvent(new AssetCreatedEvent(this, newAsset));
       // Persist the new asset
       logger.info("Asset created: {}", assetName);
       assetsRepository.save(newAsset);
@@ -85,7 +94,7 @@ public class AssetsService {
    * @throws IOException if an I/O error occurs while accessing the asset repository
    * @throws IllegalArgumentException if the asset with the specified ID is not found
    */
-  public void changeAssetQuantity(int assetId, int quantity, Constants.changeType changeType, ASSET_TYPE assetType) throws IOException {
+  public void changeAssetQuantity(int assetId, int quantity, Constants.CHANGE_TYPE changeType) throws IOException {
     Asset asset = assetsRepository.findByAssetId(assetId);
     if (asset == null) {
         logger.error("Asset not found: assetId={}", assetId);
@@ -95,18 +104,18 @@ public class AssetsService {
     int originalQuantity = asset.getQuantity();
     int newQuantity = originalQuantity;
 
-    if (changeType == Constants.changeType.ADD) {
+    if (changeType == Constants.CHANGE_TYPE.ADD) {
         newQuantity += quantity;
-    } else if (changeType == Constants.changeType.SUBTRACT) {
+    } else if (changeType == Constants.CHANGE_TYPE.SUBTRACT) {
         newQuantity -= quantity;
-    } else if (changeType == Constants.changeType.SET) {
+    } else if (changeType == Constants.CHANGE_TYPE.SET) {
         newQuantity = quantity;
     }
 
     asset.setQuantity(newQuantity);
     asset.calculateValue();
     assetsRepository.save(asset);
-
+    eventApplication.publishEvent(new AssetQuantityChangedEvent(asset, newQuantity, changeType));
     logger.info("Asset quantity changed: assetId={}, originalQuantity={}, newQuantity={}, changeType={}", assetId, originalQuantity, newQuantity, changeType);
 }
 

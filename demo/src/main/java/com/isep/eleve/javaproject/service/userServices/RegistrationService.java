@@ -1,6 +1,8 @@
 package com.isep.eleve.javaproject.service.userServices;
 import com.isep.eleve.javaproject.model.User;
 import com.isep.eleve.javaproject.Tools.Constants;
+import com.isep.eleve.javaproject.events.UserCreatedEvent;
+
 import java.io.IOException;
 import java.util.List;
 import com.isep.eleve.javaproject.repository.*;
@@ -50,7 +52,7 @@ public class RegistrationService {
         // create new user
         User newUser = new User(userName, securityService.encryptData(password, Constants.ENCRYPT_TYPE.MD5));
         // save new user
-        eventApplication.publishEvent(newUser);
+        eventApplication.publishEvent(new UserCreatedEvent(this, newUser));
         userRepository.save(newUser);
         return new RegistrationResult(true, null, newUser);
     }

@@ -35,21 +35,17 @@ public class ApplicationIntegrationTest {
 
     @Test
     public void testUserAssetPortfolioIntegration() throws IOException{
-      String userName = "chen3";
-      String password = "yc";
-      String passwordEnsurance = "yc";
+      String userName = "chen11";
+      String password = "ycc";
+      String passwordEnsurance = "ycc";
       RegistrationResult registrationResult = registrationService.register(userName, password, passwordEnsurance);
       assertNotEquals(registrationResult.getUser(), null);
-      User userTest = registrationResult.getUser();
-      UserSession userSession = new UserSession();
-      userSession.setCurrentUser(userTest);
-      Portfolio portfolioTest = portfolioService.createPortfolio("testPortfolioName", userSession.getCurrentUser().getUserId());
+      Portfolio portfolioTest = portfolioService.createPortfolio("testPortfolioName");
       PortfolioSession portfolioSession = new PortfolioSession();
       portfolioSession.setCurrentPortfolio(portfolioTest);
-      Asset assetTest = assetsService.createAsset("testAssetName", portfolioSession.getCurrentPortfolio().getPortfolioId(), 100, new BigDecimal(1), ASSET_TYPE.CASH, null);
+      Asset assetTest = assetsService.createAsset("testAssetName",  100, new BigDecimal(1), ASSET_TYPE.CASH, null);
       assertNotEquals(portfolioTest, null);
       assertNotEquals(assetTest, null);
-      assertNotEquals(userTest, null);
     }
   
 }

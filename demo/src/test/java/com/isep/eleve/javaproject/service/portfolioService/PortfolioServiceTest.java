@@ -14,6 +14,8 @@ import static org.mockito.ArgumentMatchers.argThat;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.context.ApplicationEventPublisher;
+
 
 import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.repository.PortfolioRepository;
@@ -28,14 +30,16 @@ public class PortfolioServiceTest {
     @Mock
     private PortfolioRepository portfolioRepository;
 
-@Test
+    @Mock
+    private ApplicationEventPublisher eventApplication;
+@Test 
 public void testCreatePortfolio() throws IOException {
     // Arrange
     String portfolioName = "My Portfolio";
     int ownerId = 1;
 
     // Act
-    portfolioService.createPortfolio(portfolioName, ownerId);
+    portfolioService.createPortfolio(portfolioName);
 
     // Assert
     // Verify that the repository's save method was called with a portfolio having the expected properties
@@ -51,7 +55,7 @@ public void testCreatePortfolio() throws IOException {
         doThrow(new RuntimeException()).when(portfolioRepository).save(any(Portfolio.class));
 
         // Act
-        portfolioService.createPortfolio("My Portfolio", 1);
+        portfolioService.createPortfolio("My Portfolio");
 
         // Assert
         // The test will fail if the exception is not thrown

@@ -27,7 +27,7 @@ public class TestController {
   }
   public void TestCreatePortfolio(){
     try {
-      portfolioService.createPortfolio("testPortfolio", userSession.getCurrentUser().getUserId());
+      portfolioService.createPortfolio("testPortfolio");
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -37,7 +37,7 @@ public class TestController {
     int quantityTest = 10;
     
     try {
-      assetsService.createAsset("testAsset", portfolioSession.getCurrentPortfolio().getPortfolioId(), quantityTest, priceTest, ASSET_TYPE.STOCK, null);
+      assetsService.createAsset("testAsset", quantityTest, priceTest, ASSET_TYPE.STOCK, null);
     } catch (IOException e) {
       e.printStackTrace();
     }

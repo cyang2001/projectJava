@@ -110,9 +110,14 @@ public class Constants {
     STOCK
   };
 
-  public static enum changeType {
+  public static enum CHANGE_TYPE {
     ADD,
     SUBTRACT,
     SET
+  }
+
+  public static enum TRANSACTION_TYPE {
+    BUY,
+    SELL
   }
 }

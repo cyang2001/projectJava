@@ -1,6 +1,5 @@
 package com.isep.eleve.javaproject.events;
 
-import java.time.Clock;
 
 import org.springframework.context.ApplicationEvent;
 

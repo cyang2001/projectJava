@@ -13,15 +13,22 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureMockRestServiceServer;
+import org.springframework.context.ApplicationEventPublisher;
 
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
+import com.isep.eleve.javaproject.events.AssetCreatedEvent;
 import com.isep.eleve.javaproject.factory.AssetFactory;
 import com.isep.eleve.javaproject.factory.AssetFactoryProducer;
 import com.isep.eleve.javaproject.model.Asset;
 import com.isep.eleve.javaproject.model.Portfolio;
+import com.isep.eleve.javaproject.model.User;
 import com.isep.eleve.javaproject.repository.AssetsRepository;
 import com.isep.eleve.javaproject.repository.PortfolioRepository;
 import com.isep.eleve.javaproject.service.portfolioServices.AssetsService;
+import com.isep.eleve.javaproject.session.AssetSession;
+import com.isep.eleve.javaproject.session.PortfolioSession;
+import com.isep.eleve.javaproject.session.UserSession;
 import com.isep.eleve.javaproject.Tools.Constants;
 @RunWith(MockitoJUnitRunner.class)
 public class AssetServiceTest {
@@ -41,6 +48,16 @@ public class AssetServiceTest {
   @Mock
   private AssetFactory assetFactory;
 
+  @Mock
+  private ApplicationEventPublisher eventApplication;
+  
+  @Mock
+  private UserSession userSession;
+  @Mock
+  private PortfolioSession portfolioSession;
+  @Mock
+  private AssetSession assetSession;
+
   @Test
   public void testCreateAsset() throws IOException {
     // Arrange
@@ -58,12 +75,19 @@ public class AssetServiceTest {
     when(mockAsset.getQuantity()).thenReturn(quantity);
     when(mockAsset.getPrice()).thenReturn(price);
     // when(mockAsset.getInterestRate()).thenReturn(interestRate);
-    when(mockAsset.getOwnerId()).thenReturn(ownerId);
     when(mockAsset.getAssetId()).thenReturn(assetId);
     Portfolio mockPortfolio = mock(Portfolio.class);
     when(mockPortfolio.getPortfolioId()).thenReturn(portfolioId);
     when(mockPortfolio.getOwnerId()).thenReturn(ownerId);
+    when(mockPortfolio.getPortfolioName()).thenReturn("Test Portfolio");
 
+    User mockUser = mock(User.class);
+    when(mockUser.getUserId()).thenReturn(ownerId);
+    when(userSession.getCurrentUser()).thenReturn(mockUser);
+    when(assetSession.getCurrentAsset()).thenReturn(mockAsset);
+    when(portfolioSession.getCurrentPortfolio()).thenReturn(mockPortfolio);
+    when(assetSession.getCurrentAsset().getAssetId()).thenReturn(assetId);
+    when(portfolioSession.getCurrentPortfolio().getPortfolioId()).thenReturn(portfolioId);
 
     when(factoryProducer.getFactory(assetType)).thenReturn(assetFactory);
 
@@ -74,25 +98,25 @@ public class AssetServiceTest {
     doNothing().when(mockPortfolio).addAsset(any(Asset.class));
 
     // Act
-    Asset createdAsset = assetsService.createAsset(assetName, portfolioId, quantity, price, assetType, interestRate);
+    Asset createdAsset = assetsService.createAsset(assetName, quantity, price, assetType, interestRate);
     // Assert
     verify(assetsRepository).save(mockAsset);
     assertEquals(mockAsset, createdAsset);
-    verify(mockPortfolio).addAsset(mockAsset);
+    verify(eventApplication).publishEvent(any(AssetCreatedEvent.class));
   }
   @Test(expected = IllegalArgumentException.class)
   public void testCreateAssetWithInvalidName() throws IOException {
-      assetsService.createAsset("", 1, 10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
+      assetsService.createAsset("", 10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testCreateAssetWithInvalidQuantity() throws IOException {
-      assetsService.createAsset("Test Asset", 1, -10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
+      assetsService.createAsset("Test Asset", -10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
 }
   @Test(expected = Exception.class)
   public void testCreateAssetWhenPortfolioNotFound() throws IOException {
       when(portfolioRepository.findByPortfolioId(anyInt())).thenReturn(null);
-      assetsService.createAsset("Test Asset", 1, 10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
+      assetsService.createAsset("Test Asset", 10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
   }
   @Test
   public void testChangeAssetQuantity() throws IOException {
@@ -100,7 +124,7 @@ public class AssetServiceTest {
       when(assetsRepository.findByAssetId(anyInt())).thenReturn(mockAsset);
       doNothing().when(mockAsset).setQuantity(anyInt());
 
-      assetsService.changeAssetQuantity(1, 5, Constants.changeType.ADD, ASSET_TYPE.CASH);
+      assetsService.changeAssetQuantity(1, 5, Constants.CHANGE_TYPE.ADD);
 
       verify(mockAsset).setQuantity(anyInt());
       verify(assetsRepository).save(mockAsset);
@@ -109,6 +133,6 @@ public class AssetServiceTest {
   @Test(expected = IllegalArgumentException.class)
   public void testChangeAssetQuantityWithInvalidAsset() throws IOException {
       when(assetsRepository.findByAssetId(anyInt())).thenReturn(null);
-      assetsService.changeAssetQuantity(1, 5, Constants.changeType.ADD, ASSET_TYPE.CASH);
+      assetsService.changeAssetQuantity(1, 5, Constants.CHANGE_TYPE.ADD);
   }
 }

@@ -1,5 +1,6 @@
 package com.isep.eleve.javaproject.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -67,7 +68,8 @@ public class User {
       this.passwordHash = passwordHash;
       this.portfolios = null;
       this.userId = UUIDUtils.getUUIDInOrderId();
-
+      this.portfoliosId = new ArrayList<>();
+      this.portfolios = new ArrayList<>();
   }
   // default constructor for jackson
   public User() {

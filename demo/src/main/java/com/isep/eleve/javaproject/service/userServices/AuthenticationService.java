@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.List;
 
 import com.isep.eleve.javaproject.Tools.*;
+import com.isep.eleve.javaproject.events.UserChangedEvent;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -39,7 +41,7 @@ public class AuthenticationService {
         List<User> users = userRepository.findAll();
             for (User user : users) {
                 if (user.getUserName().equals(userName) && checkPassword(user.getPasswordHash(), securityService.encryptData(password, Constants.ENCRYPT_TYPE.MD5))) {
-                    eventApplication.publishEvent(user);
+                    eventApplication.publishEvent(new UserChangedEvent(this, user));
                     return user;
                 }
             }
