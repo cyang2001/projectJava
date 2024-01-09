@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 import com.isep.eleve.javaproject.model.Asset;
 
-public class CyptoCurrency extends Asset{
+public class CryptoCurrency extends Asset{
 
-  public CyptoCurrency(String assetName, int portfolioId, int quantity, BigDecimal price, int ownerId) {
+  public CryptoCurrency(String assetName, int portfolioId, int quantity, BigDecimal price, int ownerId) {
     super(assetName, portfolioId, quantity, price, ownerId);
     
   }

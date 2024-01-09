@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 import com.isep.eleve.javaproject.model.Asset;
 import com.isep.eleve.javaproject.model.Portfolio;
+import com.isep.eleve.javaproject.repository.dataRepository.HistoryDataRepository;
 import com.isep.eleve.javaproject.service.portfolioServices.AssetsService;
 import com.isep.eleve.javaproject.service.portfolioServices.PortfolioService;
 import com.isep.eleve.javaproject.service.userServices.*;
@@ -30,10 +31,13 @@ public class ApplicationIntegrationTest {
 
     @Autowired
     private AssetsService assetsService;
-
+    
+    @Autowired
+    private HistoryDataRepository historyDataRepository;
     @Test
-    public void testUserAssetPortfolioIntegration() throws IOException{
-      String userName = "chen14";
+    public void testUserAssetPortfolioIntegration() throws Exception{
+      historyDataRepository.save("AAPL");
+      String userName = "chen3";
       String password = "ycc";
       String passwordEnsurance = "ycc";
       RegistrationResult registrationResult = registrationService.register(userName, password, passwordEnsurance);
@@ -41,7 +45,7 @@ public class ApplicationIntegrationTest {
       Portfolio portfolioTest = portfolioService.createPortfolio("testPortfolioName");
       PortfolioSession portfolioSession = new PortfolioSession();
       portfolioSession.setCurrentPortfolio(portfolioTest);
-      Asset assetTest = assetsService.createAsset("testAssetName",  100, new BigDecimal(1), ASSET_TYPE.CASH, null);
+      Asset assetTest = assetsService.createAsset("testAssetName",  100, new BigDecimal(1), ASSET_TYPE.CRYPTO, null);
       assertNotEquals(portfolioTest, null);
       assertNotEquals(assetTest, null);
     }

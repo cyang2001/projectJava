@@ -15,7 +15,7 @@ import com.isep.eleve.javaproject.Tools.FileOperation;
 @Repository
 public class HistoryDataRepository {
     private static final String EXTERNAL_FILE_PATH = System.getProperty("user.home") + File.separator + "App" + File.separator;
-    private FileOperation fileOperation;
+    private final FileOperation fileOperation;
     @Autowired
     public HistoryDataRepository(FileOperation fileOperation) {
       this.fileOperation = fileOperation;

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.isep.eleve.javaproject.Tools.UUIDUtils;
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
+import com.isep.eleve.javaproject.model.assets.cypto.CryptoCurrency;
 import com.isep.eleve.javaproject.model.assets.liquide.Cash;
 import com.isep.eleve.javaproject.model.assets.stock.Stock;
 import com.isep.eleve.javaproject.model.assets.liquide.FixedDeposit;
@@ -14,7 +15,7 @@ import com.isep.eleve.javaproject.model.assets.liquide.FixedDeposit;
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Cash.class, name = "CASH"),
     @JsonSubTypes.Type(value = Stock.class, name = "STOCK"),
-    @JsonSubTypes.Type(value = Crypto.class, name = "CRYPTO"),
+    @JsonSubTypes.Type(value = CryptoCurrency.class, name = "CRYPTO"),
     @JsonSubTypes.Type(value = FixedDeposit.class, name = "FIXED_DEPOSIT")
 })
 public abstract class Asset {
