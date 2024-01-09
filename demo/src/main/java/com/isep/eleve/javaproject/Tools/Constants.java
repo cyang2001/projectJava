@@ -59,7 +59,7 @@ public class Constants {
    * The path to the login view FXML file.
    */
   public static final String LOGIN_VIEW_PATH = "/com/isep/eleve/javaproject/view/LoginView.fxml";
-
+  public static final String LOGIN_VIEW_CSS_PATH = "/com/isep/eleve/javaproject/view/LoginView.css";
   /**
    * The path to the new portfolio view FXML file.
    */

@@ -42,7 +42,9 @@ public class App extends Application {
     FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.LOGIN_VIEW_PATH));
     fxmlLoader.setControllerFactory(context::getBean);
     Parent root = fxmlLoader.load();
-    primaryStage.setScene(new Scene(root, 300, 275));
+    Scene scene = new Scene(root, 300, 275);
+    scene.getStylesheets().add(App.class.getResource(Constants.LOGIN_VIEW_CSS_PATH).toExternalForm());
+    primaryStage.setScene(scene);
   }
 
   /**

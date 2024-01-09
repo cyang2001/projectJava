@@ -83,6 +83,7 @@
                         <include>**/*.fxml</include>
                         <include>**/*.properties</include>
                         <include>**/*.json</include>
+                        <include>**/*.css</include>
                     </includes>
                 </resource>
         </resources>

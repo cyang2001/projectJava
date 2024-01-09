@@ -1,0 +1,38 @@
+
+.grid-pane {
+  -fx-background-color: #f2f2f2; /* 背景颜色 */
+}
+
+
+.text {
+  -fx-font-size: 20px;
+  -fx-font-weight: bold;
+  -fx-fill: #333333;
+}
+
+
+.label {
+  -fx-font-size: 14px;
+  -fx-text-fill: #333333;
+}
+
+
+.text-field, .password-field {
+  -fx-border-color: #bfbfbf;
+  -fx-border-radius: 4;
+  -fx-background-color: white;
+  -fx-padding: 4 4 4 4;
+}
+
+
+.button {
+  -fx-background-color: #5cb85c;
+  -fx-text-fill: white;
+  -fx-border-radius: 4;
+  -fx-background-radius: 4;
+  -fx-padding: 10 20 10 20;
+}
+
+.button:hover {
+  -fx-background-color: #4cae4c;
+}
