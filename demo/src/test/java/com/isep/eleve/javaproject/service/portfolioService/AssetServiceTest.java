@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureMockRestServiceServer;
 import org.springframework.context.ApplicationEventPublisher;
 
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
@@ -106,15 +105,120 @@ public class AssetServiceTest {
   }
   @Test(expected = IllegalArgumentException.class)
   public void testCreateAssetWithInvalidName() throws IOException {
+    String assetName = "Test Asset";
+    int portfolioId = 1;
+    int quantity = 10;
+    BigDecimal price = new BigDecimal("100.00");
+    ASSET_TYPE assetType = ASSET_TYPE.CASH; // or ASSET_TYPE.FIXED_DEPOSIT for different tests
+    BigDecimal interestRate = new BigDecimal("0.05");
+    int ownerId = 1;
+    int assetId = 1;
+    Asset mockAsset = mock(Asset.class);
+    when(mockAsset.getAssetName()).thenReturn(assetName);
+    when(mockAsset.getPortfolioId()).thenReturn(portfolioId);
+    when(mockAsset.getQuantity()).thenReturn(quantity);
+    when(mockAsset.getPrice()).thenReturn(price);
+    // when(mockAsset.getInterestRate()).thenReturn(interestRate);
+    when(mockAsset.getAssetId()).thenReturn(assetId);
+    Portfolio mockPortfolio = mock(Portfolio.class);
+    when(mockPortfolio.getPortfolioId()).thenReturn(portfolioId);
+    when(mockPortfolio.getOwnerId()).thenReturn(ownerId);
+    when(mockPortfolio.getPortfolioName()).thenReturn("Test Portfolio");
+
+    User mockUser = mock(User.class);
+    when(mockUser.getUserId()).thenReturn(ownerId);
+    when(userSession.getCurrentUser()).thenReturn(mockUser);
+    when(assetSession.getCurrentAsset()).thenReturn(mockAsset);
+    when(portfolioSession.getCurrentPortfolio()).thenReturn(mockPortfolio);
+    when(assetSession.getCurrentAsset().getAssetId()).thenReturn(assetId);
+    when(portfolioSession.getCurrentPortfolio().getPortfolioId()).thenReturn(portfolioId);
+
+    when(factoryProducer.getFactory(assetType)).thenReturn(assetFactory);
+
+    when(assetFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId))
+        .thenReturn(mockAsset);
+
+    when(portfolioRepository.findByPortfolioId(portfolioId)).thenReturn(mockPortfolio);
+    doNothing().when(mockPortfolio).addAsset(any(Asset.class));
       assetsService.createAsset("", 10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testCreateAssetWithInvalidQuantity() throws IOException {
+    String assetName = "Test Asset";
+    int portfolioId = 1;
+    int quantity = 10;
+    BigDecimal price = new BigDecimal("100.00");
+    ASSET_TYPE assetType = ASSET_TYPE.CASH; // or ASSET_TYPE.FIXED_DEPOSIT for different tests
+    BigDecimal interestRate = new BigDecimal("0.05");
+    int ownerId = 1;
+    int assetId = 1;
+    Asset mockAsset = mock(Asset.class);
+    when(mockAsset.getAssetName()).thenReturn(assetName);
+    when(mockAsset.getPortfolioId()).thenReturn(portfolioId);
+    when(mockAsset.getQuantity()).thenReturn(quantity);
+    when(mockAsset.getPrice()).thenReturn(price);
+    // when(mockAsset.getInterestRate()).thenReturn(interestRate);
+    when(mockAsset.getAssetId()).thenReturn(assetId);
+    Portfolio mockPortfolio = mock(Portfolio.class);
+    when(mockPortfolio.getPortfolioId()).thenReturn(portfolioId);
+    when(mockPortfolio.getOwnerId()).thenReturn(ownerId);
+    when(mockPortfolio.getPortfolioName()).thenReturn("Test Portfolio");
+
+    User mockUser = mock(User.class);
+    when(mockUser.getUserId()).thenReturn(ownerId);
+    when(userSession.getCurrentUser()).thenReturn(mockUser);
+    when(assetSession.getCurrentAsset()).thenReturn(mockAsset);
+    when(portfolioSession.getCurrentPortfolio()).thenReturn(mockPortfolio);
+    when(assetSession.getCurrentAsset().getAssetId()).thenReturn(assetId);
+    when(portfolioSession.getCurrentPortfolio().getPortfolioId()).thenReturn(portfolioId);
+
+    when(factoryProducer.getFactory(assetType)).thenReturn(assetFactory);
+
+    when(assetFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId))
+        .thenReturn(mockAsset);
+
+    when(portfolioRepository.findByPortfolioId(portfolioId)).thenReturn(mockPortfolio);
+    doNothing().when(mockPortfolio).addAsset(any(Asset.class));
       assetsService.createAsset("Test Asset", -10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
 }
   @Test(expected = Exception.class)
   public void testCreateAssetWhenPortfolioNotFound() throws IOException {
+    String assetName = "Test Asset";
+    int portfolioId = 1;
+    int quantity = 10;
+    BigDecimal price = new BigDecimal("100.00");
+    ASSET_TYPE assetType = ASSET_TYPE.CASH; // or ASSET_TYPE.FIXED_DEPOSIT for different tests
+    BigDecimal interestRate = new BigDecimal("0.05");
+    int ownerId = 1;
+    int assetId = 1;
+    Asset mockAsset = mock(Asset.class);
+    when(mockAsset.getAssetName()).thenReturn(assetName);
+    when(mockAsset.getPortfolioId()).thenReturn(portfolioId);
+    when(mockAsset.getQuantity()).thenReturn(quantity);
+    when(mockAsset.getPrice()).thenReturn(price);
+    // when(mockAsset.getInterestRate()).thenReturn(interestRate);
+    when(mockAsset.getAssetId()).thenReturn(assetId);
+    Portfolio mockPortfolio = mock(Portfolio.class);
+    when(mockPortfolio.getPortfolioId()).thenReturn(portfolioId);
+    when(mockPortfolio.getOwnerId()).thenReturn(ownerId);
+    when(mockPortfolio.getPortfolioName()).thenReturn("Test Portfolio");
+
+    User mockUser = mock(User.class);
+    when(mockUser.getUserId()).thenReturn(ownerId);
+    when(userSession.getCurrentUser()).thenReturn(mockUser);
+    when(assetSession.getCurrentAsset()).thenReturn(mockAsset);
+    when(portfolioSession.getCurrentPortfolio()).thenReturn(mockPortfolio);
+    when(assetSession.getCurrentAsset().getAssetId()).thenReturn(assetId);
+    when(portfolioSession.getCurrentPortfolio().getPortfolioId()).thenReturn(portfolioId);
+
+    when(factoryProducer.getFactory(assetType)).thenReturn(assetFactory);
+
+    when(assetFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId))
+        .thenReturn(mockAsset);
+
+    when(portfolioRepository.findByPortfolioId(portfolioId)).thenReturn(mockPortfolio);
+    doNothing().when(mockPortfolio).addAsset(any(Asset.class));
       when(portfolioRepository.findByPortfolioId(anyInt())).thenReturn(null);
       assetsService.createAsset("Test Asset", 10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
   }
