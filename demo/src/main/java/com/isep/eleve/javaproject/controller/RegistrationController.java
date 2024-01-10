@@ -2,6 +2,7 @@ package com.isep.eleve.javaproject.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -37,9 +38,17 @@ public class RegistrationController {
 
   @FXML
   private PasswordField passwordField2;
-
   @FXML
-  protected void handleRegistrationAction(ActionEvent event) throws IOException {
+  private CheckBox checkBox;
+  @FXML
+  protected void handleRegistrationAction(ActionEvent event) throws Exception {
+    if (!checkBox.isSelected()) {
+      checkBox.getStyleClass().add("error");
+      App.showAlert("Error", "You must agree to the terms and conditions", "Please try again.");
+      return; 
+  } else {
+      checkBox.getStyleClass().remove("error");
+  }
     // get the username and password from the UI
     String username = usernameField.getText();
     String password = passwordField.getText();
@@ -54,7 +63,6 @@ public class RegistrationController {
     // Todo: add more error handling
     // for example, password cannot be empty
     // or username cannot be empty
-    
     if (!result.isSuccess()) {
       if (result.getFailureType() == Constants.REGISTRATION_FAILIURE_TYPE.PASSWORD_NOT_SAME) {
         App.showAlert("Password Not Same", "The passwords do not match", "Please try again.");
@@ -64,6 +72,7 @@ public class RegistrationController {
     } else {
       App.showAlert("Registration Success", "You have successfully registered", "Welcome!");
       this.userSession.setCurrentUser(result.getUser());
+      App.switchToHome();
       //User user = result.getUser();
     }
   }

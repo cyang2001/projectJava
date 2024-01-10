@@ -2,12 +2,14 @@ package com.isep.eleve.javaproject.factory;
 
 import java.math.BigDecimal;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.isep.eleve.javaproject.model.Asset;
 import com.isep.eleve.javaproject.model.assets.liquide.FixedDeposit;
 
 @Component
+@Qualifier("FixedDepositFactory")
 public class FixedDepositFactory implements AssetFactory {
   /**
   * Creates a FixedDeposit object with the specified parameters.

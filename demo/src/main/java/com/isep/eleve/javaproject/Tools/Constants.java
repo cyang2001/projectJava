@@ -74,7 +74,7 @@ public class Constants {
    * The path to the registration view FXML file.
    */
   public static final String REGISTRATION_VIEW_PATH = "/com/isep/eleve/javaproject/view/RegistrationView.fxml";
-
+  public static final String REGISTRATION_VIEW_CSS_PATH = "/com/isep/eleve/javaproject/view/RegistrationView.css";
   /**
    * The path to the sell asset view FXML file.
    */

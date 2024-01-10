@@ -2,6 +2,7 @@ package com.isep.eleve.javaproject.factory;
 
 import java.math.BigDecimal;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.isep.eleve.javaproject.model.Asset;
@@ -9,6 +10,7 @@ import com.isep.eleve.javaproject.model.assets.liquide.Cash;
 
 
 @Component
+@Qualifier("CashFactory")
 public class CashFactory implements AssetFactory{
   /**
   * Creates a Cash asset with the given parameters.

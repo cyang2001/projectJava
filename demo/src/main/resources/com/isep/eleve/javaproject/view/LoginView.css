@@ -1,13 +1,13 @@
 
-.grid-pane {
-  -fx-background-color: #f2f2f2; /* 背景颜色 */
+.anchor {
+  -fx-background-color: rgb(34, 31, 31); 
 }
 
 
 .text {
   -fx-font-size: 20px;
   -fx-font-weight: bold;
-  -fx-fill: #333333;
+  -fx-fill: #faf9f9;
 }
 
 
@@ -26,13 +26,14 @@
 
 
 .button {
-  -fx-background-color: #5cb85c;
+  -fx-background-color: rgb(213, 213, 34);
   -fx-text-fill: white;
-  -fx-border-radius: 4;
-  -fx-background-radius: 4;
-  -fx-padding: 10 20 10 20;
 }
 
 .button:hover {
   -fx-background-color: #4cae4c;
+}
+
+.error-label{
+  -fx-text-fill: #ec0808;
 }

@@ -1,0 +1,16 @@
+.anchor-registration {
+  -fx-background-color: rgb(34, 31, 31); 
+}
+.button-registration {
+  -fx-background-color: rgb(213, 213, 34);
+  -fx-text-fill: white;
+}
+
+.button-registration:hover {
+  -fx-background-color: #4cae4c;
+}
+.check-box-registration .error {
+  -fx-border-color: red;
+  -fx-border-width: 2px;
+  -fx-padding: -2;
+}
