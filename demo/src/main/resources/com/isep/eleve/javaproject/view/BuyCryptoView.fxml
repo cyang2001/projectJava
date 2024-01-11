@@ -65,12 +65,14 @@
             <children>
                 <TextField alignment="BOTTOM_CENTER" editable="false" layoutX="111.0" layoutY="53.0" text="Buy Crypto" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="53.0" />
                 <Button fx:id="userInformation" layoutX="298.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleUserInformationAction" text="User Information" />
-                <ChoiceBox fx:id="cryptoToBuyChoiceBox" layoutX="186.0" layoutY="152.0" prefWidth="150.0" />
-                <Label layoutX="97.0" layoutY="155.0" prefHeight="18.0" prefWidth="86.0" text="Choose crypto" />
-                <TextField editable="false" layoutX="55.0" layoutY="108.0" prefHeight="26.0" prefWidth="301.0" text="Select whitch crypto do you want to buy and how many" />
+                <ChoiceBox fx:id="cryptoToBuyChoiceBox" layoutX="187.0" layoutY="164.0" prefWidth="150.0" />
+                <Label layoutX="98.0" layoutY="167.0" prefHeight="18.0" prefWidth="86.0" text="Choose crypto" />
+                <TextField editable="false" layoutX="56.0" layoutY="120.0" prefHeight="26.0" prefWidth="301.0" text="Select whitch crypto do you want to buy and how many" />
                 <Button fx:id="confirmation" layoutX="298.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
-                <Label layoutX="92.0" layoutY="197.0" prefHeight="18.0" prefWidth="96.0" text="Number of them" />
+                <Label layoutX="93.0" layoutY="209.0" prefHeight="18.0" prefWidth="96.0" text="Number of them" />
                 <ChoiceBox fx:id="numberOfCryptoChoiceBox" layoutX="189.0" layoutY="193.0" prefHeight="26.0" prefWidth="34.0" />
+                <RadioButton fx:id="switchBuyAssetPage" layoutX="56.0" layoutY="91.0" mnemonicParsing="false" onAction="#handleChangeBuyCryptoPageAction" text="Buy" />
+                <RadioButton fx:id="switchSellAssetPage" layoutX="121.0" layoutY="91.0" mnemonicParsing="false" onAction="#handleChangeSellCryptoPageAction" text="Sell" />
             </children></AnchorPane>
     </items>
 </SplitPane>

@@ -15,9 +15,30 @@ import com.isep.eleve.javaproject.App;
 
 @Controller
 public class HomeController {
-    //// ToDo : add needed service
-    @FXML
-    protected void handleUserInformationAction(ActionEvent event){
-        //Switch to the UserInformation view
+    public void handleChangeHomePageAction(ActionEvent event) {
+    }
+
+    public void handleChangePortfolioPageAction(ActionEvent event) {
+    }
+
+    public void handleChangeNewPortfolioPageAction(ActionEvent event) {
+    }
+
+    public void handleChangeAssetsPageAction(ActionEvent event) {
+    }
+
+    public void handleChangeBuySellAssetsPageAction(ActionEvent event) {
+    }
+
+    public void handleChangeCryptoPageAction(ActionEvent event) {
+    }
+
+    public void handleChangeBuySellCryptoPageAction(ActionEvent event) {
+    }
+
+    public void handleChangeAnalysisPageAction(ActionEvent event) {
+    }
+
+    public void handleUserInformationAction(ActionEvent event) {
     }
 }
