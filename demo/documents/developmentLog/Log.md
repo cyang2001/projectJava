@@ -69,3 +69,7 @@ Examen du code: Passed
 Fxml HomePage, NewPortfolio, ClonePortfolio, PortfolioInformation, AssetInformation, et autres finies, controller à compléter
 Le menuController est aussi à compléter
 peut etre modifier les pages pour que le menu contienne les boutons sell et buy asset / crypto distinct
+
+**11/01/2024** Rémi
+Switch page fait dans App, App extends dans HomeController, BuyAssetController, BuyCryptoController, SellAssetController, 
+SellCryptoController et AnalysisController pour les swtch page effectifs.
