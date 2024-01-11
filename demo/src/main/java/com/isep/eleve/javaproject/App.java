@@ -32,10 +32,84 @@ public class App extends Application {
     switchToLogin();
     primaryStage.show();
   }
+  public static void switchToAddEventsPage() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.ADD_EVENT_VIEW_PATH));
+    fxmlLoader.setControllerFactory(context::getBean);
+    Parent root = fxmlLoader.load();
+    primaryStage.setScene(new Scene(root, 760, 700));
+  }
+
+  public static void switchToAnalysisPage() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.ANALYSIS_VIEW_PATH));
+    fxmlLoader.setControllerFactory(context::getBean);
+    Parent root = fxmlLoader.load();
+    primaryStage.setScene(new Scene(root, 760, 600));
+  }
+
+  public static void switchToAssetInformationPage() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.ANALYSIS_VIEW_PATH));
+    fxmlLoader.setControllerFactory(context::getBean);
+    Parent root = fxmlLoader.load();
+    primaryStage.setScene(new Scene(root, 760, 700));
+  }
+
+  public static void switchToBuyAssetPage() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.BUY_ASSET_VIEW_PATH));
+    fxmlLoader.setControllerFactory(context::getBean);
+    Parent root = fxmlLoader.load();
+    primaryStage.setScene(new Scene(root, 760, 700));
+  }
+
+  public static void switchToBuyCryptoPage() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.BUY_CRYPTO_VIEW_PATH));
+    fxmlLoader.setControllerFactory(context::getBean);
+    Parent root = fxmlLoader.load();
+    primaryStage.setScene(new Scene(root, 760, 700));
+  }
+
+  public static void switchToClonePortfolioPage() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.CLONE_PORTFOLIO_VIEW_PATH));
+    fxmlLoader.setControllerFactory(context::getBean);
+    Parent root = fxmlLoader.load();
+    primaryStage.setScene(new Scene(root, 760, 700));
+  }
+
+  public static void switchToCryptoInformationPage() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.CRYPTO_INFORMATION_VIEW_PATH));
+    fxmlLoader.setControllerFactory(context::getBean);
+    Parent root = fxmlLoader.load();
+    primaryStage.setScene(new Scene(root, 760, 700));
+  }
+
+  public static void switchToDeleteEventPage() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.DELETE_EVENTS_VIEW_PATH));
+    fxmlLoader.setControllerFactory(context::getBean);
+    Parent root = fxmlLoader.load();
+    primaryStage.setScene(new Scene(root, 760, 700));
+  }
+
+  public static void switchToDemonstrateValuePage() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.DEMONSTRATE_VALUE_VIEW_PATH));
+    fxmlLoader.setControllerFactory(context::getBean);
+    Parent root = fxmlLoader.load();
+    primaryStage.setScene(new Scene(root, 760, 700));
+  }
+
+  /**
+   * Switch to the home view.
+   *
+   * @throws Exception
+   */
+  public static void switchToHome() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.HOME_VIEW_PATH));
+    fxmlLoader.setControllerFactory(context::getBean);
+    Parent root = fxmlLoader.load();
+    primaryStage.setScene(new Scene(root, 760, 700));
+  }
 
   /**
    * Switch to the login view.
-   * 
+   *
    * @throws Exception
    */
   public static void switchToLogin() throws Exception {
@@ -47,23 +121,18 @@ public class App extends Application {
     primaryStage.setScene(scene);
   }
 
-  /**
-   * Switch to the home view.
-   * 
-   * @throws Exception
-   */
-  public static void switchToHome() throws Exception {
-    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.HOME_VIEW_PATH));
+  public static void switchToNewPortfolioPage() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.NEW_PORTFOLIO_VIEW_PATH));
     fxmlLoader.setControllerFactory(context::getBean);
     Parent root = fxmlLoader.load();
-    primaryStage.setScene(new Scene(root, 300, 275));
+    primaryStage.setScene(new Scene(root, 760, 700));
   }
 
   public static void switchToPortfolioPage() throws Exception {
     FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.PORTFOLIO_INFORMATION_VIEW_PATH));
     fxmlLoader.setControllerFactory(context::getBean);
     Parent root = fxmlLoader.load();
-    primaryStage.setScene(new Scene(root, 300, 275));
+    primaryStage.setScene(new Scene(root, 760, 700));
   }
 
   /**
@@ -78,6 +147,20 @@ public class App extends Application {
     Scene scene = new Scene(root);
     scene.getStylesheets().add(App.class.getResource(Constants.REGISTRATION_VIEW_CSS_PATH).toExternalForm());
     primaryStage.setScene(scene);
+  }
+
+  public static void switchToSellAssetPage() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.SELL_ASSET_VIEW_PATH));
+    fxmlLoader.setControllerFactory(context::getBean);
+    Parent root = fxmlLoader.load();
+    primaryStage.setScene(new Scene(root, 760, 700));
+  }
+
+  public static void switchToSellCryptoPage() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.SELL_CRYPTO_VIEW_PATH));
+    fxmlLoader.setControllerFactory(context::getBean);
+    Parent root = fxmlLoader.load();
+    primaryStage.setScene(new Scene(root, 760, 700));
   }
 
   /**

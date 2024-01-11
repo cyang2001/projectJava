@@ -48,7 +48,7 @@ public class Constants {
   /**
    * The path to the demonstrate value view FXML file.
    */
-  public static final String DEMONSTRATE_EVENTS_VIEW_PATH = "/com/isep/eleve/javaproject/view/DemonstrateValueView.fxml";
+  public static final String DEMONSTRATE_VALUE_VIEW_PATH = "/com/isep/eleve/javaproject/view/DemonstrateValueView.fxml";
 
   /**
    * The path to the home view FXML file.
@@ -81,7 +81,7 @@ public class Constants {
   public static final String SELL_ASSET_VIEW_PATH = "/com/isep/eleve/javaproject/view/SellAssetView.fxml";
 
   /**
-   * The path to the sell asset view FXML file.
+   * The path to the sell crypto view FXML file.
    */
   public static final String SELL_CRYPTO_VIEW_PATH = "/com/isep/eleve/javaproject/view/SellCryptoView.fxml";
 
