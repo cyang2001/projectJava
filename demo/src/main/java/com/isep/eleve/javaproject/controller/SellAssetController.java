@@ -11,9 +11,11 @@ public class SellAssetController extends App {
     public void handleConfirmationAction(ActionEvent event) {
     }
 
-    public void handleChangeBuyAssetsPageAction(ActionEvent event) {
+    public void handleChangeBuyAssetsPageAction(ActionEvent event) throws Exception {
+        switchToBuyAssetPage();
     }
 
-    public void handleChangeSellAssetsPageAction(ActionEvent event) {
+    public void handleChangeSellAssetsPageAction(ActionEvent event) throws Exception {
+        switchToSellAssetPage();
     }
 }
