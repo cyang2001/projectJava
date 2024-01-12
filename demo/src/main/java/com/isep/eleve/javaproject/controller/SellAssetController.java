@@ -2,7 +2,9 @@ package com.isep.eleve.javaproject.controller;
 
 import com.isep.eleve.javaproject.App;
 import javafx.event.ActionEvent;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class SellAssetController {
 
     public void handleUserInformationAction(ActionEvent event) {
