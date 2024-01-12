@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.eleve.javaproject.controller.BuyCryptoController">
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.eleve.javaproject.controller.BuyCryptoController">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="445.0">
             <children>
                 <TextField alignment="BOTTOM_CENTER" editable="false" layoutX="111.0" layoutY="53.0" text="Buy Crypto" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="53.0" />
                 <Button fx:id="userInformation" layoutX="298.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleUserInformationAction" text="User Information" />
-                <ChoiceBox fx:id="cryptoToBuyChoiceBox" layoutX="187.0" layoutY="164.0" prefWidth="150.0" />
-                <Label layoutX="98.0" layoutY="167.0" prefHeight="18.0" prefWidth="86.0" text="Choose crypto" />
-                <TextField editable="false" layoutX="56.0" layoutY="120.0" prefHeight="26.0" prefWidth="301.0" text="Select whitch crypto do you want to buy and how many" />
-                <Button fx:id="confirmation" layoutX="298.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
-                <Label layoutX="93.0" layoutY="209.0" prefHeight="18.0" prefWidth="96.0" text="Number of them" />
-                <ChoiceBox fx:id="numberOfCryptoChoiceBox" layoutX="189.0" layoutY="193.0" prefHeight="26.0" prefWidth="34.0" />
+                <ChoiceBox fx:id="cryptoToBuyChoiceBox" layoutX="187.0" layoutY="180.0" prefWidth="150.0" />
+                <Label layoutX="98.0" layoutY="183.0" prefHeight="18.0" prefWidth="86.0" text="Choose crypto" />
+                <TextField editable="false" layoutX="56.0" layoutY="136.0" prefHeight="26.0" prefWidth="311.0" text="Select whitch crypto do you want to buy and how many" />
+                <Button fx:id="confirmation" layoutX="298.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
+                <Label layoutX="93.0" layoutY="225.0" prefHeight="18.0" prefWidth="96.0" text="Number of them" />
+                <ChoiceBox fx:id="numberOfCryptoChoiceBox" layoutX="189.0" layoutY="221.0" prefHeight="26.0" prefWidth="34.0" />
                 <Button fx:id="logOut" layoutX="342.0" layoutY="89.0" mnemonicParsing="false" onAction="#handleLogOutAction" text="Log Out" />
             </children></AnchorPane>
     </items>
