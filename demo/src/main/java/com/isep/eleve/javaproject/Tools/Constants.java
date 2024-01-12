@@ -85,6 +85,8 @@ public class Constants {
    */
   public static final String SELL_CRYPTO_VIEW_PATH = "/com/isep/eleve/javaproject/view/SellCryptoView.fxml";
 
+  public static final String ADD_ASSET_VIEW_PATH = "/com/isep/eleve/javaproject/view/AddAssetView.fxml";
+
   /**
    * The encryption types available.
    */

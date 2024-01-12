@@ -59,7 +59,8 @@ public class MainController implements Initializable {
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM7),
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM8),
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM9),
-				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM10));
+				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM10),
+				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM11));
 		main_treeview.setRoot(root);
 
 	}
@@ -83,27 +84,30 @@ public class MainController implements Initializable {
 				pagePath = ViewConfig.ASSET_INFORMATION_VIEW_PATH;
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM3:
-				pagePath = ViewConfig.BUY_ASSET_VIEW_PATH;
+				pagePath = ViewConfig.ADD_ASSET_VIEW_PATH;
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM4:
-				pagePath = ViewConfig.SELL_ASSET_VIEW_PATH;
+				pagePath = ViewConfig.BUY_ASSET_VIEW_PATH;
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM5:
-				pagePath = ViewConfig.PORTFOLIO_INFORMATION_VIEW_PATH;
+				pagePath = ViewConfig.SELL_ASSET_VIEW_PATH;
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM6:
-				pagePath = ViewConfig.NEW_PORTFOLIO_VIEW_PATH;
+				pagePath = ViewConfig.PORTFOLIO_INFORMATION_VIEW_PATH;
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM7:
-				pagePath = ViewConfig.CLONE_PORTFOLIO_VIEW_PATH;
+				pagePath = ViewConfig.NEW_PORTFOLIO_VIEW_PATH;
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM8:
-				pagePath = ViewConfig.CRYPTO_INFORMATION_VIEW_PATH;
+				pagePath = ViewConfig.CLONE_PORTFOLIO_VIEW_PATH;
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM9:
-				pagePath = ViewConfig.BUY_CRYPTO_VIEW_PATH;
+				pagePath = ViewConfig.CRYPTO_INFORMATION_VIEW_PATH;
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM10:
+				pagePath = ViewConfig.BUY_CRYPTO_VIEW_PATH;
+				break;
+			case ViewConfig.MAIN_TREE_HEADER_ITEM11:
 				pagePath = ViewConfig.SELL_CRYPTO_VIEW_PATH;
 				break;
 		}
