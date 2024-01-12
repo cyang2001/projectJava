@@ -56,7 +56,7 @@ public class App extends Application {
   }
 
   public static void switchToAssetInformationPage() throws Exception {
-    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.ANALYSIS_VIEW_PATH));
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.ASSET_INFORMATION_VIEW_PATH));
     fxmlLoader.setControllerFactory(context::getBean);
     Parent root = fxmlLoader.load();
     primaryStage.setScene(new Scene(root, 760, 700));

@@ -7,60 +7,6 @@
 
 <SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.eleve.javaproject.controller.AnalysisController">
     <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-            <children>
-                <VBox prefHeight="400.0" prefWidth="175.0">
-                    <children>
-                        <Label text="MENU">
-                            <VBox.margin>
-                                <Insets bottom="20.0" left="75.0" top="20.0" />
-                            </VBox.margin>
-                        </Label>
-                        <Line endX="100.0" startX="-100.0" />
-
-                        <Button fx:id="home" mnemonicParsing="false" onAction="#handleChangeHomePageAction" prefHeight="25.0" prefWidth="146.0" text="Home">
-                            <VBox.margin>
-                                <Insets left="20.0" top="30.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="portfoliosInformations" mnemonicParsing="false" onAction="#handleChangePortfolioPageAction" prefHeight="25.0" prefWidth="146.0" text="Portfolios Informations">
-                            <VBox.margin>
-                                <Insets left="20.0" top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="newPortfolio" mnemonicParsing="false" onAction="#handleChangeNewPortfolioPageAction" prefHeight="25.0" prefWidth="146.0" text="New Portfolio">
-                            <VBox.margin>
-                                <Insets left="20.0" top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="assets" mnemonicParsing="false" onAction="#handleChangeAssetsPageAction" prefHeight="25.0" prefWidth="146.0" text="Assets">
-                            <VBox.margin>
-                                <Insets left="20.0" top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="buySellAssets" mnemonicParsing="false" onAction="#handleChangeBuySellAssetsPageAction" prefHeight="25.0" prefWidth="146.0" text="Buy / Sell Assets">
-                            <VBox.margin>
-                                <Insets left="20.0" top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="crypto" mnemonicParsing="false" onAction="#handleChangeCryptoPageAction" prefHeight="25.0" prefWidth="146.0" text="Crypto">
-                            <VBox.margin>
-                                <Insets left="20.0" top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="buySellCrypto" mnemonicParsing="false" onAction="#handleChangeBuySellCryptoPageAction" prefHeight="25.0" prefWidth="146.0" text="Buy / Sell Crypto">
-                            <VBox.margin>
-                                <Insets left="20.0" top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="Analysis" mnemonicParsing="false" onAction="#handleChangeAnalysisPageAction" prefHeight="26.0" prefWidth="146.0" text="Analysis">
-                            <VBox.margin>
-                                <Insets left="20.0" top="10.0" />
-                            </VBox.margin>
-                        </Button>
-                    </children>
-                </VBox>
-            </children></AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="445.0">
             <children>
                 <TextField alignment="BOTTOM_CENTER" editable="false" layoutX="111.0" layoutY="53.0" text="Analysis Page" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="53.0" />
