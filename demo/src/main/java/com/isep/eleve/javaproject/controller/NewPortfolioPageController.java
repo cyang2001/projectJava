@@ -1,7 +1,9 @@
 package com.isep.eleve.javaproject.controller;
 
-import javafx.event.ActionEvent;
+import org.springframework.stereotype.Controller;
 
+import javafx.event.ActionEvent;
+@Controller
 public class NewPortfolioPageController {
     public void handleUserInformationAction(ActionEvent event) {
     }

@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 
 import com.isep.eleve.javaproject.App;
-@Controller
+
 public class MenuController extends App{
     // ToDo : add needed service
     // TODO: 29/12/2023 faire les switch page 
@@ -51,7 +51,7 @@ public class MenuController extends App{
     }
 
     protected void handleChangeAnalysisPageAction(ActionEvent event) throws Exception {
-       switchToAnalysisPage();
+      switchToAnalysisPage();
     }
 
 }

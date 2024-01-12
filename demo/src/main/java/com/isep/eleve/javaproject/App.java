@@ -1,5 +1,10 @@
 package com.isep.eleve.javaproject;
 
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.isep.eleve.javaproject.config.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -9,8 +14,11 @@ import com.isep.eleve.javaproject.Tools.Constants;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 @SpringBootApplication
@@ -19,7 +27,8 @@ public class App extends Application {
 
   private static ConfigurableApplicationContext context;
   private static Stage primaryStage;
-
+  private static final Logger logger = Logger.getLogger(App.class.getName());
+	private Stage stage;
   @Override
   public void init() throws Exception {
     context = SpringApplication.run(App.class);
@@ -104,7 +113,7 @@ public class App extends Application {
     FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(Constants.HOME_VIEW_PATH));
     fxmlLoader.setControllerFactory(context::getBean);
     Parent root = fxmlLoader.load();
-    primaryStage.setScene(new Scene(root, 760, 700));
+    primaryStage.setScene(new Scene(root));
   }
 
   /**
@@ -182,6 +191,29 @@ public class App extends Application {
   public void stop() throws Exception {
     context.close();
   }
+
+
+  // new
+  private Initializable replaceSceneContent(String fxml) throws Exception {
+
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		InputStream in = App.class.getResourceAsStream(fxml);
+		fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
+    fxmlLoader.setControllerFactory(context::getBean);
+		fxmlLoader.setLocation(App.class.getResource(fxml));
+		try {
+			AnchorPane page = (AnchorPane) fxmlLoader.load(in);
+			Scene scene = new Scene(page, ViewConfig.STAGE_WIDTH, ViewConfig.STAGE_HEIGHT);
+			stage.setScene(scene);
+			stage.sizeToScene();
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Error");
+		} finally {
+			in.close();
+		}
+		return (Initializable) fxmlLoader.getController();
+	}
+
 
   public static void main(String[] args) {
     launch(args);

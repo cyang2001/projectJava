@@ -1,11 +1,10 @@
-package com.isep.eleve.javaproject.Tools;
+package com.isep.eleve.javaproject.config;
 
-/**
- * This class contains constant values used
- * in the application.
- */
-public class Constants {
-  /**
+public final class ViewConfig {
+	public final static int STAGE_WIDTH = 800;
+	public final static int STAGE_HEIGHT = 600;
+	
+	/**
    * The path to the add event view FXML file.
    */
   public static final String ADD_EVENT_VIEW_PATH = "/com/isep/eleve/javaproject/view/AddEventsView.fxml";
@@ -53,7 +52,7 @@ public class Constants {
   /**
    * The path to the home view FXML file.
    */
-  public static final String HOME_VIEW_PATH = "/com/isep/eleve/javaproject/view/HomePageView_1.fxml";
+  public static final String HOME_VIEW_PATH = "/com/isep/eleve/javaproject/view/HomePageView.fxml";
 
   /**
    * The path to the login view FXML file.
@@ -63,7 +62,7 @@ public class Constants {
   /**
    * The path to the new portfolio view FXML file.
    */
-  public static final String NEW_PORTFOLIO_VIEW_PATH = "/com/isep/eleve/javaproject/view/NewPortfolioView.fxml";
+  public static final String NEW_PORTFOLIO_VIEW_PATH = "/com/isep/eleve/javaproject/view/NewPortfolioView_1.fxml";
 
   /**
    * The path to the portfolio information view FXML file.
@@ -85,39 +84,12 @@ public class Constants {
    */
   public static final String SELL_CRYPTO_VIEW_PATH = "/com/isep/eleve/javaproject/view/SellCryptoView.fxml";
 
-  /**
-   * The encryption types available.
-   */
-  public static enum ENCRYPT_TYPE {
-    MD5,
-    SHA1,
-    SHA256,
-    SHA512,
-  };
+	public final static String MAIN_TREE_HEADER = "HomePage";
+	public final static String MAIN_TREE_HEADER_ITEM1 = "CreateNewPortfolio";
+	public final static String MAIN_TREE_HEADER_ITEM2 = "CreateNewAsset";
+	public final static String MAIN_TREE_HEADER_ITEM3 = "3";
+	public final static String MAIN_TREE_HEADER_ITEM4 = "4";
+	public final static String MAIN_TREE_HEADER_ITEM5 = "5";
 
-  /**
-   * The types of registration failures.
-   */
-  public static enum REGISTRATION_FAILIURE_TYPE {
-    PASSWORD_NOT_SAME,
-    USERNAME_ALREADY_EXIST,
-  };
-
-  public static enum ASSET_TYPE {
-    CASH,
-    FIXED_DEPOSIT,
-    CRYPTO,
-    STOCK
-  };
-
-  public static enum CHANGE_TYPE {
-    ADD,
-    SUBTRACT,
-    SET
-  }
-
-  public static enum TRANSACTION_TYPE {
-    BUY,
-    SELL
-  }
+	
 }
