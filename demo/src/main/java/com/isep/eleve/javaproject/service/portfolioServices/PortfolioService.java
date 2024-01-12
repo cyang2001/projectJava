@@ -51,8 +51,10 @@ public class PortfolioService {
         newPortfolio.addAsset(cash);
         // Persist the new portfolio
         portfolioRepository.save(newPortfolio);
+
         eventApplication.publishEvent(new CashCreatedEvent(this, cash));
         eventApplication.publishEvent(new PortfolioCreatedEvent(this, newPortfolio));
+        
         // Return the newly created portfolio
         return newPortfolio;
     }

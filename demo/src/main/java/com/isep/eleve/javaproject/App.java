@@ -26,6 +26,9 @@ import javafx.stage.Stage;
 public class App extends Application {
 
   private static ConfigurableApplicationContext context;
+  public ConfigurableApplicationContext getContext() {
+    return context;
+  }
   private static Stage primaryStage;
   private static final Logger logger = Logger.getLogger(App.class.getName());
 	private Stage stage;

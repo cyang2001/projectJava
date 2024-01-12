@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 
 import com.isep.eleve.javaproject.App;
@@ -25,7 +26,6 @@ public class MainController implements Initializable {
 	private static final Logger logger = Logger.getLogger(MainController.class.getName());
   
 	private App app;
-
 	@FXML
 	private TreeView<String> main_treeview;
 
@@ -119,7 +119,9 @@ public class MainController implements Initializable {
 	private void skipView(String pagePath) throws IOException {
 		ObservableList<Node> scrolChildren = main_pane_under_scroll.getChildren();
 		scrolChildren.clear();
-		scrolChildren.add(FXMLLoader.load(getClass().getResource(pagePath)));
+    FXMLLoader fxmlLoader = new FXMLLoader(app.getClass().getResource(pagePath));
+    fxmlLoader.setControllerFactory(app.getContext()::getBean);
+		scrolChildren.add(fxmlLoader.load());
 	}
 
 }
