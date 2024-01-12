@@ -9,4 +9,7 @@ public class DeleteEventsController {
 
     public void handleUserInformationAction(ActionEvent event) {
     }
+
+    public void handleLogOutAction(ActionEvent event) {
+    }
 }

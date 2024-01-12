@@ -8,4 +8,7 @@ public class CryptoInformationController {
 
     public void handleUserInformationAction(ActionEvent event) {
     }
+
+    public void handleLogOutAction(ActionEvent event) {
+    }
 }

@@ -14,7 +14,7 @@
                 <ChoiceBox fx:id="portfolioChoiceBox" layoutX="205.0" layoutY="173.0" prefWidth="150.0" />
                 <Label layoutX="54.0" layoutY="176.0" prefHeight="18.0" prefWidth="106.0" text="Choose Portfiolio" /><TextField editable="false" layoutX="49.0" layoutY="129.0" prefHeight="26.0" prefWidth="318.0" text="Select a portfolio in the ChoiceBox to have it information" />
                 <Button fx:id="confirmation" layoutX="298.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
-                <Button layoutX="342.0" layoutY="89.0" mnemonicParsing="false" text="Log Out" />
+                <Button fx:id="logOut" layoutX="342.0" layoutY="89.0" mnemonicParsing="false" onAction="#handleLogOutAction" text="Log Out" />
             </children></AnchorPane>
     </items>
 </SplitPane>

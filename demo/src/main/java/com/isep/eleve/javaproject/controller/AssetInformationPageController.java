@@ -9,4 +9,7 @@ public class AssetInformationPageController {
 
     public void handleConfirmationAction(ActionEvent event) {
     }
+
+    public void handleLogOutAction(ActionEvent event) {
+    }
 }

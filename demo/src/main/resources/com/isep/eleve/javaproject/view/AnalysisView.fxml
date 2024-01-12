@@ -15,7 +15,7 @@
                 <Button fx:id="demonstrateValue" layoutX="150.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleDemonstrateValueAction" text="Demonstrate Value" />
                 <Button fx:id="addEvents" layoutX="150.0" layoutY="212.0" mnemonicParsing="false" onAction="#handleAddEventsAction" prefHeight="26.0" prefWidth="118.0" text="Add events" />
                 <Button fx:id="deleteEvents" layoutX="150.0" layoutY="257.0" mnemonicParsing="false" onAction="#handleDeleteEventsAction" prefHeight="26.0" prefWidth="118.0" text="Delete events" />
-                <Button layoutX="342.0" layoutY="89.0" mnemonicParsing="false" text="Log Out" />
+                <Button fx:id="logOut" layoutX="342.0" layoutY="89.0" mnemonicParsing="false" onAction="#handleLogOutAction" text="Log Out" />
             </children></AnchorPane>
     </items>
 </SplitPane>

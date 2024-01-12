@@ -19,4 +19,7 @@ public class AnalysisController extends App {
     public void handleDeleteEventsAction(ActionEvent event) throws Exception {
         switchToDeleteEventPage();
     }
+
+    public void handleLogOutAction(ActionEvent event) {
+    }
 }

@@ -11,4 +11,6 @@ public class SellAssetController {
     public void handleConfirmationAction(ActionEvent event) {
     }
 
+    public void handleLogOutAction(ActionEvent event) {
+    }
 }

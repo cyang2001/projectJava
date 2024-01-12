@@ -10,4 +10,6 @@ public class SellCryptoController {
     public void handleConfirmationAction(ActionEvent event) {
     }
 
+    public void handleLogOutAction(ActionEvent event) {
+    }
 }

@@ -8,4 +8,7 @@ public class ClonePortfolioController {
 
     public void handleConfirmationAction(ActionEvent event) {
     }
+
+    public void handleLogOutAction(ActionEvent event) {
+    }
 }

@@ -16,7 +16,7 @@
                 <Label layoutX="21.0" layoutY="124.0" text="New Portfolio Name" />
                 <TextField fx:id="newPortfolioName" layoutX="21.0" layoutY="152.0" promptText="NewPorfolioName" />
                 <Button fx:id="confirmation" layoutX="308.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
-                <Button layoutX="342.0" layoutY="89.0" mnemonicParsing="false" text="Log Out" />
+                <Button fx:id="logOut" layoutX="342.0" layoutY="89.0" mnemonicParsing="false" onAction="#handleLogOutAction" text="Log Out" />
             </children></AnchorPane>
     </items>
 </SplitPane>
