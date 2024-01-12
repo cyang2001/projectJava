@@ -54,7 +54,12 @@ public class MainController implements Initializable {
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM2),
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM3),
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM4),
-				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM5));
+				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM5),
+				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM6),
+				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM7),
+				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM8),
+				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM9),
+				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM10));
 		main_treeview.setRoot(root);
 
 	}
@@ -68,24 +73,39 @@ public class MainController implements Initializable {
 
 		String pagePath = "";
 		switch (selectedItem.getValue()) {
-		case ViewConfig.MAIN_TREE_HEADER:
-			//pagePath = ViewConfig.;
-			break;
-		case ViewConfig.MAIN_TREE_HEADER_ITEM1:
-			pagePath = ViewConfig.NEW_PORTFOLIO_VIEW_PATH;
-			break;
-		case ViewConfig.MAIN_TREE_HEADER_ITEM2:
-			//pagePath = ViewConfig.;
-			break;
-		case ViewConfig.MAIN_TREE_HEADER_ITEM3:
-			//pagePath = ViewConfig.;
-			break;
-		case ViewConfig.MAIN_TREE_HEADER_ITEM4:
-			//pagePath = ViewConfig.DATA_VIEW_PATH;
-			break;
-		case ViewConfig.MAIN_TREE_HEADER_ITEM5:
-			//pagePath = ViewConfig.;
-			break;
+			case ViewConfig.MAIN_TREE_HEADER:
+				pagePath = ViewConfig.HOME_VIEW_PATH;
+				break;
+			case ViewConfig.MAIN_TREE_HEADER_ITEM1:
+				pagePath = ViewConfig.ANALYSIS_VIEW_PATH;
+				break;
+			case ViewConfig.MAIN_TREE_HEADER_ITEM2:
+				pagePath = ViewConfig.ASSET_INFORMATION_VIEW_PATH;
+				break;
+			case ViewConfig.MAIN_TREE_HEADER_ITEM3:
+				pagePath = ViewConfig.BUY_ASSET_VIEW_PATH;
+				break;
+			case ViewConfig.MAIN_TREE_HEADER_ITEM4:
+				pagePath = ViewConfig.SELL_ASSET_VIEW_PATH;
+				break;
+			case ViewConfig.MAIN_TREE_HEADER_ITEM5:
+				pagePath = ViewConfig.PORTFOLIO_INFORMATION_VIEW_PATH;
+				break;
+			case ViewConfig.MAIN_TREE_HEADER_ITEM6:
+				pagePath = ViewConfig.NEW_PORTFOLIO_VIEW_PATH;
+				break;
+			case ViewConfig.MAIN_TREE_HEADER_ITEM7:
+				pagePath = ViewConfig.CLONE_PORTFOLIO_VIEW_PATH;
+				break;
+			case ViewConfig.MAIN_TREE_HEADER_ITEM8:
+				pagePath = ViewConfig.CRYPTO_INFORMATION_VIEW_PATH;
+				break;
+			case ViewConfig.MAIN_TREE_HEADER_ITEM9:
+				pagePath = ViewConfig.BUY_CRYPTO_VIEW_PATH;
+				break;
+			case ViewConfig.MAIN_TREE_HEADER_ITEM10:
+				pagePath = ViewConfig.SELL_CRYPTO_VIEW_PATH;
+				break;
 		}
 		
 		skipView(pagePath);
