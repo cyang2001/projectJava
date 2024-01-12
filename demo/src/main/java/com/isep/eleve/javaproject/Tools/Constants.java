@@ -53,7 +53,7 @@ public class Constants {
   /**
    * The path to the home view FXML file.
    */
-  public static final String HOME_VIEW_PATH = "/com/isep/eleve/javaproject/view/HomePageView_1.fxml";
+  public static final String HOME_VIEW_PATH = "/com/isep/eleve/javaproject/view/HomePageView.fxml";
 
   /**
    * The path to the login view FXML file.
