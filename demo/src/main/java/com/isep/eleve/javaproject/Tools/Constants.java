@@ -118,6 +118,8 @@ public class Constants {
 
   public static enum TRANSACTION_TYPE {
     BUY,
-    SELL
+    SELL,
+    BUT_MARKET,
+    SELL_MARKET
   }
 }

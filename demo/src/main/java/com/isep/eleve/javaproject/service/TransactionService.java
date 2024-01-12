@@ -6,30 +6,42 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.tomcat.util.bcel.Const;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import com.isep.eleve.javaproject.Tools.Constants;
+import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 import com.isep.eleve.javaproject.Tools.Constants.TRANSACTION_TYPE;
-import com.isep.eleve.javaproject.events.AssetQuantityChangedEvent;
+
 import com.isep.eleve.javaproject.events.CashEarnedEvent;
 import com.isep.eleve.javaproject.events.CashSpentEvent;
+import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.model.Transaction;
+import com.isep.eleve.javaproject.model.assets.liquide.Cash;
+import com.isep.eleve.javaproject.repository.MarketTransactionRepository;
 import com.isep.eleve.javaproject.repository.TransactionRepository;
 import com.isep.eleve.javaproject.service.portfolioServices.AssetsService;
+import com.isep.eleve.javaproject.session.CashSession;
+import com.isep.eleve.javaproject.session.PortfolioSession;
 
 @Service
 public class TransactionService {
   private final TransactionRepository transactionRepository;
   private final AssetsService assetsService;
   private final ApplicationEventPublisher eventApplication;
+  private final MarketTransactionRepository marketTransactionRepository;
+  private final PortfolioSession portfolioSession;
+  private final CashSession cashSession;
   @Autowired
-  public TransactionService(TransactionRepository transactionRepository, AssetsService assetsService, ApplicationEventPublisher eventApplication) {
+  public TransactionService(TransactionRepository transactionRepository, AssetsService assetsService, ApplicationEventPublisher eventApplication, MarketTransactionRepository marketTransactionRepository, PortfolioSession portfolioSession, CashSession cashSession) {
     this.transactionRepository = transactionRepository;
     this.assetsService = assetsService;
     this.eventApplication = eventApplication;
+    this.marketTransactionRepository = marketTransactionRepository;
+    this.portfolioSession = portfolioSession;
+    this.cashSession = cashSession;
   }
   public void recordTransaction(Transaction transaction) throws IOException {
     transactionRepository.save(transaction);
@@ -40,21 +52,68 @@ public class TransactionService {
   public void executetransaction(int quantity, BigDecimal price, int portfolioId, int assetId, TRANSACTION_TYPE transitionType) throws IOException {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Date date = new Date(System.currentTimeMillis());
-    Transaction transaction = new Transaction(portfolioId, assetId, assetId, price, transitionType, sdf.format(date));
+    Transaction transaction = new Transaction(portfolioId, assetId, quantity, price, transitionType, sdf.format(date));
     if (transitionType == TRANSACTION_TYPE.BUY) {
       Constants.CHANGE_TYPE changeType = Constants.CHANGE_TYPE.ADD;
       assetsService.changeAssetQuantity(assetId, quantity,changeType);
       BigDecimal total = price.multiply(new BigDecimal(quantity));
-      eventApplication.publishEvent(new CashEarnedEvent(this, total));
-    } else {
+      eventApplication.publishEvent(new CashSpentEvent(this, total));
+    } else if(transitionType == TRANSACTION_TYPE.SELL) {
       Constants.CHANGE_TYPE changeType = Constants.CHANGE_TYPE.SUBTRACT;
       assetsService.changeAssetQuantity(assetId, quantity, changeType);
       BigDecimal total = price.multiply(new BigDecimal(quantity));
-      eventApplication.publishEvent(new CashSpentEvent(this, total));
+      eventApplication.publishEvent(new CashEarnedEvent(this, total));
     }
-    
     transactionRepository.save(transaction);
-
-
+  }
+  public void executetransaction(int quantity, BigDecimal price, int portfolioId, String assetName, TRANSACTION_TYPE transitionType) throws IOException {
+    int assetId = 0;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    Date date = new Date(System.currentTimeMillis());
+    Cash cash = cashSession.getCash();
+    Portfolio portfolio = portfolioSession.getCurrentPortfolio();
+    if (transitionType == TRANSACTION_TYPE.BUT_MARKET) {
+      Constants.CHANGE_TYPE changeType = Constants.CHANGE_TYPE.ADD;
+      boolean flag = false;
+      if (cash.getValue().compareTo(price.multiply(new BigDecimal(quantity))) >= 0) {
+        for (int i = 0; i < portfolio.getAssets().size(); i++) {
+          if (portfolio.getAssets().get(i).getAssetName().equals(assetName)) {
+            assetId = portfolio.getAssets().get(i).getAssetId();
+            assetsService.changeAssetQuantity(assetId, quantity, changeType);
+            BigDecimal total = price.multiply(new BigDecimal(quantity));
+            eventApplication.publishEvent(new CashSpentEvent(this, total));
+            flag = true;
+            break;
+          }
+        }
+        if (flag == false) {
+          assetsService.createAsset(assetName, quantity, price, ASSET_TYPE.CRYPTO, price);
+          BigDecimal total = price.multiply(new BigDecimal(quantity));
+          eventApplication.publishEvent(new CashSpentEvent(this, total));
+        }
+      } else {
+        System.out.println("Not enough cash");
+        // ToDo: throw exception
+      }
+      
+    } else if(transitionType == TRANSACTION_TYPE.SELL_MARKET) {
+      boolean flag = false;
+      for (int i = 0; i <= portfolio.getAssets().size(); i++) {
+        if (portfolio.getAssets().get(i).getAssetName().equals(assetName)) {
+          assetId = portfolio.getAssets().get(i).getAssetId();
+          Constants.CHANGE_TYPE changeType = Constants.CHANGE_TYPE.SUBTRACT;
+          assetsService.changeAssetQuantity(assetId, quantity, changeType);
+          BigDecimal total = price.multiply(new BigDecimal(quantity));
+          eventApplication.publishEvent(new CashEarnedEvent(this, total));
+          flag = true;
+          break;
+        }
+      }
+      if (flag == false) {
+        System.out.println("No such asset");
+      }
+      Transaction transaction = new Transaction(portfolioId, assetId, quantity, price, transitionType, sdf.format(date));
+      transactionRepository.save(transaction);
+    }
   }
 }

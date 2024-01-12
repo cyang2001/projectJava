@@ -24,7 +24,7 @@ public class HistoryDataRepository {
         String EXTERNAL_FILE_PATH_ = EXTERNAL_FILE_PATH + symbol + ".json";
         String url = "https://query1.finance.yahoo.com/v7/finance/download/" + symbol +
         "?period1=0&period2=9999999999&interval=1mo&events=history";
-
+        
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(url);
             String csvResponse = EntityUtils.toString(httpClient.execute(request).getEntity());

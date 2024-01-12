@@ -62,7 +62,7 @@ public final class ViewConfig {
   /**
    * The path to the new portfolio view FXML file.
    */
-  public static final String NEW_PORTFOLIO_VIEW_PATH = "/com/isep/eleve/javaproject/view/NewPortfolioView_1.fxml";
+  public static final String NEW_PORTFOLIO_VIEW_PATH = "/com/isep/eleve/javaproject/view/NewPortfolioView.fxml";
 
   /**
    * The path to the portfolio information view FXML file.
