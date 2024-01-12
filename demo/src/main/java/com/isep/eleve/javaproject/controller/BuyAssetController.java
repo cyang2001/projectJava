@@ -3,7 +3,7 @@ package com.isep.eleve.javaproject.controller;
 import com.isep.eleve.javaproject.App;
 import javafx.event.ActionEvent;
 
-public class BuyAssetController extends App {
+public class BuyAssetController {
 
     public void handleUserInformationAction(ActionEvent event) {
     }
@@ -11,11 +11,4 @@ public class BuyAssetController extends App {
     public void handleConfirmationAction(ActionEvent event) {
     }
 
-    public void handleChangeBuyAssetsPageAction(ActionEvent event) throws Exception {
-        switchToBuyAssetPage();
-    }
-
-    public void handleChangeSellAssetsPageAction(ActionEvent event) throws Exception {
-        switchToSellAssetPage();
-    }
 }

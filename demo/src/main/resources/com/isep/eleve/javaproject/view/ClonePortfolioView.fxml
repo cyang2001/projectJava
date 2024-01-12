@@ -15,6 +15,7 @@
                 <Label layoutX="46.0" layoutY="176.0" prefHeight="18.0" prefWidth="150.0" text="Choose Portfiolio to Clone" />
                 <TextField editable="false" layoutX="70.0" layoutY="129.0" prefHeight="26.0" prefWidth="258.0" text="Select a portfolio in the ChoiceBox to clone it" />
                 <Button fx:id="confirmation" layoutX="298.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
+                <Button layoutX="342.0" layoutY="89.0" mnemonicParsing="false" text="Log Out" />
             </children></AnchorPane>
     </items>
 </SplitPane>

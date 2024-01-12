@@ -17,8 +17,7 @@
                 <Button fx:id="confirmation" layoutX="298.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
                 <Label layoutX="93.0" layoutY="209.0" prefHeight="18.0" prefWidth="96.0" text="Number of them" />
                 <ChoiceBox fx:id="numberOfCryptoChoiceBox" layoutX="189.0" layoutY="193.0" prefHeight="26.0" prefWidth="34.0" />
-                <RadioButton fx:id="switchBuyAssetPage" layoutX="56.0" layoutY="91.0" mnemonicParsing="false" onAction="#handleChangeBuyCryptoPageAction" text="Buy" />
-                <RadioButton fx:id="switchSellAssetPage" layoutX="121.0" layoutY="91.0" mnemonicParsing="false" onAction="#handleChangeSellCryptoPageAction" text="Sell" />
+                <Button layoutX="342.0" layoutY="89.0" mnemonicParsing="false" text="Log Out" />
             </children></AnchorPane>
     </items>
 </SplitPane>

@@ -17,8 +17,7 @@
                     <ChoiceBox fx:id="numberOfAssetsChoiceBox" layoutX="190.0" layoutY="205.0" prefHeight="26.0" prefWidth="34.0" />
                     <TextField editable="false" layoutX="56.0" layoutY="120.0" prefHeight="26.0" prefWidth="301.0" text="Select whitch asset do you want to buy and how many" />
                     <Button fx:id="confirmation" layoutX="298.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
-                    <RadioButton fx:id="switchBuyAssetPage" layoutX="56.0" layoutY="91.0" mnemonicParsing="false" onAction="#handleChangeBuyAssetsPageAction" text="Buy" />
-                    <RadioButton fx:id="switchSellAssetPage" layoutX="121.0" layoutY="91.0" mnemonicParsing="false" onAction="#handleChangeSellAssetsPageAction" text="Sell" />
+                    <Button layoutX="342.0" layoutY="89.0" mnemonicParsing="false" text="Log Out" />
                 </children></AnchorPane>
         </items>
     </SplitPane>
