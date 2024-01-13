@@ -21,6 +21,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
+/**
+ * fini
+ */
 @Controller
 public class MainController implements Initializable {
 	private static final Logger logger = Logger.getLogger(MainController.class.getName());

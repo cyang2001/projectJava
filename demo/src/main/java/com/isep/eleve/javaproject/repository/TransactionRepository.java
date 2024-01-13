@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.isep.eleve.javaproject.Tools.FileOperation;
 import com.isep.eleve.javaproject.model.Transaction;
 @Repository
@@ -29,7 +30,8 @@ public class TransactionRepository {
    * @throws IOException if an I/O error occurs while reading the transactions from the file.
    */
   public List<Transaction> findAll() throws IOException {
-    return fileOperation.readListFromFile(EXTERNAL_FILE_PATH, Transaction.class);
+    TypeReference<List<Transaction>> typeReference = new TypeReference<List<Transaction>>() {};
+    return fileOperation.readListFromFile(EXTERNAL_FILE_PATH, typeReference);
   }
 
 
@@ -41,6 +43,12 @@ public class TransactionRepository {
    */
   public void save(Transaction transaction) throws IOException {
     List<Transaction> transactions = findAll();
+    for (Transaction t : transactions) {
+      if (t.getTransactionId() == transaction.getTransactionId()) {
+        transactions.remove(t);
+        break;
+      }
+    }
     transactions.add(transaction);
     fileOperation.writeListToFile(EXTERNAL_FILE_PATH, transactions);
   }

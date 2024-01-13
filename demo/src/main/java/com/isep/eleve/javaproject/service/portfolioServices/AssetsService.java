@@ -57,25 +57,24 @@ public class AssetsService {
    * @throws IOException              if an I/O error occurs
    * @throws IllegalArgumentException if the asset name is null or empty, quantity is less than or equal to 0, or price is less than or equal to 0
    */
-  public Asset createAsset(String assetName,int quantity, BigDecimal price, ASSET_TYPE assetType, BigDecimal interestRate) throws IOException, IllegalArgumentException{
-    int portfolioId = portfolioSession.getCurrentPortfolio().getPortfolioId();
+  public Asset createAsset(String assetName,int quantity, BigDecimal price, ASSET_TYPE assetType, BigDecimal interestRate, int portfolioId, boolean isFirst) throws IOException, IllegalArgumentException{
     if (assetName == null || assetName.isEmpty()) {
       throw new IllegalArgumentException("Asset name cannot be null or empty");
     }
     if (quantity <= 0) {
       throw new IllegalArgumentException("Quantity cannot be less than or equal to 0");
     }
-    if (price.compareTo(BigDecimal.ZERO) <= 0) {
+    if (isFirst && assetType!=ASSET_TYPE.CASH || price.compareTo(BigDecimal.ZERO) <= 0  ) {
       throw new IllegalArgumentException("Price cannot be less than or equal to 0");
     }
     try{
       AssetFactory factory = factoryProducer.getFactory(assetType);
-      Portfolio portfolio = portfolioRepository.findByPortfolioId(portfolioId);
-      Asset newAsset = factory.createAsset(assetName, portfolioId, quantity, price, interestRate, portfolio.getOwnerId());
+      Portfolio portfolio = portfolioSession.getCurrentPortfolio();
+      
+      Asset newAsset = factory.createAsset(assetName, portfolioId, quantity, price, interestRate, portfolio.getOwnerId(), assetType);
       eventApplication.publishEvent(new AssetCreatedEvent(this, newAsset));
       // Persist the new asset
       logger.info("Asset created: {}", assetName);
-      assetsRepository.save(newAsset);
       return newAsset;
     }catch(Exception e){
       logger.error("Error when creating asset", e);
@@ -114,8 +113,7 @@ public class AssetsService {
 
     asset.setQuantity(newQuantity);
     asset.calculateValue();
-    assetsRepository.save(asset);
-    eventApplication.publishEvent(new AssetQuantityChangedEvent(asset, newQuantity, changeType));
+    eventApplication.publishEvent(new AssetQuantityChangedEvent(this, asset, newQuantity, changeType));
     logger.info("Asset quantity changed: assetId={}, originalQuantity={}, newQuantity={}, changeType={}", assetId, originalQuantity, newQuantity, changeType);
 }
 

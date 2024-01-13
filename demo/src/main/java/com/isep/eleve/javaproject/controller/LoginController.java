@@ -7,28 +7,37 @@ import javafx.scene.control.TextField;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 
 import com.isep.eleve.javaproject.App;
+import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.model.User;
+import com.isep.eleve.javaproject.repository.PortfolioRepository;
 import com.isep.eleve.javaproject.service.userServices.AuthenticationService;
+import com.isep.eleve.javaproject.session.PortfolioSession;
 import com.isep.eleve.javaproject.session.UserSession;
 /**
  * Login controller
  * @version V1.2
  * @Author Chen YANG
+ * fini
  */
 @Controller
 public class LoginController {
     private final AuthenticationService authenticationService;
     private final UserSession userSession;
+    private final PortfolioSession portfolioSession;
+    private final PortfolioRepository portfolioRepository;
     @Autowired
-    public LoginController(AuthenticationService authenticationService, UserSession userSession) {
+    public LoginController(AuthenticationService authenticationService, UserSession userSession, PortfolioSession portfolioSession, PortfolioRepository portfolioRepository) {
         this.authenticationService = authenticationService;
         this.userSession = userSession;
+        this.portfolioSession = portfolioSession;
+        this.portfolioRepository = portfolioRepository;
     }
     @FXML
     private TextField usernameField;
@@ -53,14 +62,22 @@ public class LoginController {
         } else {
             errorLabel.setText("");
         }
-        App.showAlert("Login Success", "You have successfully logged in", "Welcome!");
         userSession.setCurrentUser(user);
+        List<Portfolio> portfolios = portfolioRepository.findAll();
+        for (Portfolio portfolio : portfolios) {
+            if (portfolio.getOwnerId() == user.getUserId()) {
+              user.addPortfolio(portfolio);
+            }
+        }
+
+        App.showAlert("Login Success", "You have successfully logged in", "Welcome!");
+
         App.switchToHome();
     }
 
     @FXML
     protected void handleChageRegistrationPageAction(ActionEvent event) throws Exception {
         App.switchToRegistration();
-        System.out.println("1111");
+        
     }
 }

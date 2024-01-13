@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 import com.isep.eleve.javaproject.model.Asset;
 import com.isep.eleve.javaproject.model.assets.liquide.Cash;
 
@@ -24,8 +25,8 @@ public class CashFactory implements AssetFactory{
   * @return the created Cash asset
   */
   @Override
-  public Asset createAsset(String assetName,int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate, int ownerId) {
-    return new Cash(assetName, portfolioId, quantity, price, ownerId);
+public Asset createAsset(String assetName,int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate, int ownerId,ASSET_TYPE assetType ) {
+    return new Cash(assetName, portfolioId, quantity, price, ownerId, assetType);
   }
   
 }

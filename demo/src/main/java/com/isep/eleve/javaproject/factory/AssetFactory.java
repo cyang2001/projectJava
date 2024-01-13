@@ -2,7 +2,7 @@ package com.isep.eleve.javaproject.factory;
 
 import java.math.BigDecimal;
 
-
+import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 import com.isep.eleve.javaproject.model.Asset;
 
 /**
@@ -20,6 +20,6 @@ public interface AssetFactory {
    * @param ownerId      the ID of the owner
    * @return the created asset
    */
-  Asset createAsset(String assetName, int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate, int ownerId);
+  Asset createAsset(String assetName, int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate, int ownerId, ASSET_TYPE assetType);
   
 }

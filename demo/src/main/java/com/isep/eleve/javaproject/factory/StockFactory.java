@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 import com.isep.eleve.javaproject.model.Asset;
 import com.isep.eleve.javaproject.model.assets.stock.Stock;
 @Component
@@ -12,8 +13,8 @@ import com.isep.eleve.javaproject.model.assets.stock.Stock;
 public class StockFactory implements AssetFactory{
 
   @Override
-  public Asset createAsset(String assetName, int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate, int ownerId) {
-    return new Stock(assetName, portfolioId, quantity, price, ownerId);
+  public Asset createAsset(String assetName, int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate, int ownerId, ASSET_TYPE assetType) {
+    return new Stock(assetName, portfolioId, quantity, price, ownerId, assetType);
   }
   
 }

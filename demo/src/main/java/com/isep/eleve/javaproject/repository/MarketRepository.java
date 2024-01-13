@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.sound.sampled.AudioFileFormat.Type;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.isep.eleve.javaproject.Tools.FileOperation;
 import com.isep.eleve.javaproject.model.Market;
 import com.isep.eleve.javaproject.model.Portfolio;
@@ -33,7 +36,8 @@ public class MarketRepository {
    * @throws IOException if an I/O error occurs
    */
   public List<Market> findAll() throws IOException {
-    return fileOperation.readListFromFile(EXTERNAL_FILE_PATH, Market.class);
+    TypeReference<List<Market>> typeReference = new TypeReference<List<Market>>() {};
+    return fileOperation.readListFromFile(EXTERNAL_FILE_PATH, typeReference);
   }
 
   /**
@@ -44,6 +48,12 @@ public class MarketRepository {
    */
   public void save(Market market) throws IOException {
     List<Market> markets = findAll();
+    for (Market m : markets) {
+      if (m.getMarketId() == market.getMarketId()) {
+        markets.remove(m);
+        break;
+      }
+    }
     markets.add(market);
     fileOperation.writeListToFile(EXTERNAL_FILE_PATH, markets);
   }

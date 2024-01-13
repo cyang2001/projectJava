@@ -18,7 +18,7 @@ public final class ViewConfig {
    * The path to the asset information view FXML file.
    */
   public static final String ASSET_INFORMATION_VIEW_PATH = "/com/isep/eleve/javaproject/view/AssetInformationView.fxml";
-  public static final String ADD_ASSET_VIEW_PATH = "/com/isep/eleve/javaproject/view/AddAsset.fxml";
+  public static final String ADD_ASSET_VIEW_PATH = "/com/isep/eleve/javaproject/view/AddAssetView.fxml";
   /**
    * The path to the buy asset view FXML file.
    */

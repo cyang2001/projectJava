@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.isep.eleve.javaproject.Tools.*;
+import com.isep.eleve.javaproject.model.assets.liquide.Cash;
 
 public class Portfolio {
   private int portfolioId;
@@ -60,25 +61,6 @@ public class Portfolio {
   public void setValue(BigDecimal value) {
     this.value = value;
   }
-  
-  private int cashId;
-  @JsonProperty("cashId")
-  public int getCashId() {
-    return this.cashId;
-  }
-  @JsonProperty("cashId")
-  public void setCashId(int cashId) {
-    this.cashId = cashId;
-  }
-  private int fixedDepositId;
-  @JsonProperty("fixedDepositId")
-  public int getFixedDepositId() {
-    return this.fixedDepositId;
-  }
-  @JsonProperty("fixedDepositId")
-  public void setFixedDepositId(int fixedDepositId) {
-    this.fixedDepositId = fixedDepositId;
-  }
 
   /**
    * Constructs a new Portfolio with the specified portfolio name and owner ID.
@@ -106,12 +88,32 @@ public class Portfolio {
   public void addAsset(Asset asset) {
     this.assets.add(asset);
     this.assetIds.add(asset.getAssetId());
+    //logger.info("Asset added: " + asset.getAssetName());
     this.calculatePortfolioValue(); // Recalculate the total value after adding an asset
   }
-
+  public void updateAsset(Asset asset) {
+    for (int i = 0; i < this.assets.size(); i++) {
+      if (this.assets.get(i).getAssetId() == asset.getAssetId()) {
+        this.assets.set(i, asset);
+        System.err.println("Asset updated: " + asset.getAssetName());
+        break;
+      }
+    }
+    this.calculatePortfolioValue(); // Recalculate the total value after adding an asset
+  }
   public void removeAsset(Asset asset) {
     this.assets.remove(asset);
     this.assetIds.remove(Integer.valueOf(asset.getAssetId()));
     this.calculatePortfolioValue(); // Recalculate the total value after removing an asset
   }
+    public Cash getCash() {
+      System.err.println("this.assets: " + this.assets);
+      System.err.println("get cash ");
+      return this.assets.stream()
+              .filter(asset -> asset.getAssetType() == Constants.ASSET_TYPE.CASH && asset instanceof Cash)
+              .map(asset -> (Cash) asset)
+              .findFirst()
+              .orElse(null); 
+  }
+  
 }

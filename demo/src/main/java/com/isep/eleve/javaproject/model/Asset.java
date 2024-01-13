@@ -2,6 +2,7 @@ package com.isep.eleve.javaproject.model;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -27,7 +28,7 @@ public abstract class Asset {
   private int quantity;
   private BigDecimal price;
   private int ownerId;
-  public Asset(String assetName, int portfolioId, int quantity, BigDecimal price, int ownerId) {
+  public Asset(String assetName, int portfolioId, int quantity, BigDecimal price, int ownerId, ASSET_TYPE assetType) {
     this.portfolioId = portfolioId;
     this.quantity = quantity;
     this.price = price;
@@ -35,6 +36,7 @@ public abstract class Asset {
     this.calculateValue(); // Initialize the value of the asset
     this.ownerId = ownerId;
     this.assetName = assetName;
+    this.assetType = assetType;
   }
 
 @JsonProperty("assetId")

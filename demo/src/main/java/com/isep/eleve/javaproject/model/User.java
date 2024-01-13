@@ -93,14 +93,12 @@ public class User {
     }
     return false;
   }
-  /**
-   * updateProfile
-   * @return boolean
-   * @Description: update profile
-   */
-  public boolean updateProfile() {
-    // update profile logic
-    return true;
+  public void updatePortfolio(Portfolio portfolio) {
+    for (int i = 0; i < this.getPortfolios().size(); i++) {
+      if (this.getPortfolios().get(i).getPortfolioId() == portfolio.getPortfolioId()) {
+        this.getPortfolios().set(i, portfolio);
+      }
+    }
   }
 
 }

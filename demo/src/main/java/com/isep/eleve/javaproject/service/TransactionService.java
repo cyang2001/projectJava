@@ -49,7 +49,16 @@ public class TransactionService {
   public List<Transaction> getTransactions() throws IOException {
     return transactionRepository.findAll();
   }
-  public void executetransaction(int quantity, BigDecimal price, int portfolioId, int assetId, TRANSACTION_TYPE transitionType) throws IOException {
+  /**
+   * for sell assets
+   * @param quantity
+   * @param price
+   * @param portfolioId
+   * @param assetId
+   * @param transitionType
+   * @throws IOException
+   */
+  public void executeTransaction(int quantity, BigDecimal price, int portfolioId, int assetId, TRANSACTION_TYPE transitionType) throws IOException {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Date date = new Date(System.currentTimeMillis());
     Transaction transaction = new Transaction(portfolioId, assetId, quantity, price, transitionType, sdf.format(date));
@@ -66,7 +75,7 @@ public class TransactionService {
     }
     transactionRepository.save(transaction);
   }
-  public void executetransaction(int quantity, BigDecimal price, int portfolioId, String assetName, TRANSACTION_TYPE transitionType) throws IOException {
+  public void executeTransaction(int quantity, BigDecimal price, int portfolioId, String assetName, TRANSACTION_TYPE transitionType) throws IOException {
     int assetId = 0;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Date date = new Date(System.currentTimeMillis());
@@ -87,7 +96,7 @@ public class TransactionService {
           }
         }
         if (flag == false) {
-          assetsService.createAsset(assetName, quantity, price, ASSET_TYPE.CRYPTO, price);
+          assetsService.createAsset(assetName, quantity, price, ASSET_TYPE.CRYPTO, price, portfolioId, true);
           BigDecimal total = price.multiply(new BigDecimal(quantity));
           eventApplication.publishEvent(new CashSpentEvent(this, total));
         }

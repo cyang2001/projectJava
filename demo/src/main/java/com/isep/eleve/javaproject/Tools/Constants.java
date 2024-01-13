@@ -1,5 +1,7 @@
 package com.isep.eleve.javaproject.Tools;
 
+import java.util.Map;
+
 /**
  * This class contains constant values used
  * in the application.
@@ -124,4 +126,11 @@ public class Constants {
     BUT_MARKET,
     SELL_MARKET
   }
+
+  public static Map<String, ASSET_TYPE> ASSET_TYPE_MAP = Map.of(
+    "CASH", ASSET_TYPE.CASH,
+    "FIXED_DEPOSIT", ASSET_TYPE.FIXED_DEPOSIT,
+    "BTC", ASSET_TYPE.CRYPTO,
+    "AAPL", ASSET_TYPE.STOCK
+  );
 }

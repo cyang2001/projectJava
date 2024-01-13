@@ -2,6 +2,7 @@ package com.isep.eleve.javaproject.model.assets.liquide;
 
 import java.math.BigDecimal;
 
+import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 import com.isep.eleve.javaproject.model.Asset;
 
 /**
@@ -24,8 +25,8 @@ public class FixedDeposit extends Asset {
    * @param interestRate the interest rate of the fixed deposit
    * @param ownerId     the ID of the owner
    */
-  public FixedDeposit(String assetName, int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate, int ownerId) {
-    super(assetName, portfolioId, quantity, price, ownerId);
+  public FixedDeposit(String assetName, int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate, int ownerId, ASSET_TYPE assetType) {
+    super(assetName, portfolioId, quantity, price, ownerId, assetType);
     this.interestRate = interestRate;
   }
 

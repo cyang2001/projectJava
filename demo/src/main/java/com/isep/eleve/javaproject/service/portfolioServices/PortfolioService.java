@@ -3,19 +3,25 @@ package com.isep.eleve.javaproject.service.portfolioServices;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
+import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.events.AssetAddedToPortfolioEvent;
 import com.isep.eleve.javaproject.events.CashCreatedEvent;
 import com.isep.eleve.javaproject.events.PortfolioCreatedEvent;
 import com.isep.eleve.javaproject.factory.CashFactory;
+import com.isep.eleve.javaproject.listener.DataUpdateListener;
 import com.isep.eleve.javaproject.model.Asset;
 import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.model.assets.liquide.Cash;
 import com.isep.eleve.javaproject.repository.PortfolioRepository;
+import com.isep.eleve.javaproject.session.CashSession;
+import com.isep.eleve.javaproject.session.PortfolioSession;
 import com.isep.eleve.javaproject.session.UserSession;
 
 /**
@@ -23,15 +29,21 @@ import com.isep.eleve.javaproject.session.UserSession;
  */
 @Service
 public class PortfolioService {
-
+    private static final Logger logger = LoggerFactory.getLogger(PortfolioService.class);
     private final PortfolioRepository portfolioRepository;
     private final UserSession userSession;
+    private final PortfolioSession portfolioSession;
     private final ApplicationEventPublisher eventApplication;
+    private final CashSession cashSession;
+    private final AssetsService assetService;
     @Autowired
-    public PortfolioService(PortfolioRepository portfolioRepository, ApplicationEventPublisher eventApplication, UserSession userSession){
+    public PortfolioService(PortfolioRepository portfolioRepository, ApplicationEventPublisher eventApplication, UserSession userSession, PortfolioSession portfolioSession, CashSession cashSession, AssetsService assetService){
         this.portfolioRepository = portfolioRepository;
         this.eventApplication = eventApplication;
         this.userSession = userSession;
+        this.portfolioSession = portfolioSession;
+        this.cashSession = cashSession;
+        this.assetService = assetService;
     }
 
     /**
@@ -46,15 +58,12 @@ public class PortfolioService {
         int ownerId = userSession.getCurrentUser().getUserId();
         // Create a new Portfolio object
         Portfolio newPortfolio = new Portfolio(portfolioName, ownerId, new ArrayList<>(), new ArrayList<>());
-        CashFactory cashFactory = new CashFactory();
-        Cash cash = (Cash) cashFactory.createAsset("Cash", newPortfolio.getPortfolioId(), 0, new BigDecimal(0), null, ownerId);
-        newPortfolio.addAsset(cash);
-        // Persist the new portfolio
-        portfolioRepository.save(newPortfolio);
-
+        portfolioSession.setCurrentPortfolio(newPortfolio);
+        logger.info("New portfolio created: " + newPortfolio);
+        Cash cash = (Cash)assetService.createAsset("CASH", 1000, new BigDecimal(1), Constants.ASSET_TYPE.CASH, new BigDecimal(0), newPortfolio.getPortfolioId(), true);
+        logger.info("New cash created: " + cash + "type:" + cash.getAssetType());
         eventApplication.publishEvent(new CashCreatedEvent(this, cash));
-        eventApplication.publishEvent(new PortfolioCreatedEvent(this, newPortfolio));
-        
+        eventApplication.publishEvent(new PortfolioCreatedEvent(this, portfolioSession.getCurrentPortfolio()));
         // Return the newly created portfolio
         return newPortfolio;
     }

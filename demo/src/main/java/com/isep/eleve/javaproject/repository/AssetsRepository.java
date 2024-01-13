@@ -3,15 +3,22 @@ package com.isep.eleve.javaproject.repository;
 import java.io.File;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.isep.eleve.javaproject.Tools.*;
+import com.isep.eleve.javaproject.listener.DataUpdateListener;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
 import com.isep.eleve.javaproject.model.Asset;
+import com.isep.eleve.javaproject.model.User;
 
 /**
  * Asset repository
@@ -21,8 +28,8 @@ import com.isep.eleve.javaproject.model.Asset;
 @Repository
 public class AssetsRepository {
   private static final String EXTERNAL_FILE_PATH = System.getProperty("user.home") + File.separator + "App" + File.separator + "databaseAssets.json";
+  private static final Logger logger = LoggerFactory.getLogger(AssetsRepository.class);
   private final FileOperation fileOperation;
-
   /**
    * Constructs a new AssetsRepository with the specified FileOperation.
    *
@@ -40,7 +47,8 @@ public class AssetsRepository {
    * @throws IOException if an I/O error occurs.
    */
   public List<Asset> findAll() throws IOException {
-    return fileOperation.readListFromFile(EXTERNAL_FILE_PATH, Asset.class);
+    TypeReference<List<Asset>> typeReference = new TypeReference<List<Asset>>() {};
+    return fileOperation.readListFromFile(EXTERNAL_FILE_PATH,typeReference);
   }
 
   /**
@@ -51,9 +59,33 @@ public class AssetsRepository {
    */
   public void save(Asset asset) throws IOException {
     List<Asset> assets = findAll();
-    assets.add(asset);
+    if (assets.size() == 0) {
+      assets = new ArrayList<>();
+      assets.add(asset);
+      logger.info("new asset created in vide ficher: " + asset.getAssetName());
+    } else {
+      
+    boolean flag = false;
+    for (int i = 0; i < assets.size(); i++) {
+        logger.info("Deserialized asset: " + assets.get(i) + " with assetType: " + assets.get(i).getAssetType());
+        if (assets.get(i).getAssetId() == asset.getAssetId()) {
+            assets.set(i, asset); 
+            flag = true;
+            logger.info("asset updated: " + asset.getAssetName());
+            break;
+        }
+    }
+    if (flag == false) {
+        assets.add(asset);
+        logger.info("new asset added: " + asset.getAssetName());
+    }
+    }
+    for (Asset a : assets) {
+        logger.info("Asset before second serialization: " + a + " with assetType: " + a.getAssetType());
+    }
+
     fileOperation.writeListToFile(EXTERNAL_FILE_PATH, assets);
-  }
+}
 
   /**
    * Retrieves the asset with the specified assetId from the file.

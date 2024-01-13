@@ -53,7 +53,6 @@ public class RegistrationService {
         User newUser = new User(userName, securityService.encryptData(password, Constants.ENCRYPT_TYPE.MD5));
         // save new user
         eventApplication.publishEvent(new UserCreatedEvent(this, newUser));
-        userRepository.save(newUser);
         return new RegistrationResult(true, null, newUser);
     }
 

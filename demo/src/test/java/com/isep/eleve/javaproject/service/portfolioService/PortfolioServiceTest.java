@@ -4,7 +4,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 
@@ -14,12 +16,15 @@ import static org.mockito.ArgumentMatchers.argThat;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 
 
 import com.isep.eleve.javaproject.model.Portfolio;
+import com.isep.eleve.javaproject.model.User;
 import com.isep.eleve.javaproject.repository.PortfolioRepository;
 import com.isep.eleve.javaproject.service.portfolioServices.PortfolioService;
+import com.isep.eleve.javaproject.session.UserSession;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PortfolioServiceTest {
@@ -29,7 +34,10 @@ public class PortfolioServiceTest {
 
     @Mock
     private PortfolioRepository portfolioRepository;
-
+    @Mock
+    private UserSession userSession;
+    @Mock
+    private User user;
     @Mock
     private ApplicationEventPublisher eventApplication;
 @Test 
@@ -37,7 +45,11 @@ public void testCreatePortfolio() throws IOException {
     // Arrange
     String portfolioName = "My Portfolio";
     int ownerId = 1;
-
+    userSession.setCurrentUser(user);
+    User mockUser = mock(User.class);
+    when(mockUser.getUserId()).thenReturn(ownerId);
+    when(userSession.getCurrentUser()).thenReturn(mockUser);
+    when(user.getUserId()).thenReturn(2);
     // Act
     portfolioService.createPortfolio(portfolioName);
 

@@ -24,10 +24,8 @@ public class Cash extends Asset {
    * @param price       the price of the cash
    * @param ownerId     the ID of the owner
    */
-  public Cash(String assetName, int portfolioId, int quantity, BigDecimal price, int ownerId) {
-    super(assetName, portfolioId, quantity, price, ownerId);
-    
-    this.setAssetType(ASSET_TYPE.CASH);
+  public Cash(String assetName, int portfolioId, int quantity, BigDecimal price, int ownerId, ASSET_TYPE assetType) {
+    super(assetName, portfolioId, quantity, price, ownerId, assetType);
   }
 
   /**

@@ -2,16 +2,19 @@ package com.isep.eleve.javaproject.repository;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.isep.eleve.javaproject.Tools.FileOperation;
 import com.isep.eleve.javaproject.model.Portfolio;
+import com.isep.eleve.javaproject.model.User;
 /**
  * Portfolio repository
  * @version V1.3
@@ -23,8 +26,8 @@ import com.isep.eleve.javaproject.model.Portfolio;
 @Repository
 public class PortfolioRepository {
   private static final String EXTERNAL_FILE_PATH = System.getProperty("user.home") + File.separator + "App" + File.separator + "databasePortfolios.json";
-
-  private FileOperation fileOperation;
+  private static final Logger logger = LoggerFactory.getLogger(PortfolioRepository.class);
+  private final FileOperation fileOperation;
   
   /**
    * Constructs a new PortfolioRepository with the specified FileOperation.
@@ -43,7 +46,8 @@ public class PortfolioRepository {
    * @throws IOException if an I/O error occurs
    */
   public List<Portfolio> findAll() throws IOException {
-    return fileOperation.readListFromFile(EXTERNAL_FILE_PATH, Portfolio.class);
+    TypeReference<List<Portfolio>> typeReference = new TypeReference<List<Portfolio>>() {};
+    return fileOperation.readListFromFile(EXTERNAL_FILE_PATH, typeReference);
   }
 
   /**
@@ -54,9 +58,28 @@ public class PortfolioRepository {
    */
   public void save(Portfolio portfolio) throws IOException {
     List<Portfolio> portfolios = findAll();
-    portfolios.add(portfolio);
+    if (portfolios.size() == 0) {
+      portfolios = new ArrayList<>();
+      portfolios.add(portfolio);
+      logger.info("New portfolio created in vide ficher: " + portfolio.getPortfolioName());
+    } else {
+      boolean flag = false;
+    for (int i = 0; i < portfolios.size(); i++) {
+        if (portfolios.get(i).getPortfolioId() == portfolio.getPortfolioId()) {
+            portfolios.set(i, portfolio); 
+            flag = true;
+            logger.info("Portfolio updated: " + portfolio.getPortfolioName());
+            break;
+        }
+    }
+    if (flag == false) {
+      portfolios.add(portfolio);
+      logger.info("New portfolio created: " + portfolio.getPortfolioName());
+    }
+    }
+    
     fileOperation.writeListToFile(EXTERNAL_FILE_PATH, portfolios);
-  }
+}
 
   /**
    * Finds a portfolio by its portfolio ID.

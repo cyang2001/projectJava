@@ -36,10 +36,10 @@ public class TestController {
     BigDecimal priceTest = new BigDecimal(10);
     int quantityTest = 10;
     
-    try {
-      assetsService.createAsset("testAsset", quantityTest, priceTest, ASSET_TYPE.STOCK, null);
+    /*try {
+      //assetsService.createAsset("testAsset", quantityTest, priceTest, ASSET_TYPE.STOCK, null);
     } catch (IOException e) {
       e.printStackTrace();
-    }
+    }*/
   }
 }

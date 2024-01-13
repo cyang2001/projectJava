@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 import com.isep.eleve.javaproject.model.Asset;
 import com.isep.eleve.javaproject.model.assets.liquide.FixedDeposit;
 
@@ -23,8 +24,8 @@ public class FixedDepositFactory implements AssetFactory {
   * @return              a new FixedDeposit object
   */
   @Override
-  public Asset createAsset(String assetName, int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate, int ownerId) {
-    return new FixedDeposit(assetName, portfolioId, quantity, price, interestRate, ownerId);
+  public Asset createAsset(String assetName, int portfolioId, int quantity, BigDecimal price, BigDecimal interestRate, int ownerId, ASSET_TYPE assetType) {
+    return new FixedDeposit(assetName, portfolioId, quantity, price, interestRate, ownerId, assetType);
   }
   
 }

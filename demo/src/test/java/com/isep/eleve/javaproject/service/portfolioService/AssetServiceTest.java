@@ -97,7 +97,7 @@ public class AssetServiceTest {
     doNothing().when(mockPortfolio).addAsset(any(Asset.class));
 
     // Act
-    Asset createdAsset = assetsService.createAsset(assetName, quantity, price, assetType, interestRate);
+    Asset createdAsset = assetsService.createAsset(assetName, quantity, price, assetType, interestRate,portfolioId);
     // Assert
     verify(assetsRepository).save(mockAsset);
     assertEquals(mockAsset, createdAsset);
@@ -140,7 +140,7 @@ public class AssetServiceTest {
 
     when(portfolioRepository.findByPortfolioId(portfolioId)).thenReturn(mockPortfolio);
     doNothing().when(mockPortfolio).addAsset(any(Asset.class));
-      assetsService.createAsset("", 10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
+      assetsService.createAsset("", 10, new BigDecimal("100.00" ), ASSET_TYPE.CASH, new BigDecimal("0.05"), portfolioId);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -180,7 +180,7 @@ public class AssetServiceTest {
 
     when(portfolioRepository.findByPortfolioId(portfolioId)).thenReturn(mockPortfolio);
     doNothing().when(mockPortfolio).addAsset(any(Asset.class));
-      assetsService.createAsset("Test Asset", -10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
+      assetsService.createAsset("Test Asset", -10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"), portfolioId);
 }
   @Test(expected = Exception.class)
   public void testCreateAssetWhenPortfolioNotFound() throws IOException {
@@ -220,7 +220,7 @@ public class AssetServiceTest {
     when(portfolioRepository.findByPortfolioId(portfolioId)).thenReturn(mockPortfolio);
     doNothing().when(mockPortfolio).addAsset(any(Asset.class));
       when(portfolioRepository.findByPortfolioId(anyInt())).thenReturn(null);
-      assetsService.createAsset("Test Asset", 10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"));
+      assetsService.createAsset("Test Asset", 10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"), portfolioId);
   }
   @Test
   public void testChangeAssetQuantity() throws IOException {
