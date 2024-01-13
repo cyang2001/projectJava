@@ -73,3 +73,7 @@ peut etre modifier les pages pour que le menu contienne les boutons sell et buy 
 **11/01/2024** Rémi
 Switch page fait dans App, App extends dans HomeController, BuyAssetController, BuyCryptoController, SellAssetController, 
 SellCryptoController et AnalysisController pour les swtch page effectifs.
+
+**12/01/2024** Chen
+Essayer de faire la parite de AddAssetController, mais vu quelque,
+bug. J'ai refaire les event
