@@ -12,6 +12,7 @@ import com.isep.eleve.javaproject.model.assets.cypto.CryptoCurrency;
 import com.isep.eleve.javaproject.model.assets.liquide.Cash;
 import com.isep.eleve.javaproject.model.assets.stock.Stock;
 import com.isep.eleve.javaproject.model.assets.liquide.FixedDeposit;
+import com.google.gson.*;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "assetType")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Cash.class, name = "CASH"),
