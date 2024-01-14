@@ -107,7 +107,7 @@ public class Constants {
     USERNAME_ALREADY_EXIST,
   };
 
-  public enum ASSET_TYPE {
+  /*public enum ASSET_TYPE {
     CASH("CASH"),
     FIXED_DEPOSIT("FIXED_DEPOSIT"),
     CRYPTO("CRYPTO"),
@@ -131,7 +131,13 @@ public class Constants {
         }
         throw new IllegalArgumentException("No constant with text " + text + " found");
     }
-}
+}*/
+  public static enum ASSET_TYPE {
+    CASH,
+    FIXED_DEPOSIT,
+    CRYPTO,
+    STOCK
+  }
 
 
   public static enum CHANGE_TYPE {

@@ -59,6 +59,10 @@ public class AssetsRepository {
    */
   public void save(Asset asset) throws IOException {
     List<Asset> assets = findAll();
+    for (Asset a : assets) {
+        a.setAssetType(Constants.ASSET_TYPE_MAP.get(a.getAssetName()));
+        logger.info("test for assetType : ", a.getAssetType());
+    }
     if (assets.size() == 0) {
       assets = new ArrayList<>();
       assets.add(asset);
@@ -72,6 +76,7 @@ public class AssetsRepository {
             assets.set(i, asset); 
             flag = true;
             logger.info("asset updated: " + asset.getAssetName());
+            logger.info("asset update : assetType " + asset.getAssetType());
             break;
         }
     }
@@ -96,6 +101,10 @@ public class AssetsRepository {
    */
   public Asset findByAssetId(int assetId) throws IOException {
     List<Asset> assets = findAll();
+    for (Asset a : assets) {
+      a.setAssetType(Constants.ASSET_TYPE_MAP.get(a.getAssetName()));
+      logger.info("test for assetType : ", a.getAssetType());
+  }
     return assets.stream().filter(a -> a.getAssetId() == assetId).findFirst().orElse(null);
   }
 
@@ -108,6 +117,10 @@ public class AssetsRepository {
    */
   public List<Asset> findByOwnerId(int ownerId) throws IOException {
     List<Asset> assets = findAll();
+    for (Asset a : assets) {
+      a.setAssetType(Constants.ASSET_TYPE_MAP.get(a.getAssetName()));
+      logger.info("test for assetType : ", a.getAssetType());
+  }
     return assets.stream().filter(a -> a.getOwnerId() == ownerId).collect(Collectors.toList());
   }
   

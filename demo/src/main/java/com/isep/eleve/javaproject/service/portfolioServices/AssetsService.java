@@ -64,9 +64,9 @@ public class AssetsService {
     if (quantity <= 0) {
       throw new IllegalArgumentException("Quantity cannot be less than or equal to 0");
     }
-    if (isFirst && assetType!=ASSET_TYPE.CASH || price.compareTo(BigDecimal.ZERO) <= 0  ) {
+    /*if (isFirst && assetType!=ASSET_TYPE.CASH || price.compareTo(BigDecimal.ZERO) <= 0  ) {
       throw new IllegalArgumentException("Price cannot be less than or equal to 0");
-    }
+    }*/
     try{
       AssetFactory factory = factoryProducer.getFactory(assetType);
       Portfolio portfolio = portfolioSession.getCurrentPortfolio();
@@ -75,6 +75,7 @@ public class AssetsService {
       eventApplication.publishEvent(new AssetCreatedEvent(this, newAsset));
       // Persist the new asset
       logger.info("Asset created: {}", assetName);
+      logger.info("Asset created: {}", newAsset.getAssetType());
       return newAsset;
     }catch(Exception e){
       logger.error("Error when creating asset", e);
