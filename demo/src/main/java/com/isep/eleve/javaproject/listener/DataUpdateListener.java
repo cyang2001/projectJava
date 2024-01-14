@@ -18,10 +18,12 @@ import com.isep.eleve.javaproject.events.AssetQuantityChangedEvent;
 import com.isep.eleve.javaproject.events.CashCreatedEvent;
 import com.isep.eleve.javaproject.events.CashEarnedEvent;
 import com.isep.eleve.javaproject.events.CashSpentEvent;
+import com.isep.eleve.javaproject.events.MarketTransactionCreated;
 import com.isep.eleve.javaproject.events.PortfolioChangedEvent;
 import com.isep.eleve.javaproject.events.PortfolioCreatedEvent;
 import com.isep.eleve.javaproject.events.UserChangedEvent;
 import com.isep.eleve.javaproject.events.UserCreatedEvent;
+import com.isep.eleve.javaproject.model.MarketTransaction;
 import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.repository.AssetsRepository;
 import com.isep.eleve.javaproject.repository.PortfolioRepository;
@@ -29,6 +31,7 @@ import com.isep.eleve.javaproject.repository.UserRepository;
 import com.isep.eleve.javaproject.service.portfolioServices.AssetsService;
 import com.isep.eleve.javaproject.session.AssetSession;
 import com.isep.eleve.javaproject.session.CashSession;
+import com.isep.eleve.javaproject.session.MarketTransactionSession;
 import com.isep.eleve.javaproject.session.PortfolioSession;
 import com.isep.eleve.javaproject.session.UserSession;
 // ToDo change UI
@@ -46,7 +49,8 @@ public class DataUpdateListener {
 
     @Autowired
     private CashSession cashSession;
-
+    @Autowired
+    private MarketTransactionSession marketTransactionSession;
     @Autowired
     private AssetsRepository assetsRepository;
     @Autowired
@@ -158,5 +162,18 @@ public class DataUpdateListener {
     public void onCashEarned(CashEarnedEvent event) throws IOException {
         cashSession.getCash().setPrice(cashSession.getCash().getPrice().add(event.getPrice()));
         assetsRepository.save(cashSession.getCash());
+    }
+
+    @EventListener
+    public void onMarketTransactionCreated(MarketTransactionCreated event) throws IOException {
+        MarketTransaction marketTransaction = event.getMarketTransaction();
+        logger.info("User : " + userSession.getCurrentUser().getUserName() + " created a new market transaction: " + marketTransaction.getMarketTransactionId());
+        marketTransactionSession.setMarketTransaction(marketTransaction);
+    }
+    @EventListener
+    public void onMarketTransactionSelected(MarketTransactionCreated event) throws IOException {
+        MarketTransaction marketTransaction = event.getMarketTransaction();
+        marketTransactionSession.setMarketTransaction(marketTransaction);
+        logger.info("User : " + userSession.getCurrentUser().getUserName() + " selected a market transaction: " + marketTransaction.getMarketTransactionId());
     }
 }

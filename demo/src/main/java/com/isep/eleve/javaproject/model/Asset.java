@@ -86,13 +86,14 @@ public abstract class Asset {
   public void setOwnerId(int ownerId) {
     this.ownerId = ownerId;
   }
-@JsonProperty("assetType")
-  public ASSET_TYPE getAssetType() {
-    return this.assetType;
+  @JsonProperty("assetType")
+  public void setAssetType(String assetTypeStr) {
+      this.assetType = ASSET_TYPE.fromString(assetTypeStr);
   }
-@JsonProperty("assetType")
-  public void setAssetType(ASSET_TYPE assetType) {
-    this.assetType = assetType;
+  
+  @JsonProperty("assetType")
+  public String getAssetType() {
+      return assetType != null ? assetType.getValue() : null;
   }
   // Abstract method to be implemented by subclasses to calculate the asset's value
   public abstract void calculateValue();

@@ -90,14 +90,14 @@ public class AssetServiceTest {
 
     when(factoryProducer.getFactory(assetType)).thenReturn(assetFactory);
 
-    when(assetFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId))
+    when(assetFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId, Constants.ASSET_TYPE.CASH))
         .thenReturn(mockAsset);
 
     when(portfolioRepository.findByPortfolioId(portfolioId)).thenReturn(mockPortfolio);
     doNothing().when(mockPortfolio).addAsset(any(Asset.class));
 
     // Act
-    Asset createdAsset = assetsService.createAsset(assetName, quantity, price, assetType, interestRate,portfolioId);
+    Asset createdAsset = assetsService.createAsset(assetName, quantity, price, assetType, interestRate,portfolioId, true);
     // Assert
     verify(assetsRepository).save(mockAsset);
     assertEquals(mockAsset, createdAsset);
@@ -135,12 +135,12 @@ public class AssetServiceTest {
 
     when(factoryProducer.getFactory(assetType)).thenReturn(assetFactory);
 
-    when(assetFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId))
+    when(assetFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId, Constants.ASSET_TYPE.CASH))
         .thenReturn(mockAsset);
 
     when(portfolioRepository.findByPortfolioId(portfolioId)).thenReturn(mockPortfolio);
     doNothing().when(mockPortfolio).addAsset(any(Asset.class));
-      assetsService.createAsset("", 10, new BigDecimal("100.00" ), ASSET_TYPE.CASH, new BigDecimal("0.05"), portfolioId);
+      assetsService.createAsset("", 10, new BigDecimal("100.00" ), ASSET_TYPE.CASH, new BigDecimal("0.05"), portfolioId, true);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -175,12 +175,12 @@ public class AssetServiceTest {
 
     when(factoryProducer.getFactory(assetType)).thenReturn(assetFactory);
 
-    when(assetFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId))
+    when(assetFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId, Constants.ASSET_TYPE.CASH))
         .thenReturn(mockAsset);
 
     when(portfolioRepository.findByPortfolioId(portfolioId)).thenReturn(mockPortfolio);
     doNothing().when(mockPortfolio).addAsset(any(Asset.class));
-      assetsService.createAsset("Test Asset", -10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"), portfolioId);
+      assetsService.createAsset("Test Asset", -10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"), portfolioId, true);
 }
   @Test(expected = Exception.class)
   public void testCreateAssetWhenPortfolioNotFound() throws IOException {
@@ -214,13 +214,13 @@ public class AssetServiceTest {
 
     when(factoryProducer.getFactory(assetType)).thenReturn(assetFactory);
 
-    when(assetFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId))
+    when(assetFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId, Constants.ASSET_TYPE.CASH))
         .thenReturn(mockAsset);
 
     when(portfolioRepository.findByPortfolioId(portfolioId)).thenReturn(mockPortfolio);
     doNothing().when(mockPortfolio).addAsset(any(Asset.class));
       when(portfolioRepository.findByPortfolioId(anyInt())).thenReturn(null);
-      assetsService.createAsset("Test Asset", 10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"), portfolioId);
+      assetsService.createAsset("Test Asset", 10, new BigDecimal("100.00"), ASSET_TYPE.CASH, new BigDecimal("0.05"), portfolioId, true);
   }
   @Test
   public void testChangeAssetQuantity() throws IOException {

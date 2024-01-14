@@ -75,6 +75,16 @@ public class TransactionService {
     }
     transactionRepository.save(transaction);
   }
+  /**
+   * Executes a transaction with the given parameters.
+   *
+   * @param quantity       the quantity of the asset to transact
+   * @param price          the price of the asset
+   * @param portfolioId    the ID of the portfolio
+   * @param assetName      the name of the asset
+   * @param transitionType the type of the transaction
+   * @throws IOException if an I/O error occurs
+   */
   public void executeTransaction(int quantity, BigDecimal price, int portfolioId, String assetName, TRANSACTION_TYPE transitionType) throws IOException {
     int assetId = 0;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -112,8 +122,8 @@ public class TransactionService {
           assetId = portfolio.getAssets().get(i).getAssetId();
           Constants.CHANGE_TYPE changeType = Constants.CHANGE_TYPE.SUBTRACT;
           assetsService.changeAssetQuantity(assetId, quantity, changeType);
-          BigDecimal total = price.multiply(new BigDecimal(quantity));
-          eventApplication.publishEvent(new CashEarnedEvent(this, total));
+          //BigDecimal total = price.multiply(new BigDecimal(quantity));
+          //eventApplication.publishEvent(new CashEarnedEvent(this, total));
           flag = true;
           break;
         }

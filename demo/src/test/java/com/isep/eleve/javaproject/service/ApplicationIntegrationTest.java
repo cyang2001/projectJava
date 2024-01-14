@@ -45,7 +45,7 @@ public class ApplicationIntegrationTest {
       Portfolio portfolioTest = portfolioService.createPortfolio("testPortfolioName");
       PortfolioSession portfolioSession = new PortfolioSession();
       portfolioSession.setCurrentPortfolio(portfolioTest);
-      Asset assetTest = assetsService.createAsset("testAssetName",  100, new BigDecimal(1), ASSET_TYPE.CRYPTO, null , 1);
+      Asset assetTest = assetsService.createAsset("testAssetName",  100, new BigDecimal(1), ASSET_TYPE.CRYPTO, null , 1, true);
       assertNotEquals(portfolioTest, null);
       assertNotEquals(assetTest, null);
     }

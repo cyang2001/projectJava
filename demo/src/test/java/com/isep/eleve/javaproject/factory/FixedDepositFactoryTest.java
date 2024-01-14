@@ -10,7 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.isep.eleve.javaproject.model.Asset;
-
+import com.isep.eleve.javaproject.Tools.Constants;
 @RunWith(MockitoJUnitRunner.class)
 public class FixedDepositFactoryTest {
   @InjectMocks
@@ -25,7 +25,7 @@ public class FixedDepositFactoryTest {
     BigDecimal price = new BigDecimal(1);
     BigDecimal interestRate = new BigDecimal(1);
     // Act
-    Asset asset = fixedDepositFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId);
+    Asset asset = fixedDepositFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId, Constants.ASSET_TYPE.FIXED_DEPOSIT);
     // Assert
     Assert.assertEquals(assetName, asset.getAssetName());
     Assert.assertEquals(portfolioId, asset.getPortfolioId());

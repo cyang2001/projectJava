@@ -6,13 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.tomcat.util.bcel.Const;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.Tools.FileOperation;
+import com.isep.eleve.javaproject.model.Asset;
 import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.model.User;
 /**
@@ -47,6 +50,7 @@ public class PortfolioRepository {
    */
   public List<Portfolio> findAll() throws IOException {
     TypeReference<List<Portfolio>> typeReference = new TypeReference<List<Portfolio>>() {};
+
     return fileOperation.readListFromFile(EXTERNAL_FILE_PATH, typeReference);
   }
 
@@ -58,6 +62,12 @@ public class PortfolioRepository {
    */
   public void save(Portfolio portfolio) throws IOException {
     List<Portfolio> portfolios = findAll();
+    /*for (Portfolio p : portfolios) {
+      List<Asset> assets =  p.getAssets();
+      for (Asset a : assets) {
+        a.setAssetType(Constants.ASSET_TYPE_MAP.get(a.getAssetType())); 
+      }
+    }*/
     if (portfolios.size() == 0) {
       portfolios = new ArrayList<>();
       portfolios.add(portfolio);

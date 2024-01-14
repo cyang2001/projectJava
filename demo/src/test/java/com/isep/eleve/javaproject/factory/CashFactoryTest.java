@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 import com.isep.eleve.javaproject.model.Asset;
-
+import com.isep.eleve.javaproject.Tools.Constants;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CashFactoryTest {
@@ -25,7 +25,7 @@ public class CashFactoryTest {
     int ownerId = 1;
     BigDecimal interestRate = new BigDecimal(1);
     // Act
-    Asset asset = cashFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId);
+    Asset asset = cashFactory.createAsset(assetName, portfolioId, quantity, price, interestRate, ownerId, Constants.ASSET_TYPE.CASH);
     // Assert
     Assert.assertEquals(assetName, asset.getAssetName());
     Assert.assertEquals(portfolioId, asset.getPortfolioId());

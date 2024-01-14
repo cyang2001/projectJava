@@ -107,12 +107,32 @@ public class Constants {
     USERNAME_ALREADY_EXIST,
   };
 
-  public static enum ASSET_TYPE {
-    CASH,
-    FIXED_DEPOSIT,
-    CRYPTO,
-    STOCK
-  };
+  public enum ASSET_TYPE {
+    CASH("CASH"),
+    FIXED_DEPOSIT("FIXED_DEPOSIT"),
+    CRYPTO("CRYPTO"),
+    STOCK("STOCK");
+
+    private String value;
+
+    ASSET_TYPE(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
+    public static ASSET_TYPE fromString(String text) {
+        for (ASSET_TYPE b : ASSET_TYPE.values()) {
+            if (b.value.equalsIgnoreCase(text)) {
+                return b;
+            }
+        }
+        throw new IllegalArgumentException("No constant with text " + text + " found");
+    }
+}
+
 
   public static enum CHANGE_TYPE {
     ADD,
@@ -133,4 +153,5 @@ public class Constants {
     "BTC", ASSET_TYPE.CRYPTO,
     "AAPL", ASSET_TYPE.STOCK
   );
+
 }
