@@ -90,8 +90,6 @@ public class AddAssetController {
         assetsService.createAsset(assetToAddChoiceBox.getValue(), Integer.parseInt(quantity.getText()), new BigDecimal( Integer.parseInt(price.getText())), assetType, interestRate_, portfolio.getPortfolioId(), true);
       }
 
-      
-
     }
 
     public void handleLogOutAction(ActionEvent event) {

@@ -74,6 +74,7 @@ public class SellAssetController {
       // choise asset
       List<Asset> assets = userSession.getCurrentUser().getPortfolios().stream().filter(p -> p.getPortfolioName().equals(portfolioOfAssetToSellChoiceBox.getValue())).findFirst().get().getAssets();
       Asset asset = assets.stream().filter(a -> a.getAssetName().equals(assetToSellChoiceBox.getValue())).findFirst().orElse(null);
+
       if (asset == null) {
         logger.info("error : asset is null" );
       } else {
