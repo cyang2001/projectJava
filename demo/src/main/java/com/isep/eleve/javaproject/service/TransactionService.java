@@ -124,6 +124,7 @@ public class TransactionService {
           assetsService.changeAssetQuantity(assetId, quantity, changeType);
           //BigDecimal total = price.multiply(new BigDecimal(quantity));
           //eventApplication.publishEvent(new CashEarnedEvent(this, total));
+          // Todo dont forget to add cash
           flag = true;
           break;
         }

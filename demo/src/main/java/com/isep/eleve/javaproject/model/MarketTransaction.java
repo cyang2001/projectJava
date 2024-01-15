@@ -111,4 +111,5 @@ public class MarketTransaction {
   public void setMarketTransactionName(String marketTransactionName) {
     this.marketTransactionName = marketTransactionName;
   }
+  
 }

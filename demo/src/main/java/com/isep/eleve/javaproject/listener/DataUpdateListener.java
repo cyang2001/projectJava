@@ -23,14 +23,18 @@ import com.isep.eleve.javaproject.events.PortfolioChangedEvent;
 import com.isep.eleve.javaproject.events.PortfolioCreatedEvent;
 import com.isep.eleve.javaproject.events.UserChangedEvent;
 import com.isep.eleve.javaproject.events.UserCreatedEvent;
+import com.isep.eleve.javaproject.model.Market;
 import com.isep.eleve.javaproject.model.MarketTransaction;
 import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.repository.AssetsRepository;
+import com.isep.eleve.javaproject.repository.MarketRepository;
+import com.isep.eleve.javaproject.repository.MarketTransactionRepository;
 import com.isep.eleve.javaproject.repository.PortfolioRepository;
 import com.isep.eleve.javaproject.repository.UserRepository;
 import com.isep.eleve.javaproject.service.portfolioServices.AssetsService;
 import com.isep.eleve.javaproject.session.AssetSession;
 import com.isep.eleve.javaproject.session.CashSession;
+import com.isep.eleve.javaproject.session.MarketSession;
 import com.isep.eleve.javaproject.session.MarketTransactionSession;
 import com.isep.eleve.javaproject.session.PortfolioSession;
 import com.isep.eleve.javaproject.session.UserSession;
@@ -46,7 +50,8 @@ public class DataUpdateListener {
 
     @Autowired
     private AssetSession assetSession;
-
+    @Autowired 
+    private MarketSession marketSession;
     @Autowired
     private CashSession cashSession;
     @Autowired
@@ -57,6 +62,10 @@ public class DataUpdateListener {
     private PortfolioRepository portfolioRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private MarketRepository marketRepository;
+    @Autowired
+    private MarketTransactionRepository marketTransactionRepository;
     @EventListener
     public void onPortfolioCreated(PortfolioCreatedEvent event) throws IOException {
         //userSession.getCurrentUser().addPortfolio(event.getPortfolio());
@@ -95,17 +104,18 @@ public class DataUpdateListener {
         portfolioSession.getCurrentPortfolio().addAsset(event.getAsset());
         assetSession.setCurrentAsset(event.getAsset());
         List<Portfolio> portfolios = userSession.getCurrentUser().getPortfolios();
+        logger.info("Asset created_event : portfolios " ,userSession.getCurrentUser().getPortfolios());
         boolean flag = false;
         for (Portfolio portfolio : portfolios) {
             if (portfolio.getPortfolioName().equals(portfolioSession.getCurrentPortfolio().getPortfolioName())) {
                 userSession.getCurrentUser().updatePortfolio(portfolioSession.getCurrentPortfolio());
                 flag = true;
-                logger.info("Asset created_event portfolio update: " + event.getAsset().getAssetName());
+                logger.info("Asset created_event {}portfolio {} update: " ,event.getAsset().getAssetName(), portfolio.getPortfolioName());
             }
         }
         if (!flag) {
             userSession.getCurrentUser().addPortfolio(portfolioSession.getCurrentPortfolio());
-            logger.info("Asset created_event: " + event.getAsset().getAssetName());
+            logger.info("Asset created_event {} in {}): " ,event.getAsset().getAssetName(), portfolioSession.getCurrentPortfolio().getPortfolioName());
         }
         
         assetsRepository.save(event.getAsset());
@@ -132,7 +142,6 @@ public class DataUpdateListener {
         portfolioSession.getCurrentPortfolio().updateAsset(assetSession.getCurrentAsset());
         logger.info("Asset quantity changed_event: update portfolioSession" + portfolioSession.getCurrentPortfolio().getPortfolioName());
         userSession.getCurrentUser().updatePortfolio(portfolioSession.getCurrentPortfolio());
-        logger.info("Asset quantity changed_event: portfolio in usersession" + userSession.getCurrentUser().getPortfolios());
         logger.info("Asset quantity changed_event: update userSession" + userSession.getCurrentUser().getUserName());
         assetsRepository.save(assetSession.getCurrentAsset());
         portfolioRepository.save(portfolioSession.getCurrentPortfolio());
@@ -144,12 +153,15 @@ public class DataUpdateListener {
     public void onUserCreated(UserCreatedEvent event) throws IOException {
         userSession.setCurrentUser(event.getUser());
         userRepository.save(userSession.getCurrentUser());
-        
+        logger.info("User created_event: " + event.getUser().getUserName());
+
     }
     @EventListener
     public void onUserChanged(UserChangedEvent event) {
         userSession.setCurrentUser(event.getUser());
-        
+        logger.info("User changed_event: " + event.getUser().getUserName());
+        logger.info("User changed_event: portfolios " + event.getUser().getPortfolios());
+
     }
 
     @EventListener

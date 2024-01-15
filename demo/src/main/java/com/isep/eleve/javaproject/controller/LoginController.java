@@ -63,12 +63,13 @@ public class LoginController {
             errorLabel.setText("");
         }
         userSession.setCurrentUser(user);
-        List<Portfolio> portfolios = portfolioRepository.findAll();
+        /*List<Portfolio> portfolios = 
+        portfolioRepository.findAll();
         for (Portfolio portfolio : portfolios) {
             if (portfolio.getOwnerId() == user.getUserId()) {
               user.addPortfolio(portfolio);
             }
-        }
+        }*/
 
         App.showAlert("Login Success", "You have successfully logged in", "Welcome!");
 

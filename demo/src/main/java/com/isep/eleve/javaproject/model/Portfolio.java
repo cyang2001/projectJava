@@ -110,7 +110,7 @@ public class Portfolio {
       System.err.println("this.assets: " + this.assets);
       System.err.println("get cash ");
       return this.assets.stream()
-              .filter(asset -> Constants.ASSET_TYPE_MAP.get(asset.getAssetType())  == Constants.ASSET_TYPE.CASH && asset instanceof Cash)
+              .filter(asset -> Constants.ASSET_TYPE_MAP.get(asset.getAssetName()) == Constants.ASSET_TYPE.CASH && asset instanceof Cash)
               .map(asset -> (Cash) asset)
               .findFirst()
               .orElse(null); 

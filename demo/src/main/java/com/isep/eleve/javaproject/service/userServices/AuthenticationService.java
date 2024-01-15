@@ -1,4 +1,5 @@
 package com.isep.eleve.javaproject.service.userServices;
+import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.model.User;
 import com.isep.eleve.javaproject.repository.*;
 import java.io.IOException;

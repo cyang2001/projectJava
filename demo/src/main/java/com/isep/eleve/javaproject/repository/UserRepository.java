@@ -101,4 +101,8 @@ public class UserRepository {
     List<User> users = findAll();
     return users.stream().filter(u -> u.getUserName().equals(userName)).findFirst().orElse(null);
   }
+  public User findByUserId(int userId) throws IOException {
+    List<User> users = findAll();
+    return users.stream().filter(u -> u.getUserId() == userId).findFirst().orElse(null);
+  }
 }

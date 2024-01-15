@@ -59,7 +59,7 @@ public class AddAssetController {
     @FXML 
     public void initialize() {
         List<String> portfolioNames = userSession.getCurrentUser().getPortfolios().stream().map(portfolio -> portfolio.getPortfolioName()).collect(java.util.stream.Collectors.toList());
-        System.err.println(portfolioNames);
+        //System.err.println(portfolioNames);
         assetToAddChoiceBox.setItems(FXCollections.observableArrayList("BTC", "AAPL", "CASH", "FIXED_DEPOSIT"));
         portfolioToAddChoiceBox.setItems(FXCollections.observableArrayList(portfolioNames));
     }

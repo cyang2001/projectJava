@@ -1,6 +1,7 @@
 package com.isep.eleve.javaproject.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,6 +10,7 @@ public class Market {
   public Market(String marketName) {
     this.marketId = UUIDUtils.getUUIDInOrderId();
     this.marketName = marketName;
+    this.marketTransactionIds = new ArrayList<>();
   }
   private int marketId;
   @JsonProperty("marketId")
