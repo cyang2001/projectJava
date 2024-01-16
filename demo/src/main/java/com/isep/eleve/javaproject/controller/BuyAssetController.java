@@ -63,7 +63,7 @@ public class BuyAssetController {
     public void initialize() {
         List<String> portfolioNames = userSession.getCurrentUser().getPortfolios().stream().map(portfolio -> portfolio.getPortfolioName()).collect(java.util.stream.Collectors.toList());
         //System.err.println(portfolioNames);
-        assetToBuyChoiceBox.setItems(FXCollections.observableArrayList("BTC", "AAPL", "CASH", "FIXED_DEPOSIT"));
+        assetToBuyChoiceBox.setItems(FXCollections.observableArrayList("BTC", "AAPL", "FIXED_DEPOSIT"));
         portfolioOfAssetToBuyChoiceBox.setItems(FXCollections.observableArrayList(portfolioNames));
     }
     public void handleUserInformationAction(ActionEvent event) {
@@ -79,6 +79,8 @@ public class BuyAssetController {
 
         if (asset==null){
             showAlert("asset not found", "asset not found in the portfolio");
+            // ToDo create a new asset for user
+            // dont forget to add eventPublisher.publishEvent(new AssetCreatedEvent(this, asset));
         }
         else {eventPublisher.publishEvent(new AssetChangedEvent(this, asset));
             int portfolioId= portfolio.getPortfolioId();

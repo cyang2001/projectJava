@@ -4,9 +4,9 @@ import org.springframework.context.ApplicationEvent;
 
 import com.isep.eleve.javaproject.model.MarketTransaction;
 
-public class MarketTransactionSelected extends ApplicationEvent{
+public class MarketTransactionCreatedEvent extends ApplicationEvent{
   private MarketTransaction marketTransaction;
-  public MarketTransactionSelected(Object source, MarketTransaction marketTransaction) {
+  public MarketTransactionCreatedEvent(Object source, MarketTransaction marketTransaction) {
     super(source);
     this.marketTransaction = marketTransaction;
   }

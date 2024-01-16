@@ -7,12 +7,16 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.isep.eleve.javaproject.Tools.*;
 public class Market {
+  private int marketId;
+  private String marketName;
+  private List<Integer> marketTransactionIds;
   public Market(String marketName) {
     this.marketId = UUIDUtils.getUUIDInOrderId();
     this.marketName = marketName;
     this.marketTransactionIds = new ArrayList<>();
   }
-  private int marketId;
+  public Market() {
+  }
   @JsonProperty("marketId")
   public int getMarketId() {
     return marketId;
@@ -21,7 +25,6 @@ public class Market {
   public void setMarketId(int marketId) {
     this.marketId = marketId;
   }
-  private String marketName;
   @JsonProperty("marketName")
   public String getMarketName() {
     return marketName;
@@ -30,7 +33,6 @@ public class Market {
   public void setMarketName(String marketName) {
     this.marketName = marketName;
   }
-  private List<Integer> marketTransactionIds;
   @JsonProperty("marketTransactionIds")
   public List<Integer> getMarketTransactionIds() {
     return marketTransactionIds;

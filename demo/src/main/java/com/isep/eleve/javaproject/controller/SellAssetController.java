@@ -49,22 +49,23 @@ public class SellAssetController {
     private final AssetsRepository assetsRepository;
     private final ApplicationEventPublisher eventPublisher;
     private static final Logger logger = LoggerFactory.getLogger(SellAssetController.class);
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
     @Autowired
-    SellAssetController(AssetsService assetsService, UserSession userSession, PortfolioSession portfolioSession, CashSession cashSession, AssetsRepository assetsRepository, ApplicationEventPublisher eventPublisher) {
+    SellAssetController(AssetsService assetsService, UserSession userSession, PortfolioSession portfolioSession, CashSession cashSession, AssetsRepository assetsRepository, ApplicationEventPublisher eventPublisher, TransactionService transactionService) {
         this.assetsService = assetsService;
         this.userSession = userSession;
         this.portfolioSession = portfolioSession;
         this.cashSession = cashSession;
         this.assetsRepository = assetsRepository;
         this.eventPublisher = eventPublisher;
+        this.transactionService = transactionService;
     }
     @FXML 
     public void initialize() {
     List<String> portfolioNames = userSession.getCurrentUser().getPortfolios().stream().map(portfolio -> portfolio.getPortfolioName()).collect(java.util.stream.Collectors.toList());
     System.err.println(portfolioNames);
-    assetToSellChoiceBox.setItems(FXCollections.observableArrayList("BTC", "AAPL", "CASH", "FIXED_DEPOSIT"));
+    assetToSellChoiceBox.setItems(FXCollections.observableArrayList( "AAPL"));
     portfolioOfAssetToSellChoiceBox.setItems(FXCollections.observableArrayList(portfolioNames));
     }
     public void handleUserInformationAction(ActionEvent event) {

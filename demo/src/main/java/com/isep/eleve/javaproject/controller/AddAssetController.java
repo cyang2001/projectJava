@@ -18,6 +18,7 @@ import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.model.Asset;
 import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.model.assets.liquide.Cash;
+import com.isep.eleve.javaproject.model.assets.liquide.FixedDeposit;
 import com.isep.eleve.javaproject.repository.AssetsRepository;
 import com.isep.eleve.javaproject.service.portfolioServices.AssetsService;
 import com.isep.eleve.javaproject.session.CashSession;
@@ -81,14 +82,23 @@ public class AddAssetController {
       }
       
       eventPublisher.publishEvent(new PortfolioChangedEvent(this, portfolio));
-      if (asset != null)  {
-        logger.info("Asset already exists");
-        assetsService.changeAssetQuantity(asset.getAssetId(), Integer.parseInt(quantity.getText()), Constants.CHANGE_TYPE.ADD);
-      } else {
+      if (asset == null) {
         // ToDo remaind user to fill in the interest rate if the asset is a fixed deposit
         logger.info("Asset does not exist");
         assetsService.createAsset(assetToAddChoiceBox.getValue(), Integer.parseInt(quantity.getText()), new BigDecimal( Integer.parseInt(price.getText())), assetType, interestRate_, portfolio.getPortfolioId(), true);
+        return;
       }
+      if (asset != null && asset.getClass() != Cash.class && asset.getClass() != FixedDeposit.class)  {
+        logger.info("Asset already exists");
+        assetsService.changeAssetQuantity(asset.getAssetId(), Integer.parseInt(quantity.getText()), Constants.CHANGE_TYPE.ADD);
+        return;
+      } 
+      if (asset != null && asset.getClass() == Cash.class || asset.getClass() == FixedDeposit.class) {
+        logger.info("Asset already exists");
+        assetsService.changeAssetQuantity(asset.getAssetId(), new BigDecimal(Integer.parseInt(price.getText())), Constants.CHANGE_TYPE.ADD, false);
+        return;
+      } 
+      
 
     }
 

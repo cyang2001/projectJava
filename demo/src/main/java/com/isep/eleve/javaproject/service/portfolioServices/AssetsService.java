@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 import com.isep.eleve.javaproject.events.AssetCreatedEvent;
+import com.isep.eleve.javaproject.events.AssetPriceChangedEvent;
 import com.isep.eleve.javaproject.events.AssetQuantityChangedEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +118,27 @@ public class AssetsService {
     eventApplication.publishEvent(new AssetQuantityChangedEvent(this, asset, newQuantity, changeType));
     logger.info("Asset quantity changed: assetId={}, originalQuantity={}, newQuantity={}, changeType={}", assetId, originalQuantity, newQuantity, changeType);
 }
+public void changeAssetQuantity(int assetId, BigDecimal price, Constants.CHANGE_TYPE changeType, boolean isMarket) throws IOException {
+  Asset asset = assetsRepository.findByAssetId(assetId);
+    if (asset == null) {
+        logger.error("Asset not found: assetId={}", assetId);
+        throw new IllegalArgumentException("Asset not found with id: " + assetId);
+    }
 
+    BigDecimal originalPrice = asset.getPrice();
+    BigDecimal newPrice = originalPrice;
+
+    if (changeType == Constants.CHANGE_TYPE.ADD) {
+        newPrice = newPrice.add(price);
+    } else if (changeType == Constants.CHANGE_TYPE.SUBTRACT) {
+        newPrice = newPrice.subtract(price);
+    } 
+
+    asset.setPrice(newPrice);
+    asset.calculateValue();
+    eventApplication.publishEvent(new AssetPriceChangedEvent(this, asset, newPrice, changeType, isMarket));
+    logger.info("Asset price changed: assetId={}, originalPrice={}, newPrice={}, changeType={}", assetId, originalPrice.intValue(), newPrice.intValue(), changeType);
+}
 
   /**
    * Updates the price of an asset and recalculates its value.

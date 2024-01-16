@@ -14,11 +14,13 @@ import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.events.AssetAddedToPortfolioEvent;
 import com.isep.eleve.javaproject.events.AssetChangedEvent;
 import com.isep.eleve.javaproject.events.AssetCreatedEvent;
+import com.isep.eleve.javaproject.events.AssetPriceChangedEvent;
 import com.isep.eleve.javaproject.events.AssetQuantityChangedEvent;
 import com.isep.eleve.javaproject.events.CashCreatedEvent;
 import com.isep.eleve.javaproject.events.CashEarnedEvent;
 import com.isep.eleve.javaproject.events.CashSpentEvent;
-import com.isep.eleve.javaproject.events.MarketTransactionCreated;
+import com.isep.eleve.javaproject.events.MarketTransactionCreatedEvent;
+import com.isep.eleve.javaproject.events.MarketTransactionSelectedEvent;
 import com.isep.eleve.javaproject.events.PortfolioChangedEvent;
 import com.isep.eleve.javaproject.events.PortfolioCreatedEvent;
 import com.isep.eleve.javaproject.events.UserChangedEvent;
@@ -26,6 +28,7 @@ import com.isep.eleve.javaproject.events.UserCreatedEvent;
 import com.isep.eleve.javaproject.model.Market;
 import com.isep.eleve.javaproject.model.MarketTransaction;
 import com.isep.eleve.javaproject.model.Portfolio;
+import com.isep.eleve.javaproject.model.User;
 import com.isep.eleve.javaproject.repository.AssetsRepository;
 import com.isep.eleve.javaproject.repository.MarketRepository;
 import com.isep.eleve.javaproject.repository.MarketTransactionRepository;
@@ -147,21 +150,56 @@ public class DataUpdateListener {
         portfolioRepository.save(portfolioSession.getCurrentPortfolio());
         userRepository.save(userSession.getCurrentUser());
     }
+    @EventListener
+    public void onAssetPriceChanged(AssetPriceChangedEvent event) throws IOException {
+      assetSession.setCurrentAsset(event.getAsset());
+        logger.info("Asset price changed_event: new assetSession" + event.getAsset().getAssetName());
+        portfolioSession.getCurrentPortfolio().updateAsset(assetSession.getCurrentAsset());
+        logger.info("Asset price changed_event: update portfolioSession" + portfolioSession.getCurrentPortfolio().getPortfolioName());
+        userSession.getCurrentUser().updatePortfolio(portfolioSession.getCurrentPortfolio());
+        logger.info("Asset price changed_event: update userSession" + userSession.getCurrentUser().getUserName());
+        assetsRepository.save(assetSession.getCurrentAsset());
+        portfolioRepository.save(portfolioSession.getCurrentPortfolio());
+        if (event.isMarket()) {
+          Portfolio pTemp = portfolioRepository.findByPortfolioId(marketTransactionSession.getMarketTransaction().getPortfolioId());
+          pTemp.updateAsset(assetSession.getCurrentAsset());
+          portfolioRepository.save(pTemp);
+          User uTemp = userRepository.findByUserId(marketTransactionSession.getMarketTransaction().getPublisherId());
+          uTemp.updatePortfolio(pTemp);
+          userRepository.save(uTemp);
+        } else {
+          userRepository.save(userSession.getCurrentUser());
+        }
 
+    }
 
     @EventListener
     public void onUserCreated(UserCreatedEvent event) throws IOException {
         userSession.setCurrentUser(event.getUser());
         userRepository.save(userSession.getCurrentUser());
         logger.info("User created_event: " + event.getUser().getUserName());
-
+        if (marketRepository.findAll().isEmpty()) {
+            marketSession.setMarket(new Market("Market Crypto"));
+            marketRepository.save(marketSession.getMarket());
+            logger.info("Market created_event: " + marketSession.getMarket().getMarketName());
+        } else {
+            marketSession.setMarket(marketRepository.findAll().get(0));
+            logger.info("Market changed_event: " + marketSession.getMarket().getMarketName());
+        }
     }
     @EventListener
-    public void onUserChanged(UserChangedEvent event) {
+    public void onUserChanged(UserChangedEvent event) throws IOException {
         userSession.setCurrentUser(event.getUser());
         logger.info("User changed_event: " + event.getUser().getUserName());
         logger.info("User changed_event: portfolios " + event.getUser().getPortfolios());
-
+        if (marketRepository.findAll().isEmpty()) {
+            marketSession.setMarket(new Market("Market Crypto"));
+            marketRepository.save(marketSession.getMarket());
+            logger.info("Market created_event: " + marketSession.getMarket().getMarketName());
+        } else {
+            marketSession.setMarket(marketRepository.findAll().get(0));
+            logger.info("Market changed_event: " + marketSession.getMarket().getMarketName());
+        }
     }
 
     @EventListener
@@ -177,13 +215,14 @@ public class DataUpdateListener {
     }
 
     @EventListener
-    public void onMarketTransactionCreated(MarketTransactionCreated event) throws IOException {
+    public void onMarketTransactionCreated(MarketTransactionCreatedEvent event) throws IOException {
         MarketTransaction marketTransaction = event.getMarketTransaction();
         logger.info("User : " + userSession.getCurrentUser().getUserName() + " created a new market transaction: " + marketTransaction.getMarketTransactionId());
         marketTransactionSession.setMarketTransaction(marketTransaction);
+        marketTransactionRepository.save(marketTransaction);
     }
     @EventListener
-    public void onMarketTransactionSelected(MarketTransactionCreated event) throws IOException {
+    public void onMarketTransactionSelected(MarketTransactionSelectedEvent event) throws IOException {
         MarketTransaction marketTransaction = event.getMarketTransaction();
         marketTransactionSession.setMarketTransaction(marketTransaction);
         logger.info("User : " + userSession.getCurrentUser().getUserName() + " selected a market transaction: " + marketTransaction.getMarketTransactionId());

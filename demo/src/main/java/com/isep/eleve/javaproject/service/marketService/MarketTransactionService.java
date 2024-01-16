@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
-import com.isep.eleve.javaproject.events.MarketTransactionCreated;
+import com.isep.eleve.javaproject.events.MarketTransactionCreatedEvent;
 import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.model.MarketTransaction;
 import com.isep.eleve.javaproject.repository.MarketTransactionRepository;
@@ -33,7 +33,7 @@ public class MarketTransactionService {
   }
   public void addNewMarketTransaction(String assetName, int assetId, int publisherId, BigDecimal price, int quantity, String marketTransactionName, int portfolioId) throws IOException {
     MarketTransaction marketTransaction = new MarketTransaction(price, quantity, publisherId, assetName, marketTransactionName, portfolioId, assetId);
-    eventApplication.publishEvent(new MarketTransactionCreated(this, marketTransaction));
+    eventApplication.publishEvent(new MarketTransactionCreatedEvent(this, marketTransaction));
     //marketTransactionSession.setMarketTransaction(marketTransaction);
   }
   public String getMarketTransactionNameByTransactionId(int marketTransactionId) throws IOException {
@@ -51,5 +51,12 @@ public class MarketTransactionService {
   }
   public void executeTransaction(Constants.TRANSACTION_TYPE transactionType) throws IOException {
     transactionService.executeTransaction(marketTransactionSession.getMarketTransaction().getQuantity(), marketTransactionSession.getMarketTransaction().getPrice(), marketTransactionSession.getMarketTransaction().getPortfolioId(),marketTransactionSession.getMarketTransaction().getAssetName(), transactionType);
+  }
+  public MarketTransaction getMarketTransactionByMarketTransactionId(int marketTransactionId) throws IOException {
+    return marketTransactionRepository.findByMarketTransactionId(marketTransactionId);
+  }
+
+  public Boolean getMarketTransactionIsBuyByMakretId(int marketTransactionId) throws IOException {
+    return marketTransactionRepository.findByMarketTransactionId(marketTransactionId).getIsSuccess();
   }
 }

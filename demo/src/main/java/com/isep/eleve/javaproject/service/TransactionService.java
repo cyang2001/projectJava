@@ -6,7 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,16 @@ import com.isep.eleve.javaproject.Tools.Constants.TRANSACTION_TYPE;
 
 import com.isep.eleve.javaproject.events.CashEarnedEvent;
 import com.isep.eleve.javaproject.events.CashSpentEvent;
+import com.isep.eleve.javaproject.model.MarketTransaction;
 import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.model.Transaction;
 import com.isep.eleve.javaproject.model.assets.liquide.Cash;
 import com.isep.eleve.javaproject.repository.MarketTransactionRepository;
 import com.isep.eleve.javaproject.repository.TransactionRepository;
+import com.isep.eleve.javaproject.repository.UserRepository;
 import com.isep.eleve.javaproject.service.portfolioServices.AssetsService;
 import com.isep.eleve.javaproject.session.CashSession;
+import com.isep.eleve.javaproject.session.MarketTransactionSession;
 import com.isep.eleve.javaproject.session.PortfolioSession;
 
 @Service
@@ -32,16 +36,21 @@ public class TransactionService {
   private final AssetsService assetsService;
   private final ApplicationEventPublisher eventApplication;
   private final MarketTransactionRepository marketTransactionRepository;
+  private final MarketTransactionSession marketTransactionSession;
   private final PortfolioSession portfolioSession;
+  private final UserRepository userRepository;
   private final CashSession cashSession;
+  private final Logger logger = LoggerFactory.getLogger(TransactionService.class);
   @Autowired
-  public TransactionService(TransactionRepository transactionRepository, AssetsService assetsService, ApplicationEventPublisher eventApplication, MarketTransactionRepository marketTransactionRepository, PortfolioSession portfolioSession, CashSession cashSession) {
+  public TransactionService(TransactionRepository transactionRepository, AssetsService assetsService, ApplicationEventPublisher eventApplication, MarketTransactionRepository marketTransactionRepository, PortfolioSession portfolioSession, CashSession cashSession, MarketTransactionSession marketTransactionSession, UserRepository userRepository) {
     this.transactionRepository = transactionRepository;
     this.assetsService = assetsService;
     this.eventApplication = eventApplication;
     this.marketTransactionRepository = marketTransactionRepository;
     this.portfolioSession = portfolioSession;
     this.cashSession = cashSession;
+    this.marketTransactionSession = marketTransactionSession;
+    this.userRepository = userRepository;
   }
   public void recordTransaction(Transaction transaction) throws IOException {
     transactionRepository.save(transaction);
@@ -110,9 +119,12 @@ public class TransactionService {
           BigDecimal total = price.multiply(new BigDecimal(quantity));
           eventApplication.publishEvent(new CashSpentEvent(this, total));
         }
+        assetsService.changeAssetQuantity(userRepository.findByUserId(marketTransactionSession.getMarketTransaction().getPublisherId()).getPortfolios().stream().filter(p -> p.getPortfolioId() == marketTransactionSession.getMarketTransaction().getPortfolioId()).collect(java.util.stream.Collectors.toList()).get(0).getAssets().stream().filter(a -> a.getAssetName().equals("CASH")).collect(java.util.stream.Collectors.toList()).get(0).getAssetId(), price.multiply(new BigDecimal(quantity)), Constants.CHANGE_TYPE.ADD,true); 
+        Transaction transaction = new Transaction(portfolioId, assetId, quantity, price, transitionType, sdf.format(date));
+        transactionRepository.save(transaction);
+        marketTransactionSession.getMarketTransaction().setIsBuy(true);
       } else {
-        System.out.println("Not enough cash");
-        // ToDo: throw exception
+        logger.error("Not enough cash");
       }
       
     } else if(transitionType == TRANSACTION_TYPE.SELL_MARKET) {
@@ -122,9 +134,6 @@ public class TransactionService {
           assetId = portfolio.getAssets().get(i).getAssetId();
           Constants.CHANGE_TYPE changeType = Constants.CHANGE_TYPE.SUBTRACT;
           assetsService.changeAssetQuantity(assetId, quantity, changeType);
-          //BigDecimal total = price.multiply(new BigDecimal(quantity));
-          //eventApplication.publishEvent(new CashEarnedEvent(this, total));
-          // Todo dont forget to add cash
           flag = true;
           break;
         }
@@ -136,4 +145,5 @@ public class TransactionService {
       transactionRepository.save(transaction);
     }
   }
+    
 }

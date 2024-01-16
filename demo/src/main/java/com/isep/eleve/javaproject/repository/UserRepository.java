@@ -86,10 +86,6 @@ public class UserRepository {
     fileOperation.writeListToFile(EXTERNAL_FILE_PATH, users);
 }
 
-
-
-
-
   /**
    * Finds a user by their username.
    * 

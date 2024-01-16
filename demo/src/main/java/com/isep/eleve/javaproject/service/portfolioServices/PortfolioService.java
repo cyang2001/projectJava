@@ -60,7 +60,7 @@ public class PortfolioService {
         Portfolio newPortfolio = new Portfolio(portfolioName, ownerId, new ArrayList<>(), new ArrayList<>());
         portfolioSession.setCurrentPortfolio(newPortfolio);
         logger.info("New portfolio created: " + newPortfolio);
-        Cash cash = (Cash)assetService.createAsset("CASH", 1000, new BigDecimal(1), Constants.ASSET_TYPE.CASH, new BigDecimal(0), newPortfolio.getPortfolioId(), true);
+        Cash cash = (Cash)assetService.createAsset("CASH", 1, new BigDecimal(1000), Constants.ASSET_TYPE.CASH, new BigDecimal(0), newPortfolio.getPortfolioId(), true);
         logger.info("New cash created: " + cash + "type:" + cash.getAssetType());
         eventApplication.publishEvent(new CashCreatedEvent(this, cash));
         eventApplication.publishEvent(new PortfolioCreatedEvent(this, portfolioSession.getCurrentPortfolio()));
