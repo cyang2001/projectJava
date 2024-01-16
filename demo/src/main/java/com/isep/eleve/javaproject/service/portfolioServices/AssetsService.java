@@ -155,5 +155,8 @@ public void changeAssetQuantity(int assetId, BigDecimal price, Constants.CHANGE_
     asset.calculateValue();
     assetsRepository.save(asset);
   }
-  
+  public int getAssetQuantity(int assetId) throws IOException {
+    Asset asset = assetsRepository.findByAssetId(assetId);
+    return asset.getQuantity();
+  }
 }

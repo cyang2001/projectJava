@@ -73,14 +73,24 @@ public class TransactionService {
     Transaction transaction = new Transaction(portfolioId, assetId, quantity, price, transitionType, sdf.format(date));
     if (transitionType == TRANSACTION_TYPE.BUY) {
       Constants.CHANGE_TYPE changeType = Constants.CHANGE_TYPE.ADD;
-      assetsService.changeAssetQuantity(assetId, quantity,changeType);
-      BigDecimal total = price.multiply(new BigDecimal(quantity));
-      eventApplication.publishEvent(new CashSpentEvent(this, total));
+      if (cashSession.getCash().getValue().compareTo(price.multiply(new BigDecimal(quantity))) >= 0) {
+        assetsService.changeAssetQuantity(assetId, quantity, changeType);
+        BigDecimal total = price.multiply(new BigDecimal(quantity));
+        eventApplication.publishEvent(new CashSpentEvent(this, total));
+      } else {
+        logger.error("Not enough cash");
+        // ToDo add alert
+      }
     } else if(transitionType == TRANSACTION_TYPE.SELL) {
       Constants.CHANGE_TYPE changeType = Constants.CHANGE_TYPE.SUBTRACT;
-      assetsService.changeAssetQuantity(assetId, quantity, changeType);
-      BigDecimal total = price.multiply(new BigDecimal(quantity));
-      eventApplication.publishEvent(new CashEarnedEvent(this, total));
+      if (assetsService.getAssetQuantity(assetId) >= quantity) {
+        assetsService.changeAssetQuantity(assetId, quantity, changeType);
+        BigDecimal total = price.multiply(new BigDecimal(quantity));
+        eventApplication.publishEvent(new CashEarnedEvent(this, total));
+      } else {
+        logger.error("Not enough assets");
+        // ToDo add alert
+      }
     }
     transactionRepository.save(transaction);
   }
