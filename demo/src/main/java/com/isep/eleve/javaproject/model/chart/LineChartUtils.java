@@ -1,5 +1,6 @@
 package com.isep.eleve.javaproject.model.chart;
 
+import com.isep.eleve.javaproject.model.chart.chartTools.Point;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -28,7 +29,7 @@ public class LineChartUtils {
     }
 
 
-        /*public void addDataSeries(List<Point> stockData) {
+        public void addDataSeries(List<Point> stockData) {
             XYChart.Series<String, Number> series = new XYChart.Series<>();
             series.setName("AAPL Stock Price");
 
@@ -38,7 +39,7 @@ public class LineChartUtils {
 
             // 将系列添加到图表中
             lineChart.getData().add(series);
-        }*/
+        }
     }
 
 
