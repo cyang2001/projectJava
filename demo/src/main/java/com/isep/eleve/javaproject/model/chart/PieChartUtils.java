@@ -5,7 +5,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.HashMap;
 
 public class PieChartUtils {
     private PieChart pieChart;
@@ -20,8 +19,22 @@ public class PieChartUtils {
         pieChartData.add(new PieChart.Data(name, value));
     }
 
+    private void showChart()
+    {
+        pieChart.setData(pieChartData);
+    }
+    private void setDataColor(int index, String color)
+    {
+        pieChartData.get(index).getNode().setStyle("-fx-background-color: "+ color);
+    }
+    private void setMarkVisible(boolean b)
+    {
+        pieChart.setLabelsVisible(b);
+    }
 
-    void operatePieChart(List<AssetStructureForPieChart> assetStructures) {
+
+
+    public PieChart createPieChart(List<AssetStructureForPieChart> assetStructures) {
         // 计算总资产价值
         BigDecimal totalValue = assetStructures.stream()
                 .map(AssetStructureForPieChart::getAssetValue)
@@ -33,14 +46,16 @@ public class PieChartUtils {
             addData(assetStructure.getAssetName() + " (" + percentage.setScale(2, BigDecimal.ROUND_HALF_UP) + "%)", assetStructure.getAssetValue().doubleValue());
         }
 
-        // 显示图表
-        showChart();
+        // 创建饼图数据
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (AssetStructureForPieChart assetStructure : assetStructures) {
+            pieChartData.add(new PieChart.Data(assetStructure.getAssetName() + " (" + assetStructure.getPercentageOfTotal().setScale(2, BigDecimal.ROUND_HALF_UP) + "%)", assetStructure.getAssetValue().doubleValue()));
+        }
 
-        // 根据需要设置颜色和其他属性
+        // 创建饼图并设置标题
+        PieChart chart = new PieChart(pieChartData);
+        chart.setTitle("asset distribution");
 
+        return chart;
     }
-
-    private void showChart() {
-    }
-
 }
