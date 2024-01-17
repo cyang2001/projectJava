@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.isep.eleve.javaproject.events.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,23 +12,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import com.isep.eleve.javaproject.Tools.Constants;
-import com.isep.eleve.javaproject.events.AssetAddedToPortfolioEvent;
-import com.isep.eleve.javaproject.events.AssetChangedEvent;
-import com.isep.eleve.javaproject.events.AssetClonedEvent;
-import com.isep.eleve.javaproject.events.AssetCreatedEvent;
-import com.isep.eleve.javaproject.events.AssetPriceChangedEvent;
-import com.isep.eleve.javaproject.events.AssetQuantityChangedEvent;
-import com.isep.eleve.javaproject.events.CashCreatedEvent;
-import com.isep.eleve.javaproject.events.CashEarnedEvent;
-import com.isep.eleve.javaproject.events.CashSpentEvent;
-import com.isep.eleve.javaproject.events.MarketTransactionCreatedEvent;
-import com.isep.eleve.javaproject.events.MarketTransactionSelectedEvent;
-import com.isep.eleve.javaproject.events.PortfolioChangedEvent;
-import com.isep.eleve.javaproject.events.PortfolioClonedEvent;
-import com.isep.eleve.javaproject.events.PortfolioCreatedEvent;
-import com.isep.eleve.javaproject.events.SellCryptoEvent;
-import com.isep.eleve.javaproject.events.UserChangedEvent;
-import com.isep.eleve.javaproject.events.UserCreatedEvent;
 import com.isep.eleve.javaproject.model.Market;
 import com.isep.eleve.javaproject.model.MarketTransaction;
 import com.isep.eleve.javaproject.model.Portfolio;
@@ -156,6 +140,12 @@ public class DataUpdateListener {
 
           logger.info("Asset changed_event: new assetSession" + event.getAsset().getAssetName());
         }
+    }
+    @EventListener
+    public void onAssetBought(BuyAssetEvent event) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("Not enough money");
+        showAlert("Buy Asset failed", sb.toString());
     }
     @EventListener
     public void onAssetQuantityChanged(AssetQuantityChangedEvent event) throws IOException {

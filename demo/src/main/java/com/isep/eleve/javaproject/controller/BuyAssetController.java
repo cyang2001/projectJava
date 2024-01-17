@@ -3,6 +3,7 @@ package com.isep.eleve.javaproject.controller;
 import com.isep.eleve.javaproject.App;
 import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.events.AssetChangedEvent;
+import com.isep.eleve.javaproject.events.AssetCreatedEvent;
 import com.isep.eleve.javaproject.events.PortfolioChangedEvent;
 import com.isep.eleve.javaproject.model.Asset;
 import com.isep.eleve.javaproject.model.Portfolio;
@@ -47,6 +48,8 @@ public class BuyAssetController {
     private TextField assetQuantity;
     @FXML
     private TextField assetPrice;
+    @FXML
+    private TextField interestRate;
     private final UserSession userSession;
 
     @Autowired
@@ -75,16 +78,17 @@ public class BuyAssetController {
         List<Asset> assets = userSession.getCurrentUser().getPortfolios().stream().filter(p -> p.getPortfolioName().equals(portfolioOfAssetToBuyChoiceBox.getValue())).findFirst().get().getAssets();
         Asset asset = assets.stream().filter(a -> a.getAssetName().equals(assetToBuyChoiceBox.getValue())).findFirst().orElse(null);
 
+        int portfolioId= portfolio.getPortfolioId();
+        int assetId = asset.getAssetId();
+        int quantity = Integer.parseInt(assetQuantity.getText());
+        BigDecimal price = new BigDecimal(Integer.parseInt(this.assetPrice.getText()));
+        BigDecimal interestRate = this.interestRate.getText().equals("")? new BigDecimal(0) : new BigDecimal(Integer.parseInt(this.interestRate.getText()));
         if (asset==null){
             showAlert("asset not found", "asset not found in the portfolio");
             // ToDo create a new asset for user
-            // dont forget to add eventPublisher.publishEvent(new AssetCreatedEvent(this, asset));
+            transactionService.executeTransaction(quantity,price,portfolioId, Constants.TRANSACTION_TYPE.BUY, interestRate, Constants.ASSET_TYPE_MAP.get(assetToBuyChoiceBox.getValue()), assetToBuyChoiceBox.getValue());
         }
         else {eventPublisher.publishEvent(new AssetChangedEvent(this, asset));
-            int portfolioId= portfolio.getPortfolioId();
-            int assetId = asset.getAssetId();
-            int quantity = Integer.parseInt(assetQuantity.getText());
-            BigDecimal price = new BigDecimal(Integer.parseInt(this.assetPrice.getText()));
             transactionService.executeTransaction(quantity, price, portfolioId, assetId, Constants.TRANSACTION_TYPE.BUY);
         }
     }

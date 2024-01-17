@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.isep.eleve.javaproject.events.BuyAssetEvent;
+import com.isep.eleve.javaproject.model.Asset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,6 +156,30 @@ public class TransactionService {
       Transaction transaction = new Transaction(portfolioId, assetId, quantity, price, transitionType, sdf.format(date));
       transactionRepository.save(transaction);
     }
+  }
+  public void executeTransaction(int quantity, BigDecimal price, int portfolioId, TRANSACTION_TYPE transitionType, BigDecimal interestRate, Constants.ASSET_TYPE assetType, String assetName) throws IOException {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    Date date = new Date(System.currentTimeMillis());
+    Constants.CHANGE_TYPE changeType = Constants.CHANGE_TYPE.ADD;
+    if (cashSession.getCash().getValue().compareTo(price.multiply(new BigDecimal(quantity))) >= 0) {
+      if (assetType.equals("FIXED_DEPOSIT")) {
+        Asset assetCreated =  assetsService.createAsset(assetName,quantity,price,assetType, interestRate,portfolioId,true );
+        Transaction transaction = new Transaction(portfolioId, assetCreated.getAssetId() , quantity, price, transitionType, sdf.format(date));
+        transactionRepository.save(transaction);
+      } else {
+        Asset assetCreated = assetsService.createAsset(assetName,quantity,price,assetType,new BigDecimal(0), portfolioId, true);
+        Transaction transaction = new Transaction(portfolioId, assetCreated.getAssetId(), quantity, price, transitionType, sdf.format(date));
+        transactionRepository.save(transaction);
+      }
+      BigDecimal total = price.multiply(new BigDecimal(quantity));
+      eventApplication.publishEvent(new CashSpentEvent(this, total));
+    } else {
+      logger.error("Not enough cash");
+      eventApplication.publishEvent(new BuyAssetEvent(this, null));
+    }
+
+
+
   }
     
 }
