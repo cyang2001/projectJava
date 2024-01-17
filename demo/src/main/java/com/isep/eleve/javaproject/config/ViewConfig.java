@@ -83,6 +83,10 @@ public final class ViewConfig {
    * The path to the sell crypto view FXML file.
    */
   public static final String SELL_CRYPTO_VIEW_PATH = "/com/isep/eleve/javaproject/view/SellCryptoView.fxml";
+    /**
+     * The path to the transaction view FXML file.
+     */
+  public static final String USER_INFORMATION_VIEW_PATH = "/com/isep/eleve/javaproject/view/UserInformationView.fxml";
 
 	public final static String MAIN_TREE_HEADER = "Home";
 	public final static String MAIN_TREE_HEADER_ITEM1 = "Analysis";
@@ -96,4 +100,6 @@ public final class ViewConfig {
     public static final String MAIN_TREE_HEADER_ITEM9 = "Crypto Information";
     public static final String MAIN_TREE_HEADER_ITEM10 = "Buy Crypto";
     public static final String MAIN_TREE_HEADER_ITEM11 = "Sell Crypto";
+    public static final String MAIN_TREE_HEADER_ITEM12 = "User Information";
+    public static final String MAIN_TREE_HEADER_ITEM13 = "Log out";
 }

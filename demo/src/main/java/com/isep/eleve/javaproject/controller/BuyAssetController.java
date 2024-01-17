@@ -66,8 +66,6 @@ public class BuyAssetController {
         assetToBuyChoiceBox.setItems(FXCollections.observableArrayList("BTC", "AAPL", "FIXED_DEPOSIT"));
         portfolioOfAssetToBuyChoiceBox.setItems(FXCollections.observableArrayList(portfolioNames));
     }
-    public void handleUserInformationAction(ActionEvent event) {
-    }
 
     public void handleConfirmationAction(ActionEvent event) throws IOException {
         List<Portfolio> portfolios = userSession.getCurrentUser().getPortfolios();
@@ -96,8 +94,6 @@ public class BuyAssetController {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(content);
-        alert.showAndWait();}
-
-        public void handleLogOutAction(ActionEvent event) {
+        alert.showAndWait();
     }
 }

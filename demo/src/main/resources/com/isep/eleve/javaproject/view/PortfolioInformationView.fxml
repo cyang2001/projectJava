@@ -8,11 +8,8 @@
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="445.0">
             <children>
                 <TextField alignment="BOTTOM_CENTER" editable="false" layoutX="111.0" layoutY="53.0" text="Portfolio Information" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="53.0" />
-                <Button fx:id="userInformation" layoutX="298.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleUserInformationAction" text="User Information" />
-                <ChoiceBox fx:id="portfolioChoiceBox" layoutX="202.0" layoutY="183.0" prefWidth="150.0" />
-                <Label layoutX="51.0" layoutY="186.0" prefHeight="18.0" prefWidth="106.0" text="Choose Portfiolio" /><TextField editable="false" layoutX="46.0" layoutY="139.0" prefHeight="26.0" prefWidth="318.0" text="Select a portfolio in the ChoiceBox to have it information" />
-                <Button fx:id="confirmation" layoutX="295.0" layoutY="258.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
-                <Button fx:id="logOut" layoutX="342.0" layoutY="89.0" mnemonicParsing="false" onAction="#handleLogOutAction" text="Log Out" />
+                <Button fx:id="confirmation" layoutX="300.0" layoutY="328.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
+            <TextArea fx:id="userPortfolio" layoutX="86.0" layoutY="108.0" prefHeight="221.0" prefWidth="200.0" promptText="User's Portfolio" />
             </children></AnchorPane>
     </items>
 </SplitPane>

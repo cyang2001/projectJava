@@ -7,10 +7,4 @@ import org.springframework.stereotype.Controller;
 public class CryptoInformationController {
     public void handleConfirmationAction(ActionEvent event) {
     }
-
-    public void handleUserInformationAction(ActionEvent event) {
-    }
-
-    public void handleLogOutAction(ActionEvent event) {
-    }
 }

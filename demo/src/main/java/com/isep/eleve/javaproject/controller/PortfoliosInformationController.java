@@ -15,14 +15,7 @@ import com.isep.eleve.javaproject.App;
 
 @Controller
 public class PortfoliosInformationController {
-    public void handleUserInformationAction(ActionEvent event) {
-    }
-
     public void handleConfirmationAction(ActionEvent event) {
     }
-
-    public void handleLogOutAction(ActionEvent event) {
-    }
     // ToDo : add needed service
-    
 }

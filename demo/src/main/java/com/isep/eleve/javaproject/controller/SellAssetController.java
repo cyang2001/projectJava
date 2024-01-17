@@ -68,8 +68,6 @@ public class SellAssetController {
     assetToSellChoiceBox.setItems(FXCollections.observableArrayList( "AAPL"));
     portfolioOfAssetToSellChoiceBox.setItems(FXCollections.observableArrayList(portfolioNames));
     }
-    public void handleUserInformationAction(ActionEvent event) {
-    }
 
     public void handleConfirmationAction(ActionEvent event) throws IOException {
 
@@ -101,6 +99,4 @@ public class SellAssetController {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();}
-    public void handleLogOutAction(ActionEvent event) {
-    }
 }

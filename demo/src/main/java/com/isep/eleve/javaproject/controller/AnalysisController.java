@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class AnalysisController {
 
-    public void handleUserInformationAction(ActionEvent event) {
-    }
 
     public void handleDemonstrateValueAction(ActionEvent event) throws Exception {
 
@@ -19,8 +17,5 @@ public class AnalysisController {
     }
 
     public void handleDeleteEventsAction(ActionEvent event) throws Exception {
-    }
-
-    public void handleLogOutAction(ActionEvent event) {
     }
 }

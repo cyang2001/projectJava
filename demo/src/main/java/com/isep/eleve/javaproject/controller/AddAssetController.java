@@ -64,44 +64,37 @@ public class AddAssetController {
         assetToAddChoiceBox.setItems(FXCollections.observableArrayList("BTC", "AAPL", "CASH", "FIXED_DEPOSIT"));
         portfolioToAddChoiceBox.setItems(FXCollections.observableArrayList(portfolioNames));
     }
-    public void handleUserInformationAction(ActionEvent event) {
-    }
 
     public void handleConfirmationAction(ActionEvent event) throws NumberFormatException, IllegalArgumentException, IOException {
-      Constants.ASSET_TYPE assetType= Constants.ASSET_TYPE_MAP.get(assetToAddChoiceBox.getValue());
-      BigDecimal interestRate_ = null;
-      List<Portfolio> portfolios = userSession.getCurrentUser().getPortfolios();
-      Portfolio portfolio = portfolios.stream().filter(p -> p.getPortfolioName().equals(portfolioToAddChoiceBox.getValue())).findFirst().get();
-      List<Asset> assets = userSession.getCurrentUser().getPortfolios().stream().filter(p -> p.getPortfolioName().equals(portfolioToAddChoiceBox.getValue())).findFirst().get().getAssets();
-      Asset asset = assets.stream().filter(a -> a.getAssetName().equals(assetToAddChoiceBox.getValue())).findFirst().orElse(null);
-      eventPublisher.publishEvent(new AssetChangedEvent(this, asset));
-      if (assetType != Constants.ASSET_TYPE.FIXED_DEPOSIT) {
-        interestRate_ = new BigDecimal(0);
-      } else {
-        interestRate_ = new BigDecimal(this.interestRate.getText());
-      }
-      
-      eventPublisher.publishEvent(new PortfolioChangedEvent(this, portfolio));
-      if (asset == null) {
-        // ToDo remaind user to fill in the interest rate if the asset is a fixed deposit
-        logger.info("Asset does not exist");
-        assetsService.createAsset(assetToAddChoiceBox.getValue(), Integer.parseInt(quantity.getText()), new BigDecimal( Integer.parseInt(price.getText())), assetType, interestRate_, portfolio.getPortfolioId(), true);
-        return;
-      }
-      if (asset != null && asset.getClass() != Cash.class && asset.getClass() != FixedDeposit.class)  {
-        logger.info("Asset already exists");
-        assetsService.changeAssetQuantity(asset.getAssetId(), Integer.parseInt(quantity.getText()), Constants.CHANGE_TYPE.ADD);
-        return;
-      } 
-      if (asset != null && asset.getClass() == Cash.class || asset.getClass() == FixedDeposit.class) {
-        logger.info("Asset already exists");
-        assetsService.changeAssetQuantity(asset.getAssetId(), new BigDecimal(Integer.parseInt(price.getText())), Constants.CHANGE_TYPE.ADD, false);
-        return;
-      } 
-      
+        Constants.ASSET_TYPE assetType = Constants.ASSET_TYPE_MAP.get(assetToAddChoiceBox.getValue());
+        BigDecimal interestRate_ = null;
+        List<Portfolio> portfolios = userSession.getCurrentUser().getPortfolios();
+        Portfolio portfolio = portfolios.stream().filter(p -> p.getPortfolioName().equals(portfolioToAddChoiceBox.getValue())).findFirst().get();
+        List<Asset> assets = userSession.getCurrentUser().getPortfolios().stream().filter(p -> p.getPortfolioName().equals(portfolioToAddChoiceBox.getValue())).findFirst().get().getAssets();
+        Asset asset = assets.stream().filter(a -> a.getAssetName().equals(assetToAddChoiceBox.getValue())).findFirst().orElse(null);
+        eventPublisher.publishEvent(new AssetChangedEvent(this, asset));
+        if (assetType != Constants.ASSET_TYPE.FIXED_DEPOSIT) {
+            interestRate_ = new BigDecimal(0);
+        } else {
+            interestRate_ = new BigDecimal(this.interestRate.getText());
+        }
 
-    }
-
-    public void handleLogOutAction(ActionEvent event) {
+        eventPublisher.publishEvent(new PortfolioChangedEvent(this, portfolio));
+        if (asset == null) {
+            // ToDo remaind user to fill in the interest rate if the asset is a fixed deposit
+            logger.info("Asset does not exist");
+            assetsService.createAsset(assetToAddChoiceBox.getValue(), Integer.parseInt(quantity.getText()), new BigDecimal(Integer.parseInt(price.getText())), assetType, interestRate_, portfolio.getPortfolioId(), true);
+            return;
+        }
+        if (asset != null && asset.getClass() != Cash.class && asset.getClass() != FixedDeposit.class) {
+            logger.info("Asset already exists");
+            assetsService.changeAssetQuantity(asset.getAssetId(), Integer.parseInt(quantity.getText()), Constants.CHANGE_TYPE.ADD);
+            return;
+        }
+        if (asset != null && asset.getClass() == Cash.class || asset.getClass() == FixedDeposit.class) {
+            logger.info("Asset already exists");
+            assetsService.changeAssetQuantity(asset.getAssetId(), new BigDecimal(Integer.parseInt(price.getText())), Constants.CHANGE_TYPE.ADD, false);
+            return;
+        }
     }
 }

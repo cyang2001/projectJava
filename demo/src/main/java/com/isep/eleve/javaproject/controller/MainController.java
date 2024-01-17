@@ -63,7 +63,9 @@ public class MainController implements Initializable {
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM8),
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM9),
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM10),
-				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM11));
+				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM11),
+				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM12),
+				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM13));
 		main_treeview.setRoot(root);
 
 	}
@@ -112,6 +114,12 @@ public class MainController implements Initializable {
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM11:
 				pagePath = ViewConfig.SELL_CRYPTO_VIEW_PATH;
+				break;
+			case ViewConfig.MAIN_TREE_HEADER_ITEM12:
+				pagePath = ViewConfig.USER_INFORMATION_VIEW_PATH;
+				break;
+			case ViewConfig.MAIN_TREE_HEADER_ITEM13:
+				pagePath = ViewConfig.LOGIN_VIEW_PATH;
 				break;
 		}
 		

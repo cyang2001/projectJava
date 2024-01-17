@@ -131,8 +131,6 @@ public class BuyCryptoController {
         portfioToAddCrypto.setItems(FXCollections.observableArrayList(portfolioNames));
         marketSession.setMarket(new Market("Market Cypto"));
     }
-    public void handleUserInformationAction(ActionEvent event) {
-    }
 
     public void handleConfirmationAction(ActionEvent event) throws IOException {
       List<Portfolio> portfolios = userSession.getCurrentUser().getPortfolios();
@@ -145,8 +143,6 @@ public class BuyCryptoController {
       transactionService.executeTransaction(marketTransactionSession.getMarketTransaction().getQuantity(), marketTransactionSession.getMarketTransaction().getPrice(), marketTransactionSession.getMarketTransaction().getPortfolioId(), marketTransactionSession.getMarketTransaction().getAssetName(), Constants.TRANSACTION_TYPE.BUT_MARKET);
     }
 
-    public void handleLogOutAction(ActionEvent event) {
-    }
     public class MarketTransactionChoiceBoxItem {
       private String name;
       private Integer quantity;

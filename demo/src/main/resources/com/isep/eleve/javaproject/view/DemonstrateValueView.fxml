@@ -8,12 +8,11 @@
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="445.0">
             <children>
                 <TextField alignment="BOTTOM_CENTER" editable="false" layoutX="111.0" layoutY="53.0" text="Demonstrate Value" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="53.0" />
-                <Button fx:id="userInformation" layoutX="298.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleUserInformationAction" text="User Information" />
-                <ChoiceBox fx:id="demonstrateValuePortfolioChoiceBox" layoutX="201.0" layoutY="207.0" prefWidth="150.0" />
-                <Label layoutX="69.0" layoutY="210.0" prefHeight="18.0" prefWidth="106.0" text="Choose a Portfolio" />
-                <Button fx:id="confirmation" layoutX="298.0" layoutY="273.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
-                <TextArea layoutX="73.0" layoutY="149.0" prefHeight="44.0" prefWidth="286.0" text="Select a portfolio in the ChoiceBox to have access &#10;to it global value" />
-                <Button fx:id="logOut" layoutX="342.0" layoutY="89.0" mnemonicParsing="false" onAction="#handleLogOutAction" text="Log Out" />
+                <ChoiceBox fx:id="demonstrateValuePortfolioChoiceBox" layoutX="209.0" layoutY="146.0" prefWidth="150.0" />
+                <Label layoutX="77.0" layoutY="149.0" prefHeight="18.0" prefWidth="106.0" text="Choose a Portfolio" />
+                <Button fx:id="confirmation" layoutX="308.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
+                <TextArea layoutX="75.0" layoutY="90.0" prefHeight="44.0" prefWidth="286.0" text="Select a portfolio in the ChoiceBox to have access &#10;to it global value" />
+            <TextArea fx:id="transaction" layoutX="75.0" layoutY="179.0" prefHeight="170.0" prefWidth="286.0" promptText="Transactions" />
             </children></AnchorPane>
     </items>
 </SplitPane>

@@ -8,13 +8,11 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="445.0">
                 <children>
                     <TextField alignment="BOTTOM_CENTER" editable="false" layoutX="111.0" layoutY="53.0" text="Buy Assets" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="53.0" />
-                    <Button fx:id="userInformation" layoutX="298.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleUserInformationAction" text="User Information" />
                     <ChoiceBox fx:id="portfolioOfAssetToBuyChoiceBox" layoutX="187.0" layoutY="182.0" prefWidth="150.0" />
                     <Label layoutX="78.0" layoutY="185.0" prefHeight="18.0" prefWidth="106.0" text="Choose portfolio" />
                     <Label layoutX="111.0" layoutY="255.0" prefHeight="18.0" prefWidth="52.0" text="Quantity" />
                     <TextField editable="false" layoutX="56.0" layoutY="138.0" prefHeight="26.0" prefWidth="301.0" text="Select whitch asset do you want to buy and how many" />
                     <Button fx:id="confirmation" layoutX="294.0" layoutY="322.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
-                    <Button fx:id="logOut" layoutX="342.0" layoutY="89.0" mnemonicParsing="false" onAction="#handleLogOutAction" text="Log Out" />
                     <TextField fx:id="AssetQuantity" layoutX="187.0" layoutY="252.0" />
                     <ChoiceBox fx:id="assetToBuyChoiceBox" layoutX="187.0" layoutY="218.0" prefWidth="150.0" />
                     <Label layoutX="78.0" layoutY="221.0" prefHeight="18.0" prefWidth="106.0" text="Choose asset" />

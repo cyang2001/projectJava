@@ -31,8 +31,6 @@ public class NewPortfolioPageController {
 
     @FXML
     public TextField newPortfolioName;
-    public void handleUserInformationAction(ActionEvent event) {
-    }
 
     public void handleConfirmationAction(ActionEvent event) throws IOException {
       String portfolioName = this.newPortfolioName.getText();
@@ -45,8 +43,5 @@ public class NewPortfolioPageController {
         }
       }
       portfolioService.createPortfolio(portfolioName);
-    }
-
-    public void handleLogOutAction(ActionEvent event) {
     }
 }

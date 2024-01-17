@@ -8,12 +8,10 @@
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="445.0">
             <children>
                 <TextField alignment="BOTTOM_CENTER" editable="false" layoutX="111.0" layoutY="53.0" text="Add events" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="53.0" />
-                <Button fx:id="userInformation" layoutX="298.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleUserInformationAction" text="User Information" />
                 <ChoiceBox fx:id="eventsToAddChoiceBox" layoutX="192.0" layoutY="173.0" prefWidth="150.0" />
                 <Label layoutX="74.0" layoutY="176.0" prefHeight="18.0" prefWidth="115.0" text="Choose event to add" />
                 <TextField editable="false" layoutX="84.0" layoutY="129.0" prefHeight="26.0" prefWidth="230.0" text="Select whitch events do you want to add" />
                 <Button fx:id="confirmation" layoutX="298.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleConfirmationAction" text="Confirmation" />
-                <Button fx:id="logOut" layoutX="342.0" layoutY="89.0" mnemonicParsing="false" onAction="#handleLogOutAction" text="Log Out" />
             </children></AnchorPane>
     </items>
 </SplitPane>

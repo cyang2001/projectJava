@@ -11,12 +11,12 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" BorderPane.alignment="CENTER_LEFT" />
          </top>
          <left>
-            <TreeView fx:id="main_treeview" onMouseClicked="#mainTreeViewClick" prefHeight="360.0" prefWidth="126.0" BorderPane.alignment="TOP_LEFT" />
+            <TreeView fx:id="main_treeview" onMouseClicked="#mainTreeViewClick" prefHeight="624.0" prefWidth="173.0" BorderPane.alignment="TOP_LEFT" />
          </left>
          <center>
             <ScrollPane prefHeight="600.0" BorderPane.alignment="CENTER">
                <content>
-                  <AnchorPane fx:id="main_pane_under_scroll" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="631.0" prefWidth="480.0" />
+                  <AnchorPane fx:id="main_pane_under_scroll" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="631.0" prefWidth="514.0" />
                </content>
             </ScrollPane>
          </center>
