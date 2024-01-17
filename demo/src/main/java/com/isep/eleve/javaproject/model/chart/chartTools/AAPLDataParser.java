@@ -26,7 +26,7 @@ public class AAPLDataParser {
     public static List<Point> parseAAPLData() {
         String resourcePath = "com/isep/eleve/javaproject/reposity/AAPL.json"; 
         InputStream inputStream = null;
-
+        logger.info("Parsing AAPL data");
         try {
             inputStream = AAPLDataParser.class.getClassLoader().getResourceAsStream(resourcePath);
             if (inputStream == null) {
