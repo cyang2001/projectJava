@@ -1,8 +1,8 @@
 package com.isep.eleve.javaproject.config;
 
 public final class ViewConfig {
-	public final static int STAGE_WIDTH = 800;
-	public final static int STAGE_HEIGHT = 600;
+	public final static int STAGE_WIDTH = 2000;
+	public final static int STAGE_HEIGHT = 1600;
 	
 	/**
    * The path to the add event view FXML file.
