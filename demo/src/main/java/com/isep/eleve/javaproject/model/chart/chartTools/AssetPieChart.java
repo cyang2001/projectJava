@@ -32,4 +32,5 @@ public class AssetPieChart {
 
         return chart;
     }
+
 }

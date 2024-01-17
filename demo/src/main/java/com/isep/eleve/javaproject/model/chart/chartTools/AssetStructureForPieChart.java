@@ -38,4 +38,5 @@ public class AssetStructureForPieChart {
     public BigDecimal getPercentageOfTotal() {
         return assetValue.divide(totalValueOfPortfolio, 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100));
     }
+
 }
