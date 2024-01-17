@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
-import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.events.AssetAddedToPortfolioEvent;
+import com.isep.eleve.javaproject.events.AssetClonedEvent;
 import com.isep.eleve.javaproject.events.CashCreatedEvent;
 import com.isep.eleve.javaproject.events.PortfolioClonedEvent;
 import com.isep.eleve.javaproject.events.PortfolioCreatedEvent;
@@ -27,6 +27,7 @@ import com.isep.eleve.javaproject.repository.PortfolioRepository;
 import com.isep.eleve.javaproject.session.CashSession;
 import com.isep.eleve.javaproject.session.PortfolioSession;
 import com.isep.eleve.javaproject.session.UserSession;
+import com.isep.eleve.javaproject.Tools.*;
 
 /**
  * This class represents a service for managing portfolios.
@@ -72,26 +73,22 @@ public class PortfolioService {
         return newPortfolio;
     }
     public Portfolio clonePortfolio(String portfolioName) throws IOException {
-        int ownerId = userSession.getCurrentUser().getUserId();
-        Portfolio clonedPortfolio = new Portfolio(portfolioName, ownerId, new ArrayList<>(), new ArrayList<>());
-        List<Asset> assetsWaitingToBeCloned = portfolioSession.getCurrentPortfolio().getAssets();
-        List<Asset> assetsWaitingToBeCloned2 = new ArrayList<>();
-        for (Asset asset : assetsWaitingToBeCloned) {
-            if (asset.getClass().equals(FixedDeposit.class)){
-              FixedDeposit fixedDeposit = (FixedDeposit)asset;
-              Asset clonedAsset = assetService.cloneAsset(fixedDeposit.getAssetName(), fixedDeposit.getQuantity(), fixedDeposit.getPrice(), fixedDeposit.getAssetType(), fixedDeposit.getInterestRate(), clonedPortfolio.getPortfolioId(), true, clonedPortfolio);
-              assetsWaitingToBeCloned2.add(clonedAsset);
-            } else {
-              Asset clonedAsset = assetService.createAsset(asset.getAssetName(), asset.getQuantity(), asset.getPrice(), asset.getAssetType(), new BigDecimal(0), clonedPortfolio.getPortfolioId(), false);
-              assetsWaitingToBeCloned2.add(clonedAsset);
-            }
-        }
-        for (Asset asset2 : assetsWaitingToBeCloned2) {
-          clonedPortfolio.addAsset(asset2);
-        }
-        eventApplication.publishEvent(new PortfolioClonedEvent(this, clonedPortfolio));
-        return clonedPortfolio;
+    int ownerId = userSession.getCurrentUser().getUserId();
+    Portfolio clonedPortfolio = new Portfolio(portfolioName, ownerId, new ArrayList<>(), new ArrayList<>());
+    List<Asset> assetsWaitingToBeCloned = portfolioSession.getCurrentPortfolio().getAssets();
+
+    for (Asset asset : assetsWaitingToBeCloned) {
+        Asset clonedAsset = DeepCopyUtil.deepCopy(asset);
+        clonedAsset.setAssetId();
+        clonedAsset.setPortfolioId(clonedPortfolio.getPortfolioId());
+        clonedPortfolio.addAsset(clonedAsset);
+        eventApplication.publishEvent(new AssetClonedEvent(this, clonedAsset));
     }
+
+    eventApplication.publishEvent(new PortfolioClonedEvent(this, clonedPortfolio));
+    return clonedPortfolio;
+}
+
     /**
      * Updates the given portfolio.
      *

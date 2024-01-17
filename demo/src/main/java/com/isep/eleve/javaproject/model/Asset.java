@@ -1,5 +1,6 @@
 package com.isep.eleve.javaproject.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,7 +13,6 @@ import com.isep.eleve.javaproject.model.assets.cypto.CryptoCurrency;
 import com.isep.eleve.javaproject.model.assets.liquide.Cash;
 import com.isep.eleve.javaproject.model.assets.stock.Stock;
 import com.isep.eleve.javaproject.model.assets.liquide.FixedDeposit;
-import com.google.gson.*;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "assetType")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Cash.class, name = "CASH"),
@@ -20,7 +20,7 @@ import com.google.gson.*;
     @JsonSubTypes.Type(value = CryptoCurrency.class, name = "CRYPTO"),
     @JsonSubTypes.Type(value = FixedDeposit.class, name = "FIXED_DEPOSIT")
 })
-public abstract class Asset {
+public abstract class Asset implements Serializable{
   private ASSET_TYPE assetType;
   private int assetId;
   private String assetName;
@@ -87,6 +87,7 @@ public abstract class Asset {
   public void setOwnerId(int ownerId) {
     this.ownerId = ownerId;
   }
+
   /*@JsonProperty("assetType")
   public void setAssetType(String assetTypeStr) {
       this.assetType = ASSET_TYPE.fromString(assetTypeStr);
@@ -103,6 +104,12 @@ public abstract class Asset {
   @JsonProperty("assetType")
   public void setAssetType(ASSET_TYPE assetType) {
       this.assetType = assetType;
+  }
+  public void setAssetId() {
+    this.assetId = UUIDUtils.getUUIDInOrderId();
+  }
+  public void setPortfolioId(int portfolioId) {
+    this.portfolioId = portfolioId;
   }
   // Abstract method to be implemented by subclasses to calculate the asset's value
   public abstract void calculateValue();

@@ -128,7 +128,15 @@ public class DataUpdateListener {
             userSession.getCurrentUser().addPortfolio(portfolioSession.getCurrentPortfolio());
             logger.info("Asset created_event {} in {}): " ,event.getAsset().getAssetName(), portfolioSession.getCurrentPortfolio().getPortfolioName());
         }
-        
+        StringBuffer sb = new StringBuffer();
+        sb.append(event.getAsset().getAssetName());
+        sb.append(" - ");
+        sb.append(event.getAsset().getQuantity());
+        sb.append(" - ");
+        sb.append(event.getAsset().getPrice());
+        sb.append(" - ");
+        sb.append(event.getAsset().getValue());
+        showAlert("New Asset Created", sb.toString());
         assetsRepository.save(event.getAsset());
         portfolioRepository.save(portfolioSession.getCurrentPortfolio());
         userRepository.save(userSession.getCurrentUser());
