@@ -20,6 +20,7 @@ import com.isep.eleve.javaproject.Tools.Constants.TRANSACTION_TYPE;
 
 import com.isep.eleve.javaproject.events.CashEarnedEvent;
 import com.isep.eleve.javaproject.events.CashSpentEvent;
+import com.isep.eleve.javaproject.events.SellAssetEvent;
 import com.isep.eleve.javaproject.model.MarketTransaction;
 import com.isep.eleve.javaproject.model.Portfolio;
 import com.isep.eleve.javaproject.model.Transaction;
@@ -81,7 +82,7 @@ public class TransactionService {
         eventApplication.publishEvent(new CashSpentEvent(this, total));
       } else {
         logger.error("Not enough cash");
-        // ToDo add alert
+        eventApplication.publishEvent(new BuyAssetEvent(this, null));
       }
     } else if(transitionType == TRANSACTION_TYPE.SELL) {
       Constants.CHANGE_TYPE changeType = Constants.CHANGE_TYPE.SUBTRACT;
@@ -91,7 +92,7 @@ public class TransactionService {
         eventApplication.publishEvent(new CashEarnedEvent(this, total));
       } else {
         logger.error("Not enough assets");
-        // ToDo add alert
+        eventApplication.publishEvent(new SellAssetEvent(this));
       }
     }
     transactionRepository.save(transaction);

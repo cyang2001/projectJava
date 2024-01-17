@@ -156,6 +156,12 @@ public class DataUpdateListener {
         showAlert("Buy Asset failed", sb.toString());
     }
     @EventListener
+    public void onAssetSold(SellAssetEvent event) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("Not enough asset");
+        showAlert("Sell Asset failed", sb.toString());
+    }
+    @EventListener
     public void onAssetQuantityChanged(AssetQuantityChangedEvent event) throws IOException {
         /*if (event.getChangeType() == Constants.CHANGE_TYPE.ADD) {
             assetSession.getCurrentAsset().setQuantity(assetSession.getCurrentAsset().getQuantity() + event.getQuantity());

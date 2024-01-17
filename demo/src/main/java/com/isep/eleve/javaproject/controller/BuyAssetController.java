@@ -79,12 +79,15 @@ public class BuyAssetController {
         Asset asset = assets.stream().filter(a -> a.getAssetName().equals(assetToBuyChoiceBox.getValue())).findFirst().orElse(null);
 
         int portfolioId= portfolio.getPortfolioId();
-        int assetId = asset.getAssetId();
+        int assetId = 0;
+        if (asset != null) {
+          assetId = asset.getAssetId();
+        }
         int quantity = Integer.parseInt(assetQuantity.getText());
         BigDecimal price = new BigDecimal(Integer.parseInt(this.assetPrice.getText()));
         BigDecimal interestRate = this.interestRate.getText().equals("")? new BigDecimal(0) : new BigDecimal(Integer.parseInt(this.interestRate.getText()));
         if (asset==null){
-            showAlert("asset not found", "asset not found in the portfolio");
+            showAlert("asset not found", "Creating a new asset");
             // ToDo create a new asset for user
             transactionService.executeTransaction(quantity,price,portfolioId, Constants.TRANSACTION_TYPE.BUY, interestRate, Constants.ASSET_TYPE_MAP.get(assetToBuyChoiceBox.getValue()), assetToBuyChoiceBox.getValue());
         }
