@@ -22,6 +22,7 @@ import com.isep.eleve.javaproject.session.UserSession;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
@@ -85,25 +86,38 @@ public class SellCryptoController {
     }
 
     public void handleConfirmationAction(ActionEvent event) throws NumberFormatException, IllegalArgumentException, IOException{
+
       if (marketSession.getMarket() == null ){
         marketSession.setMarket(new Market("Market Crypto"));
       }
+
       List<Portfolio> portfolios = userSession.getCurrentUser().getPortfolios();
       Portfolio portfolio = portfolios.stream().filter(p -> p.getPortfolioName().equals(portfolioToSellChoiceBox.getValue())).findFirst().get();
+
       List<Asset> assets = userSession.getCurrentUser().getPortfolios().stream().filter(p -> p.getPortfolioName().equals(portfolioToSellChoiceBox.getValue())).findFirst().get().getAssets();
       Asset asset = assets.stream().filter(a -> a.getAssetName().equals(cryptoToSellChoiceBox.getValue())).findFirst().orElse(null);
+
       if (asset!=null){
         eventPublisher.publishEvent(new AssetChangedEvent(this, asset));
       }
       eventPublisher.publishEvent(new PortfolioChangedEvent(this, portfolio));
       if (asset!=null){
+        if (asset.getQuantity() < Integer.parseInt(quantity.getText())){
+          showAlert("Quantity is not enough", "Quantity is not enough");
+          return;
+        }
         marketTransactionService.addNewMarketTransaction(asset.getAssetName(), asset.getAssetId(), asset.getOwnerId(), new BigDecimal(Integer.parseInt(price.getText())), Integer.parseInt(quantity.getText()), marketTransactionName.getText(), portfolio.getPortfolioId());
         marketService.addNewMarketTransaction(marketTransactionSession.getMarketTransaction());
         marketTransactionService.executeTransaction(Constants.TRANSACTION_TYPE.SELL_MARKET);
       }
       
     }
-
+    protected void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();}
     public void handleLogOutAction(ActionEvent event) {
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.events.AssetAddedToPortfolioEvent;
 import com.isep.eleve.javaproject.events.AssetChangedEvent;
+import com.isep.eleve.javaproject.events.AssetClonedEvent;
 import com.isep.eleve.javaproject.events.AssetCreatedEvent;
 import com.isep.eleve.javaproject.events.AssetPriceChangedEvent;
 import com.isep.eleve.javaproject.events.AssetQuantityChangedEvent;
@@ -22,7 +23,9 @@ import com.isep.eleve.javaproject.events.CashSpentEvent;
 import com.isep.eleve.javaproject.events.MarketTransactionCreatedEvent;
 import com.isep.eleve.javaproject.events.MarketTransactionSelectedEvent;
 import com.isep.eleve.javaproject.events.PortfolioChangedEvent;
+import com.isep.eleve.javaproject.events.PortfolioClonedEvent;
 import com.isep.eleve.javaproject.events.PortfolioCreatedEvent;
+import com.isep.eleve.javaproject.events.SellCryptoEvent;
 import com.isep.eleve.javaproject.events.UserChangedEvent;
 import com.isep.eleve.javaproject.events.UserCreatedEvent;
 import com.isep.eleve.javaproject.model.Market;
@@ -41,6 +44,8 @@ import com.isep.eleve.javaproject.session.MarketSession;
 import com.isep.eleve.javaproject.session.MarketTransactionSession;
 import com.isep.eleve.javaproject.session.PortfolioSession;
 import com.isep.eleve.javaproject.session.UserSession;
+
+import javafx.scene.control.Alert;
 // ToDo change UI
 @Component
 public class DataUpdateListener {
@@ -76,8 +81,21 @@ public class DataUpdateListener {
         logger.info("Portfolio created_event: " + event.getPortfolio().getPortfolioName());
         portfolioSession.setCurrentPortfolio(event.getPortfolio());
         //cashSession.setCash(portfolioSession.getCurrentPortfolio().getCash());
+        StringBuffer sb = new StringBuffer();
+        sb.append(event.getPortfolio().getPortfolioName());
+        showAlert("New portfolio created", "New Portfolio Created : " + sb.toString());
     }
-
+    @EventListener
+    public void onPortfolioCloned(PortfolioClonedEvent event) throws IOException {
+        userSession.getCurrentUser().addPortfolio(event.getPortfolio());
+        userRepository.save(userSession.getCurrentUser());
+        logger.info("Portfolio cloned_event: " + event.getPortfolio().getPortfolioName());
+        portfolioSession.setCurrentPortfolio(event.getPortfolio());
+        cashSession.setCash(portfolioSession.getCurrentPortfolio().getCash());
+        StringBuffer sb = new StringBuffer();
+        sb.append(event.getPortfolio().getPortfolioName());
+        showAlert("New portfolio cloned", "New Portfolio Cloned : " + sb.toString());
+    }
     @EventListener
     public void onCashCreated(CashCreatedEvent event) {
         cashSession.setCash(event.getCash());
@@ -101,7 +119,13 @@ public class DataUpdateListener {
         portfolioSession.getCurrentPortfolio().addAsset(event.getAsset());
         assetSession.setCurrentAsset(event.getAsset());
     }
+    @EventListener
+    public void onAssetCloned(AssetClonedEvent event) throws IOException {
+      assetsRepository.save(event.getAsset());
+      logger.info("Asset cloned_event: new assetSession" + event.getAsset().getAssetName());
+    }
 
+    
     @EventListener
     public void onAssetCreated(AssetCreatedEvent event) throws IOException {
         portfolioSession.getCurrentPortfolio().addAsset(event.getAsset());
@@ -227,4 +251,24 @@ public class DataUpdateListener {
         marketTransactionSession.setMarketTransaction(marketTransaction);
         logger.info("User : " + userSession.getCurrentUser().getUserName() + " selected a market transaction: " + marketTransaction.getMarketTransactionId());
     }
+
+
+    @EventListener
+    public void onSellCryptroEventCreated(SellCryptoEvent event) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(event.getMarketTransaction().getAssetName());
+        sb.append(" - ");
+        sb.append(event.getMarketTransaction().getQuantity());
+        sb.append(" - ");
+        sb.append(event.getMarketTransaction().getPrice());
+        sb.append(" - ");
+        sb.append(event.getMarketTransaction().getMarketTransactionName());
+        showAlert("Sell crypto transaction created", sb.toString());
+    }
+    protected void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();}
 }

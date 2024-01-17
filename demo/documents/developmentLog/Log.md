@@ -81,10 +81,10 @@ bug. J'ai refaire les event
 **16/01/2024** Chen
 Fini les tests de Controleur, et puis toutes les erreurs sont commentées.
 
-Les sections suivantes restent aujourd'hui inachevées
-Nécessité d'informer l'utilisateur lorsqu'une condition limite est déclenchée
-Représentation de la répartition des actifs sous forme de diagrammes circulaires
-Données historiques sur les actions via des graphiques linéaires
-Afficher les détails des actifs sélectionnés dans l'interface utilisateur
+1. Les sections suivantes restent aujourd'hui inachevées
+2. Nécessité d'informer l'utilisateur lorsqu'une condition limite est déclenchée
+3. Représentation de la répartition des actifs sous forme de diagrammes circulaires
+4. Données historiques sur les actions via des graphiques linéaires
+5. Afficher les détails des actifs sélectionnés dans l'interface utilisateur
 Afficher des informations sur l'utilisateur
 Déconnexion

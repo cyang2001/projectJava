@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
+import com.isep.eleve.javaproject.events.AssetClonedEvent;
 import com.isep.eleve.javaproject.events.AssetCreatedEvent;
 import com.isep.eleve.javaproject.events.AssetPriceChangedEvent;
 import com.isep.eleve.javaproject.events.AssetQuantityChangedEvent;
@@ -84,7 +85,17 @@ public class AssetsService {
     }
     
   }
-
+  public Asset cloneAsset(String assetName,int quantity, BigDecimal price, ASSET_TYPE assetType, BigDecimal interestRate, int portfolioId, boolean isFirst, Portfolio portfolioToClone) throws IOException { 
+    AssetFactory factory = factoryProducer.getFactory(assetType);
+    //Portfolio portfolio = portfolioSession.getCurrentPortfolio();
+    
+    Asset newAsset = factory.createAsset(assetName, portfolioId, quantity, price, interestRate, portfolioToClone.getOwnerId(), assetType);
+    eventApplication.publishEvent(new AssetClonedEvent(this, newAsset));
+    // Persist the new asset
+    logger.info("Asset cloned: {}", assetName);
+    logger.info("Asset cloned: {}", newAsset.getAssetType());
+    return newAsset;
+  }
   /**
    * Changes the quantity of an asset based on the specified change type.
    *

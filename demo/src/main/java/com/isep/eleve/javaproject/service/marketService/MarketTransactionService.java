@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import com.isep.eleve.javaproject.events.MarketTransactionCreatedEvent;
+import com.isep.eleve.javaproject.events.SellCryptoEvent;
 import com.isep.eleve.javaproject.Tools.Constants;
 import com.isep.eleve.javaproject.model.MarketTransaction;
 import com.isep.eleve.javaproject.repository.MarketTransactionRepository;
@@ -21,12 +22,14 @@ public class MarketTransactionService {
   private final TransactionService transactionService;
   private final ApplicationEventPublisher eventApplication;
   private final UserRepository userRepository;
-  public MarketTransactionService(MarketTransactionRepository marketTransactionRepository, MarketTransactionSession marketTransactionSession, TransactionService transactionService, ApplicationEventPublisher eventApplication, UserRepository userRepository) {
+  private final ApplicationEventPublisher eventPublisher;
+  public MarketTransactionService(MarketTransactionRepository marketTransactionRepository, MarketTransactionSession marketTransactionSession, TransactionService transactionService, ApplicationEventPublisher eventApplication, UserRepository userRepository, ApplicationEventPublisher eventPublisher) {
     this.marketTransactionRepository = marketTransactionRepository;
     this.marketTransactionSession = marketTransactionSession;
     this.transactionService = transactionService;
     this.eventApplication = eventApplication;
     this.userRepository = userRepository;
+    this.eventPublisher = eventPublisher;
   }
   public void recordMarketTransaction() throws IOException {
     marketTransactionRepository.save(marketTransactionSession.getMarketTransaction());
@@ -51,6 +54,8 @@ public class MarketTransactionService {
   }
   public void executeTransaction(Constants.TRANSACTION_TYPE transactionType) throws IOException {
     transactionService.executeTransaction(marketTransactionSession.getMarketTransaction().getQuantity(), marketTransactionSession.getMarketTransaction().getPrice(), marketTransactionSession.getMarketTransaction().getPortfolioId(),marketTransactionSession.getMarketTransaction().getAssetName(), transactionType);
+    eventPublisher.publishEvent(new SellCryptoEvent(this, marketTransactionSession.getMarketTransaction()));
+
   }
   public MarketTransaction getMarketTransactionByMarketTransactionId(int marketTransactionId) throws IOException {
     return marketTransactionRepository.findByMarketTransactionId(marketTransactionId);
