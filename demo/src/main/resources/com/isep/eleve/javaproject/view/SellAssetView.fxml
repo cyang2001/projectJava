@@ -17,7 +17,7 @@
                 <TextField fx:id="quantity" layoutX="191.0" layoutY="230.0" prefHeight="26.0" prefWidth="150.0" promptText="Quantity" />
             <Label layoutX="93.0" layoutY="164.0" prefHeight="18.0" prefWidth="96.0" text="Choose portfolio" />
             <ChoiceBox fx:id="portfolioOfAssetToSellChoiceBox" layoutX="191.0" layoutY="160.0" prefWidth="150.0" />
-            <Label layoutX="88.0" layoutY="275.0" prefHeight="18.0" prefWidth="96.0" text="Price" />
+            <Label layoutX="93.0" layoutY="275.0" prefHeight="18.0" prefWidth="96.0" text="Price" />
             </children></AnchorPane>
     </items>
 </SplitPane>
