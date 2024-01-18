@@ -6,7 +6,8 @@
 \usepackage{graphicx}
 \usepackage[hidelinks]{hyperref}
 \usepackage{tocbibind} 
-
+\usepackage{verbatim}
+\usepackage{float}
 \geometry{a4paper, margin=1in}
 
 \title{Documentation sur le développement}
@@ -18,7 +19,7 @@
 \tableofcontents
 \newpage
 
-
+\begin{comment}
 \section{Besoins du projet}
 \subsection{Introduction}
 Ce document vise à définir et décrire les besoins de développement de l'application de gestion de portefeuilles financiers. L'application offrira des outils pour créer, gérer et analyser des portefeuilles financiers personnels ou multiples, couvrant les investissements en actions et cryptomonnaies.
@@ -90,7 +91,9 @@ Ce document vise à définir et décrire les besoins de développement de l'appl
     \item Limitations techniques : L'application doit être compatible avec les systèmes d'exploitation et dispositifs principaux.
     \item Conformité légale : Respecter les lois et réglementations relatives aux données financières et à la vie privée.
 \end{itemize}
+\end{comment}
 
+\section{Méthodologie de développement et gestion de projet}
 \subsection{Spécification Du Code}
 \begin{itemize}
     \item Langage de programmation : Java
@@ -122,8 +125,6 @@ Ce document vise à définir et décrire les besoins de développement de l'appl
     \subitem Gérez le code à l'aide d'un système de contrôle de version tel que Github
     \subitem Suivez un processus clair de gestion des branches et de demande de fusion
 \end{itemize}
-\section{Méthodologie de développement et gestion de projet}
-
 \subsection{Choix du modèle en cascade}
 
 Ce projet utilise le modèle en cascade comme méthodologie de développement logiciel. Le modèle en cascade est une méthode de développement séquentielle où chaque phase doit être complètement terminée avant de passer à la suivante. Ce modèle convient aux projets avec des objectifs clairs et des exigences stables.
@@ -131,7 +132,7 @@ Ce projet utilise le modèle en cascade comme méthodologie de développement lo
 Bien que notre équipe soit petite, composée de seulement deux membres, le choix du modèle en cascade est le plus approprié pour plusieurs raisons :
 \begin{itemize}
     \item \textbf{Objectifs clairs du projet} : Les objectifs et les besoins du logiciel sont bien définis au début du projet.
-    \item \textbf{Expérience des membres} : C'est la première participation de notre membre Remi à un projet Java, donc une approche structurée et phasée aidera à une meilleure compréhension et participation.
+    \item \textbf{Expérience des membres} : C'est la première participation de notre membre Remi et WenBin à un projet Java, donc une approche structurée et phasée aidera à une meilleure compréhension et participation. Toutefois, en raison de contraintes de temps, ils n'ont pas été en mesure de produire une documentation de bonne qualité, de sorte que la seconde moitié du projet a été modifiée pour adopter un modèle de développement agile.
 \end{itemize}
 
 \subsection{Planification du projet et chronologie}
@@ -208,9 +209,27 @@ Voici le plan détaillé du projet et la chronologie prévue :
 
 \subsection{Architecture logicielle de haut niveau}
 
-Le projet est structuré selon le modèle MVC (Modèle-Vue-Contrôleur), complété par des couches supplémentaires pour la gestion des services et l'accès aux données. Cette organisation vise à séparer les préoccupations, facilitant ainsi la maintenance et l'évolutivité du système.
+Ce projet adopte le modèle d'architecture MVC (Modèle-Vue-Contrôleur) et est étendu par une couche de gestion des services et une couche d'accès aux données. Le but de cette architecture est de réaliser une séparation des préoccupations, rendant ainsi le système plus facile à maintenir et à mettre à jour. Dans ce projet, la couche Service est principalement responsable du traitement de la logique métier. Cette couche est conçue pour gérer des opérations commerciales complexes, assurant ainsi la clarté et la maintenabilité du code. En même temps, la couche Modèle joue principalement le rôle de porteur de données dans ce projet. La simplification de la couche Modèle rend la structure des données du système plus intuitive et facilite également l'interaction avec la source de données. La couche Vue est responsable de la présentation des données, tandis que la couche Contrôleur coordonne l'interaction entre le modèle et la vue.
+\subsubsection{Choix de la Pile Technologique}
+Pour la partie backend du projet, nous avons choisi le framework SpringBoot, tandis que le frontend utilise JavaFX. SpringBoot, en tant que framework backend largement utilisé, offre des avantages tels que le développement rapide, la facilité de configuration et un solide soutien communautaire. Cependant, en raison des caractéristiques du cycle de vie des composants JavaFX, leur intégration directe avec SpringBoot présente des défis. Pour résoudre ce problème, nous avons apporté des modifications adaptatives à la structure du projet pour assurer la compatibilité entre les deux. Pour plus de détails sur les modifications, veuillez consulter le document technique.
+\subsubsection{Caractéristiques Clés de SpringBoot}
+\begin{enumerate}
+    \item Démarrage Rapide et Configuration Automatique
+    \begin{itemize}
+        \item La fonction de démarrage rapide de SpringBoot réduit considérablement le cycle de développement, nous permettant d'entrer plus rapidement dans la phase principale du développement. De plus, le mécanisme de configuration automatique de SpringBoot simplifie la configuration du projet, en configurant automatiquement le conteneur Spring et les dépendances, réduisant ainsi la complexité de la configuration et améliorant l'efficacité du développement.
+    \end{itemize}
+    \item Injection de Dépendances
+    \begin{itemize}
+        \item Le mécanisme d'injection de dépendances de SpringBoot est particulièrement bénéfique pour les tests unitaires et d'intégration ultérieurs. Ce mécanisme réduit le couplage entre les composants, facilitant ainsi les tests unitaires. L'injection de dépendances améliore non seulement la modularité du code, mais rend également les tests plus faciles à réaliser et à maintenir, assurant ainsi la qualité du code et la stabilité du système.
+    \end{itemize}
+\end{enumerate}
 
-\subsubsection{Modèle (Model)}
+
+
+
+
+\begin{comment}
+    \subsubsection{Modèle (Model)}
 La couche modèle constitue le cœur de l'architecture logicielle. Elle encapsule la logique métier et les structures de données, gérant les interactions avec la base de données et l'exécution des règles métier. Les entités au sein du dossier \texttt{model} représentent les objets du domaine tels que les comptes financiers, les transactions et les portefeuilles d'investissement.
 
 \subsubsection{Vue (View)}
@@ -229,37 +248,102 @@ La couche d'accès aux données abstrait la persistance et la récupération des
 La configuration de l'application est gérée dans la couche de configuration. Elle inclut les paramètres de démarrage, les configurations de la base de données, les clés API pour les services externes et les détails de l'injection de dépendance. Le dossier \texttt{config} contient des classes de configuration et du code d'initialisation.
 
 Chaque couche est conçue pour être indépendante mais interopérable, permettant une division claire des responsabilités et une évolution simplifiée du système.
+\end{comment}
+
+
 \subsection{Interaction du système}
 
+\subsubsection{vue d'ensemble du système}
 
+L'application de gestion de portefeuille est une solution complète conçue pour permettre aux utilisateurs de gérer efficacement leurs investissements, qu'il s'agisse d'actions, de crypto-monnaies ou de transactions financières. Son objectif principal est de fournir une interface utilisateur simple, intuitive et performante permettant à l'utilisateur de visualiser, analyser et effectuer des actions liées à son portefeuille financier.
+L'application prend en charge la gestion de divers types d'actifs, notamment :
+\begin{itemize}
+    \item les actions : l'application permet de suivre, d'acheter ou vendre des actions.
+    \item les crypto-monaies : l'application donne la possibilité à l'utilisateur de suivre les variations de prix des crypto-monnaies, d'acheter ou de vendre des crypto-monnaies
+    \item les transactions : l'application permet de gérer des transactions financières liées aux actions et aux crypto-monnaies, offrant ainsi une vue détaillée de l'historique des transactions.
+    \item la gestion de porte-feuilles : ajouter, cloner et visualiser ce que contient les porte-feuilles de l'utilisateur.
+\end{itemize}
 
+\subsubsection{architecture et conception}
+
+L'application repose sur une architecture robuste, utilisant des modèles de conception tels que MVC (Modèle-Vue-Contrôleur) pour assurer une séparation claire des responsabilités. Elle peut être intégrée à des services externes (API) pour fournir des informations en temps réel sur les actions et les crypto-monnaies.
+
+\begin{itemize}
+    \item Model : Le modèle est responsable de la gestion des données, de la logique métier et des interactions avec la base de données. Il comprend des classes telles que : 
+    
+    - Asset
+    
+    - Market
+    
+    - marketTransactoin
+    
+    - Portfolio
+    
+    - Transaction
+    
+    - User
+    
+\end{itemize}
+
+\subsubsection{Conception de l'interface utilisateur}
+
+L'interface utilisateur est organisée de manière à fournir une navigation claire et à permettre un accès rapide aux fonctionnalités principales de l'application. Le composant clé de l'application est le menu à partir duquel l'utilisateur peut accéder à toutes les fonctionnalité de l'application après s'être identifier ou après avoir créé un compte.
+dans le menu, l'utilisateur peut avoir accès à :
+\begin{itemize}
+    \item la liste et la gestion de ses portefeuilles (évolution des porte-feuilles, création de nouveaux, clonage de porte-feuilles)
+    \item liste et gestion des actions (cours avec API, vente, achat)
+    \item liste et gestion des crypto-monnaies (cours avec API, vente, achat)
+    \item gestion des transactions (virement)
+\end{itemize}
+
+\subsubsection{Flux d'interaction}
+
+Les flux d'interactions de l'application de gestion de portefeuille décrivent comment les utilisateurs interagissent avec le système pour effectuer diverses actions liées à la gestion de leurs actifs financiers. Ces interactions englobent l'ajout d'actifs, la gestion de portefeuilles, l'exécution de transactions, et la visualisation des performances. Voici un aperçu non exhaustif des principaux flux d'interactions :
+
+\begin{itemize}
+    \item gestion des porte-feuilles
+    \item ajout ou vente d'actif
+    \item ajout ou vente de crypto-monnaies
+    \item exécution de transaction
+    \item visualisation des performances
+    
+\end{itemize}
 \subsection{Considérations de sécurité et de performance}
+\subsubsection{Considérations sur la Sécurité}
+Dans ce projet, nous avons adopté une méthode de stockage de données locale pour les utilisateurs, spécifiquement au format de fichier JSON. Afin d'assurer la sécurité des données, toutes les informations sensibles ont été cryptées. La méthode de cryptage spécifique et les détails sont décrits en détail dans le document technique. Prenant l'exemple du mot de passe utilisateur, en tant que partie des informations sensibles, il est toujours stocké localement sous forme cryptée pour garantir la sécurité.
+\subsubsection{Considérations sur la Performance}
+En termes de performance, nous avons remarqué que le volume de lecture et d'écriture des données dans le projet actuel n'est pas important. Sur cette base, nous avons développé un ensemble d'outils personnalisés pour la lecture et l'écriture de documents. Cet outil, en implémentant les fonctionnalités de sérialisation et de désérialisation de la bibliothèque Jackson, permet une lecture et une écriture efficaces des fichiers. Pour plus de détails sur la mise en œuvre, veuillez consulter le document technique.
 
-
-
+Étant donné que les membres de l'équipe, Remi et Wenbin, ne sont pas encore familiers avec les principes de la programmation asynchrone, nous n'avons pas utilisé de méthodes asynchrones dans le projet actuel. Cela signifie que toutes les opérations documentaires sont thread-safe.
+\subsubsection{Développement Piloté par Événements}
+Compte tenu de la manipulation de fichiers locaux, de la gestion des données en mémoire et des mises à jour de l'interface utilisateur (UI) impliquées dans le projet, nous avons choisi le modèle de développement piloté par événements pour optimiser le traitement de ces aspects. Le développement piloté par événements offre un mécanisme efficace pour faire face aux divers événements liés aux opérations de fichier et aux mises à jour de l'UI. Pour plus de détails sur le développement piloté par événements, veuillez consulter le document technique.
 \subsection{Diagramme de processus métier}
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{../analysises/bussness process/V1.0/analysisV1.0.png}
+    \includegraphics[width=0.7\textwidth]{../analysises/bussness process/V1.0/analysisV1.0.png}
     \caption{Diagramme de processus métier}
     \label{fig:processusMetier}
 \end{figure}
-\newpage
 \subsection{Diagramme de UML}
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{../analysises/UML/V1.0/UMLV1.4.png}
+    \includegraphics[width=0.7\textwidth]{../analysises/UML/V1.0/UMLV1.4.png}
     \caption{Diagramme de UML}
     \label{fig:UML}
 \end{figure}
 
-\subsection{Changement de Modèle de Conception}
-\subsubsection{Introduction}
+\subsection{Application des Modèles de Conception}
+\subsubsection{Méthode de la Fabrique}
+Dans ce projet, le modèle de conception de la méthode de la fabrique est utilisé pour créer différents types d'actifs. Nous avons plusieurs types d'actifs, tels que l'espèce et les dépôts à terme, qui héritent tous de la classe Asset. Les dépôts à terme, en tant que type spécial d'actif, nécessitent des paramètres supplémentaires tels que le taux d'intérêt pour être instanciés. La méthode de la fabrique nous permet de créer différents types d'objets d'actifs selon les besoins, sans exposer la logique spécifique de leur création. Ce modèle offre un moyen flexible d'étendre les types d'actifs tout en maintenant la clarté et la maintenabilité du code.
+\subsubsection{Modèle Singleton}
+Le modèle Singleton est largement appliqué dans cette application. Dans notre conception, le programme permet à un seul utilisateur de se connecter et d'utiliser l'application à tout moment. Chaque utilisateur ne peut accéder et opérer qu'un seul portfolio et un seul actif à la fois. De plus, pour chaque portfolio en cours d'opération, il n'y a qu'une seule instance de la classe Cash dans le système. Le modèle Singleton est très approprié ici, car il assure qu'il n'y a qu'une seule instance globale, ce qui aide à éviter les conflits et les incohérences sur les ressources partagées. En même temps, cela simplifie la gestion des ressources et le contrôle d'accès, assurant la stabilité du programme et la cohérence des données.
+\subsubsection{Raison pour Ne Pas Utiliser le Modèle Observateur}
+Bien que notre programme adopte une architecture pilotée par événements pour les mises à jour de l'UI et des données, nous avons choisi de ne pas utiliser le modèle observateur. Cela est principalement dû au fait que dans le contexte spécifique de notre projet actuel, l'architecture pilotée par événements est suffisante pour gérer efficacement les mises à jour synchronisées de l'UI et des données. Bien que le modèle observateur puisse offrir un contrôle de mise à jour plus fin dans certains scénarios, il peut également introduire des dépendances plus complexes et des coûts de maintenance plus élevés. Dans notre cas, la méthode simplifiée pilotée par événements répond déjà aux besoins, tout en conservant la simplicité et l'efficacité du système.
 
 
 
-
-\section{Conception détaillée}
+\begin{comment}
+    \section{Conception détaillée}
 \subsection{Service}
 \subsubsection{Registration Service (Service d'Enregistrement)}
 \paragraph{Responsabilités:} Traite la logique d'enregistrement des nouveaux utilisateurs.
@@ -434,11 +518,55 @@ Chaque couche est conçue pour être indépendante mais interopérable, permetta
   \item \textbf{transactionType}: TRANSACTION\_TYPE
   \item \textbf{timeStamp}: Time
 \end{itemize}
-\section{Guide de développement et de déploiement}
-\section{Test Plan et Test Cases}
-\section{Manuel de l'utilisateur}
-\section{Évaluation des performances}
-\section{Exemple de code}
-\section{Journal des modifications}
+\end{comment}
+\begin{comment}
+    \section{Guide de développement et de déploiement}
+\end{comment}
+
+\section{Aperçu du Plan de Test}
+\subsection{Tests Unitaires}
+Les tests unitaires seront effectués après la complétion de chaque partie pour assurer la fonctionnalité et la fiabilité de chaque composant. Les normes de test unitaire comprennent, mais ne sont pas limitées à :
+\begin{enumerate}
+    \item \textbf{Tests de Fonctionnalité :} Assurer que chaque unité fonctionne conformément aux attentes.
+    \item \textbf{Tests de Conditions Limites : }Tester le comportement des unités dans des conditions limites, y compris les entrées extrêmes, anormales et erronées.
+    \item \textbf{Tests de Performance : }Évaluer la performance des unités sous des charges normales et de pointe.
+    \item \textbf{Couverture du Code :} Augmenter autant que possible la couverture des tests pour assurer que les principaux chemins logiques soient testés.
+    \item \textbf{Tests de Régression :} Effectués après des modifications du code pour s'assurer que les nouveaux changements n'affectent pas les fonctionnalités existantes.
+\end{enumerate}
+\subsubsection{Tests d'Intégration}
+Après la réussite de tous les tests unitaires, les tests d'intégration commenceront. Les normes de test d'intégration comprennent :
+\begin{enumerate}
+    \item \textbf{Consistance des Interfaces :} Assurer que les interfaces entre différents modules peuvent interagir correctement.
+    \item \textbf{Tests de Flux de Données :} Vérifier l'exactitude du transfert de données entre les modules.
+    \item \textbf{Tests de Gestion d'Erreurs : }Vérifier les mécanismes de traitement et de réponse des modules en cas d'erreur.
+    \item \textbf{Tests de Performance et de Fiabilité :} Évaluer la performance et la stabilité du système entier après l'intégration.
+\end{enumerate}
+\subsubsection{Tests du Système Intégré et de l'UI}
+Après les tests d'intégration, le processus de liaison avec l'UI frontal et l'intégration au contrôleur commencera. À ce stade, l'accent est mis sur la capacité de travail conjoint de tout le système, y compris la réactivité de l'UI et l'exactitude des données.
+\subsubsection{Omission des Tests JavaFX}
+En raison de contraintes de temps, une partie spécifique des tests JavaFX n'a pas été effectuée, mais a été validée directement lors des tests d'intégration du système. Bien que cette méthode puisse économiser du temps, elle peut augmenter le risque de défauts cachés dans le système.
+\subsubsection{Tests Automatisés et Intégration Continue (CI)}
+Limité par le temps et une familiarité insuffisante avec les processus de test automatisé Java, le projet n'a pas déployé d'intégration continue (CI) ni de génération automatique de documentation de test. Bien que ces étapes puissent être omises dans des situations de contrainte de temps, elles sont généralement cruciales pour maintenir la qualité du code et détecter rapidement les problèmes.
+\begin{comment}
+    \section{Manuel de l'utilisateur}
+\end{comment}
+
+\section{Rapport de Test de Performance}
+\subsection{Performance de Lecture et d'Écriture de Fichiers}
+Un des points clés des tests de performance a été l'évaluation de l'efficacité des opérations de lecture et d'écriture de fichiers dans le système. Après plusieurs tests, nous avons constaté que la durée moyenne des opérations de lecture et d'écriture de fichiers est de 245 millisecondes. Ce résultat a été obtenu sans le traitement asynchrone et sans nécessiter d'interaction avec des serveurs cloud.
+\subsection{Évaluation de la Performance}
+Compte tenu des facteurs suivants, nous considérons que ce délai est acceptable :
+\begin{enumerate}
+    \item \textbf{Contexte d'Application :} Étant donné que l'application n'implique pas d'interactions backend complexes ou de traitement de données, les opérations de lecture et d'écriture de fichiers constituent une part majeure de la consommation de performance dans l'ensemble des opérations de l'application.
+    \item \textbf{Expérience Utilisateur :} Dans un contexte sans opérations asynchrones, un temps de traitement de 245 millisecondes est peu susceptible d'avoir un impact négatif significatif sur l'expérience utilisateur.
+    \item \textbf{Référence de Performance :} Pour une application qui n'interagit pas avec des serveurs cloud et dépend principalement des ressources locales, de telles performances sont raisonnables.
+\end{enumerate}
+
+\begin{comment}
+    \section{Exemple de code}
+    \section{Journal des modifications}
 \section{Annexe}
+\end{comment}
+
+
 \end{document}

@@ -9,7 +9,7 @@
 \usepackage{hyperref}[colorlinks,linkcolor=blue]
 \usepackage{listings}
 \geometry{a4paper, margin=1in}
-
+\setlength{\parindent}{0pt}
 \title{Documentation technique}
 \date{30/11/2023}
 \author{YANG Chen}
@@ -20,7 +20,7 @@
 \newpage
 \section{Intégration de JavaFX et Spring Boot et résolution de problèmes}
 \subsection{Vue d'ensemble}
-  Dans notre projet actuel, où nous utilisons JavaFX comme framework front-end et Spring comme framework back-end, nous avons rencontré un problème critique : malgré le fait que nous voulions implémenter l'injection de dépendances à travers Spring, les composants Controller et Service ont des références `null` au moment de l'exécution. Cela indique que ces composants ne sont pas correctement identifiés et gérés par le conteneur Spring.
+  Dans notre projet actuel, où nous utilisons JavaFX comme framework front-end et SpringBoot comme framework back-end, nous avons rencontré un problème critique : malgré le fait que nous voulions implémenter l'injection de dépendances à travers Spring, les composants Controller et Service ont des références `null` au moment de l'exécution. Cela indique que ces composants ne sont pas correctement identifiés et gérés par le conteneur Spring.
 \subsection{La nécessité de l'injection de dépendances}
 L'injection de dépendances (DI) est un modèle de conception logicielle qui permet de gérer les dépendances d'une classe de manière externe (par exemple, fichiers de configuration ou annotations) plutôt que de les coder en dur à l'intérieur de la classe :
 \begin{itemize}
@@ -112,8 +112,6 @@ public class UserRepository {
 
 \subsection{Références}
 \href{https://www.cnblogs.com/lingkang/p/16698421.html}{https://www.cnblogs.com/lingkang/p/16698421.html}
-\section{}
-
 
 \section{Classe Outils(Tools)}
 \subsection{Vue d'ensemble}
@@ -230,4 +228,36 @@ public class MyService {
 }
 
 \end{lstlisting}
+\section{Architecture Pilotée par Événements}
+\subsection{Aperçu}
+L'architecture pilotée par événements est un modèle de conception dans lequel le flux du système est déclenché et contrôlé par des événements. Cette architecture offre une grande flexibilité et extensibilité, permettant au système de répondre plus agilement aux changements internes ou externes.
+\subsection{Applications Principales}
+\begin{enumerate}
+    \item Synchronisation des Données
+    
+    Dans notre projet, l'architecture pilotée par événements est utilisée pour synchroniser les données en mémoire avec les données dans les fichiers locaux (stockés au format JSON). Les étapes principales de ce processus sont les suivantes :
+    \begin{itemize}
+        \item \textbf{Déclenchement d'Événements :} Un événement est déclenché lorsque les données en mémoire changent.
+        \item \textbf{Traitement des Données :} Le gestionnaire d'événements répond à cet événement en écrivant les données mises à jour dans le fichier JSON local.
+        \item \textbf{Mécanisme de Synchronisation :} Assure que les données en mémoire et dans le fichier restent cohérentes, réduisant le risque de perte ou d'incohérence des données.
+    \end{itemize}
+    \item Mises à Jour de l'UI en Temps Réel
+
+    L'architecture pilotée par événements est également adaptée pour les mises à jour en temps réel de l'interface utilisateur (UI). Cela est particulièrement important lorsque l'interface utilisateur doit répondre immédiatement aux changements de données ou aux interactions des utilisateurs. Les méthodes de mise en œuvre spécifiques comprennent :
+    \begin{itemize}
+        \item \textbf{Écoute d'Événements :} Les composants de l'UI écoutent les événements provenant de la logique backend ou des interactions des utilisateurs.
+        \item \textbf{Mises à Jour Réactives :} Lorsque les événements pertinents sont déclenchés, les composants de l'UI se mettent à jour en conséquence, affichant les dernières données ou états.
+        \item \textbf{Expérience Utilisateur :} Cette méthode assure que l'interface utilisateur reflète toujours l'état actuel du système, améliorant ainsi l'expérience utilisateur.
+    \end{itemize}
+\end{enumerate}
+\subsection{Avantages}
+Les principaux avantages de l'architecture pilotée par événements comprennent :
+\begin{itemize}
+    \item Découplage : Réduction de la dépendance directe entre les différentes parties du système, facilitant la maintenance et l'extension.
+    \item Flexibilité : Capacité à gérer de manière flexible une variété d'événements, améliorant l'adaptabilité du système.
+    \item Réactivité : La réponse rapide aux événements améliore la réactivité du système, en particulier en ce qui concerne les mises à jour de l'UI.
+\end{itemize}
+\subsection{Conclusion}
+L'architecture pilotée par événements a joué un rôle clé dans notre projet, en particulier dans la synchronisation des données et la mise à jour de l'UI. Elle a rendu le système plus modulaire, facile à étendre et a amélioré la réactivité de l'interface utilisateur ainsi que la fiabilité du traitement des données.
+    
 \end{document}
