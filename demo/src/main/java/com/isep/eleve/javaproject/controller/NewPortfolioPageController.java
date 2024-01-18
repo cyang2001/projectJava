@@ -3,6 +3,7 @@ package com.isep.eleve.javaproject.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javafx.scene.control.Alert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -38,10 +39,17 @@ public class NewPortfolioPageController {
       for (Portfolio portfolio : portfolios) {
         if (portfolio.getPortfolioName().equals(portfolioName)) {
           System.err.println("Portfolio name already exists");
-          // ToDo: add a pop up window to remind the user that the portfolio name already exists
+          showAlert("Information", "Portfolio's name already exist");
           return;
         }
       }
       portfolioService.createPortfolio(portfolioName);
+    }
+    protected void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }
