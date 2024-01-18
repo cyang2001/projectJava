@@ -160,6 +160,19 @@ public class TransactionService {
       transactionRepository.save(transaction);
     }
   }
+  /**
+   * Executes a transaction with the given parameters.
+   *
+   * @param quantity      the quantity of the asset being transacted
+   * @param price         the price of the asset being transacted
+   * @param portfolioId   the ID of the portfolio associated with the transaction
+   * @param transitionType   the type of transaction (e.g., BUY, SELL)
+   * @param interestRate  the interest rate for fixed deposit assets (ignored for other asset types)
+   * @param assetType     the type of asset being transacted
+   * @param assetName     the name of the asset being transacted
+   * @param ownerId       the ID of the owner associated with the transaction
+   * @throws IOException  if an I/O error occurs while saving the transaction
+   */
   public void executeTransaction(int quantity, BigDecimal price, int portfolioId, TRANSACTION_TYPE transitionType, BigDecimal interestRate, Constants.ASSET_TYPE assetType, String assetName, int ownerId) throws IOException {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Date date = new Date(System.currentTimeMillis());

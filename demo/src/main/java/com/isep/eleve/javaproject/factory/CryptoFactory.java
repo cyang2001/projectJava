@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.isep.eleve.javaproject.Tools.Constants.ASSET_TYPE;
 import com.isep.eleve.javaproject.model.Asset;
-import com.isep.eleve.javaproject.model.assets.cypto.CryptoCurrency;
+import com.isep.eleve.javaproject.model.assets.Cypto.CryptoCurrency;
 
 @Component
 @Qualifier("CryptoFactory")

@@ -27,6 +27,10 @@ import com.isep.eleve.javaproject.session.PortfolioSession;
 /**
  * This class represents a service for managing assets in a portfolio.
  */
+/**
+ * This class represents a service for managing assets in a portfolio.
+ * It provides methods for creating, cloning, and updating assets, as well as changing asset quantities and retrieving asset quantities.
+ */
 @Service
 public class AssetsService {
   private static final Logger logger = LoggerFactory.getLogger(AssetsService.class);
