@@ -97,7 +97,6 @@ public final class ViewConfig {
 	public final static String MAIN_TREE_HEADER_ITEM6 = "Portfolio Information";
 	public final static String MAIN_TREE_HEADER_ITEM7 = "Create New Portfolio";
 	public final static String MAIN_TREE_HEADER_ITEM8 = "Clone Portfolio";
-    public static final String MAIN_TREE_HEADER_ITEM9 = "Crypto Information";
     public static final String MAIN_TREE_HEADER_ITEM10 = "Buy Crypto";
     public static final String MAIN_TREE_HEADER_ITEM11 = "Sell Crypto";
     public static final String MAIN_TREE_HEADER_ITEM12 = "User Information";

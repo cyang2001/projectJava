@@ -61,7 +61,6 @@ public class MainController implements Initializable {
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM6),
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM7),
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM8),
-				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM9),
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM10),
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM11),
 				new TreeItem<String>(ViewConfig.MAIN_TREE_HEADER_ITEM12),
