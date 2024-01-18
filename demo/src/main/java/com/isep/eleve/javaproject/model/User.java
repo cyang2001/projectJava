@@ -71,6 +71,7 @@ public class User {
       this.portfoliosId = new ArrayList<>();
       this.portfolios = new ArrayList<>();
   }
+ 
   // default constructor for jackson
   public User() {
       this.userName = null;

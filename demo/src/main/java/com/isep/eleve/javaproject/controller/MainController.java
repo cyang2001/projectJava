@@ -86,7 +86,7 @@ public class MainController implements Initializable {
 				pagePath = ViewConfig.ANALYSIS_VIEW_PATH;
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM2:
-				pagePath = ViewConfig.ASSET_INFORMATION_VIEW_PATH;
+				pagePath = ViewConfig.TRANSACTION_HISTORY_VIEW_PATH;
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM3:
 				pagePath = ViewConfig.ADD_ASSET_VIEW_PATH;
@@ -105,9 +105,6 @@ public class MainController implements Initializable {
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM8:
 				pagePath = ViewConfig.CLONE_PORTFOLIO_VIEW_PATH;
-				break;
-			case ViewConfig.MAIN_TREE_HEADER_ITEM9:
-				pagePath = ViewConfig.CRYPTO_INFORMATION_VIEW_PATH;
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM10:
 				pagePath = ViewConfig.BUY_CRYPTO_VIEW_PATH;

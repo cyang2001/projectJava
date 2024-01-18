@@ -89,10 +89,10 @@ public class BuyAssetController {
         if (asset==null){
             showAlert("asset not found", "Creating a new asset");
             // ToDo create a new asset for user
-            transactionService.executeTransaction(quantity,price,portfolioId, Constants.TRANSACTION_TYPE.BUY, interestRate, Constants.ASSET_TYPE_MAP.get(assetToBuyChoiceBox.getValue()), assetToBuyChoiceBox.getValue());
+            transactionService.executeTransaction(quantity,price,portfolioId, Constants.TRANSACTION_TYPE.BUY, interestRate, Constants.ASSET_TYPE_MAP.get(assetToBuyChoiceBox.getValue()), assetToBuyChoiceBox.getValue(), userSession.getCurrentUser().getUserId());
         }
         else {eventPublisher.publishEvent(new AssetChangedEvent(this, asset));
-            transactionService.executeTransaction(quantity, price, portfolioId, assetId, Constants.TRANSACTION_TYPE.BUY);
+            transactionService.executeTransaction(quantity, price, portfolioId, assetId, Constants.TRANSACTION_TYPE.BUY, userSession.getCurrentUser().getUserId());
         }
     }
 

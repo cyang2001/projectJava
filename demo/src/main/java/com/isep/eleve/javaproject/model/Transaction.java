@@ -6,7 +6,7 @@ import com.isep.eleve.javaproject.Tools.Constants.TRANSACTION_TYPE;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Transaction {
-  public Transaction( int portfolioId, int assetId, int quantity, BigDecimal price, TRANSACTION_TYPE transactionType, String timeStamp) {
+  public Transaction( int portfolioId, int assetId, int quantity, BigDecimal price, TRANSACTION_TYPE transactionType, String timeStamp, int ownerId) {
     this.setTransactioinId();
     this.portfolioId = portfolioId;
     this.assetId = assetId;
@@ -14,6 +14,7 @@ public class Transaction {
     this.price = price;
     this.transactionType = transactionType;
     this.timeStamp = timeStamp;
+    this.ownerId = ownerId;
   }
   private int transactionId;
   @JsonProperty("transactionId")

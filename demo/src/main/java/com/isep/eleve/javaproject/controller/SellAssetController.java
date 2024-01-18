@@ -89,7 +89,7 @@ public class SellAssetController {
           int assetId = asset.getAssetId();
           int quantity = Integer.parseInt(this.quantity.getText());
           BigDecimal price = new BigDecimal(Integer.parseInt(this.price.getText()));
-          transactionService.executeTransaction(quantity, price, portfolioId, assetId, Constants.TRANSACTION_TYPE.SELL);
+          transactionService.executeTransaction(quantity, price, portfolioId, assetId, Constants.TRANSACTION_TYPE.SELL, userSession.getCurrentUser().getUserId());
         }
     }
 

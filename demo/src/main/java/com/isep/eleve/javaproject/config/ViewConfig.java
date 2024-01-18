@@ -17,7 +17,7 @@ public final class ViewConfig {
   /**
    * The path to the asset information view FXML file.
    */
-  public static final String ASSET_INFORMATION_VIEW_PATH = "/com/isep/eleve/javaproject/view/AssetInformationView.fxml";
+  public static final String TRANSACTION_HISTORY_VIEW_PATH = "/com/isep/eleve/javaproject/view/TransactionHistoryView.fxml";
   public static final String ADD_ASSET_VIEW_PATH = "/com/isep/eleve/javaproject/view/AddAssetView.fxml";
   /**
    * The path to the buy asset view FXML file.
@@ -90,7 +90,7 @@ public final class ViewConfig {
 
 	public final static String MAIN_TREE_HEADER = "Home";
 	public final static String MAIN_TREE_HEADER_ITEM1 = "Analysis";
-	public final static String MAIN_TREE_HEADER_ITEM2 = "Asset Information";
+	public final static String MAIN_TREE_HEADER_ITEM2 = "Transaction History";
 	public final static String MAIN_TREE_HEADER_ITEM3 = "Add Asset";
 	public final static String MAIN_TREE_HEADER_ITEM4 = "Buy Asset";
 	public final static String MAIN_TREE_HEADER_ITEM5 = "Sell Asset";

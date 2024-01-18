@@ -69,7 +69,7 @@ public class TransactionRepository {
     List<Transaction> transactions = findAll();
     return transactions.stream().filter(t -> t.getOwnerId() == ownerId).collect(Collectors.toList());
   }
-
+  
   public void delete(Transaction transaction) throws IOException {
     List<Transaction> transactions = findAll();
     transactions.remove(transaction);

@@ -70,19 +70,20 @@ public class TransactionService {
    * @param transitionType
    * @throws IOException
    */
-  public void executeTransaction(int quantity, BigDecimal price, int portfolioId, int assetId, TRANSACTION_TYPE transitionType) throws IOException {
+  public void executeTransaction(int quantity, BigDecimal price, int portfolioId, int assetId, TRANSACTION_TYPE transitionType, int ownerId) throws IOException {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Date date = new Date(System.currentTimeMillis());
-    Transaction transaction = new Transaction(portfolioId, assetId, quantity, price, transitionType, sdf.format(date));
+    Transaction transaction = new Transaction(portfolioId, assetId, quantity, price, transitionType, sdf.format(date), ownerId);
     if (transitionType == TRANSACTION_TYPE.BUY) {
       Constants.CHANGE_TYPE changeType = Constants.CHANGE_TYPE.ADD;
       if (cashSession.getCash().getValue().compareTo(price.multiply(new BigDecimal(quantity))) >= 0) {
         assetsService.changeAssetQuantity(assetId, quantity, changeType);
         BigDecimal total = price.multiply(new BigDecimal(quantity));
         eventApplication.publishEvent(new CashSpentEvent(this, total));
+        eventApplication.publishEvent(new BuyAssetEvent(this, true, transaction.getTransactionId()));
       } else {
         logger.error("Not enough cash");
-        eventApplication.publishEvent(new BuyAssetEvent(this, null));
+        eventApplication.publishEvent(new BuyAssetEvent(this, false, transaction.getTransactionId()));
       }
     } else if(transitionType == TRANSACTION_TYPE.SELL) {
       Constants.CHANGE_TYPE changeType = Constants.CHANGE_TYPE.SUBTRACT;
@@ -90,9 +91,10 @@ public class TransactionService {
         assetsService.changeAssetQuantity(assetId, quantity, changeType);
         BigDecimal total = price.multiply(new BigDecimal(quantity));
         eventApplication.publishEvent(new CashEarnedEvent(this, total));
+        eventApplication.publishEvent(new SellAssetEvent(this, true, transaction.getTransactionId()));
       } else {
         logger.error("Not enough assets");
-        eventApplication.publishEvent(new SellAssetEvent(this));
+        eventApplication.publishEvent(new SellAssetEvent(this, false, transaction.getTransactionId()));
       }
     }
     transactionRepository.save(transaction);
@@ -133,7 +135,7 @@ public class TransactionService {
           eventApplication.publishEvent(new CashSpentEvent(this, total));
         }
         assetsService.changeAssetQuantity(userRepository.findByUserId(marketTransactionSession.getMarketTransaction().getPublisherId()).getPortfolios().stream().filter(p -> p.getPortfolioId() == marketTransactionSession.getMarketTransaction().getPortfolioId()).collect(java.util.stream.Collectors.toList()).get(0).getAssets().stream().filter(a -> a.getAssetName().equals("CASH")).collect(java.util.stream.Collectors.toList()).get(0).getAssetId(), price.multiply(new BigDecimal(quantity)), Constants.CHANGE_TYPE.ADD,true); 
-        Transaction transaction = new Transaction(portfolioId, assetId, quantity, price, transitionType, sdf.format(date));
+        Transaction transaction = new Transaction(portfolioId, assetId, quantity, price, transitionType, sdf.format(date), marketTransactionSession.getMarketTransaction().getPublisherId());
         transactionRepository.save(transaction);
         marketTransactionSession.getMarketTransaction().setIsBuy(true);
       } else {
@@ -154,33 +156,39 @@ public class TransactionService {
       if (flag == false) {
         System.out.println("No such asset");
       }
-      Transaction transaction = new Transaction(portfolioId, assetId, quantity, price, transitionType, sdf.format(date));
+      Transaction transaction = new Transaction(portfolioId, assetId, quantity, price, transitionType, sdf.format(date), marketTransactionSession.getMarketTransaction().getPublisherId());
       transactionRepository.save(transaction);
     }
   }
-  public void executeTransaction(int quantity, BigDecimal price, int portfolioId, TRANSACTION_TYPE transitionType, BigDecimal interestRate, Constants.ASSET_TYPE assetType, String assetName) throws IOException {
+  public void executeTransaction(int quantity, BigDecimal price, int portfolioId, TRANSACTION_TYPE transitionType, BigDecimal interestRate, Constants.ASSET_TYPE assetType, String assetName, int ownerId) throws IOException {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Date date = new Date(System.currentTimeMillis());
     Constants.CHANGE_TYPE changeType = Constants.CHANGE_TYPE.ADD;
+    int transactionId = 0;
     if (cashSession.getCash().getValue().compareTo(price.multiply(new BigDecimal(quantity))) >= 0) {
-      if (assetType.equals("FIXED_DEPOSIT")) {
+      if (assetType.equals(Constants.ASSET_TYPE_MAP.get("FIXED_DEPOSIT"))) {
         Asset assetCreated =  assetsService.createAsset(assetName,quantity,price,assetType, interestRate,portfolioId,true );
-        Transaction transaction = new Transaction(portfolioId, assetCreated.getAssetId() , quantity, price, transitionType, sdf.format(date));
+        Transaction transaction = new Transaction(portfolioId, assetCreated.getAssetId() , quantity, price, transitionType, sdf.format(date), ownerId);
         transactionRepository.save(transaction);
+        transactionId = transaction.getTransactionId();
       } else {
         Asset assetCreated = assetsService.createAsset(assetName,quantity,price,assetType,new BigDecimal(0), portfolioId, true);
-        Transaction transaction = new Transaction(portfolioId, assetCreated.getAssetId(), quantity, price, transitionType, sdf.format(date));
+        Transaction transaction = new Transaction(portfolioId, assetCreated.getAssetId(), quantity, price, transitionType, sdf.format(date), ownerId);
         transactionRepository.save(transaction);
+        transactionId = transaction.getTransactionId();
       }
       BigDecimal total = price.multiply(new BigDecimal(quantity));
       eventApplication.publishEvent(new CashSpentEvent(this, total));
+      eventApplication.publishEvent(new BuyAssetEvent(this, true, transactionId));
     } else {
       logger.error("Not enough cash");
-      eventApplication.publishEvent(new BuyAssetEvent(this, null));
+      eventApplication.publishEvent(new BuyAssetEvent(this, false, transactionId));
     }
 
 
 
   }
-    
+  public List<Transaction>getTransactionByOwnerId(int transactionOwnerId) throws IOException {
+    return transactionRepository.findByOwnerId(transactionOwnerId);
+  }
 }

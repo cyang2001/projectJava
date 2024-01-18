@@ -60,11 +60,8 @@ public class DataUpdateListener {
     private MarketTransactionRepository marketTransactionRepository;
     @EventListener
     public void onPortfolioCreated(PortfolioCreatedEvent event) throws IOException {
-        //userSession.getCurrentUser().addPortfolio(event.getPortfolio());
-        //userRepository.save(userSession.getCurrentUser());
         logger.info("Portfolio created_event: " + event.getPortfolio().getPortfolioName());
         portfolioSession.setCurrentPortfolio(event.getPortfolio());
-        //cashSession.setCash(portfolioSession.getCurrentPortfolio().getCash());
         StringBuffer sb = new StringBuffer();
         sb.append(event.getPortfolio().getPortfolioName());
         showAlert("New portfolio created", "New Portfolio Created : " + sb.toString());
@@ -151,15 +148,27 @@ public class DataUpdateListener {
     }
     @EventListener
     public void onAssetBought(BuyAssetEvent event) {
-        StringBuffer sb = new StringBuffer();
-        sb.append("Not enough money");
-        showAlert("Buy Asset failed", sb.toString());
+        if (event.getIsSuccessful()) {
+            StringBuffer sb = new StringBuffer();
+            sb.append("Asset bought");
+            showAlert("Buy Asset successful", sb.toString());
+        } else {
+            StringBuffer sb = new StringBuffer();
+            sb.append("Not enough money");
+            showAlert("Buy Asset failed", sb.toString());
+        }
     }
     @EventListener
     public void onAssetSold(SellAssetEvent event) {
-        StringBuffer sb = new StringBuffer();
-        sb.append("Not enough asset");
-        showAlert("Sell Asset failed", sb.toString());
+        if (event.getIsSuccessful()) {
+            StringBuffer sb = new StringBuffer();
+            sb.append("Asset sold");
+            showAlert("Sell Asset successful", sb.toString());
+        } else {
+            StringBuffer sb = new StringBuffer();
+            sb.append("Not enough asset");
+            showAlert("Sell Asset failed", sb.toString());
+        }
     }
     @EventListener
     public void onAssetQuantityChanged(AssetQuantityChangedEvent event) throws IOException {
@@ -234,12 +243,21 @@ public class DataUpdateListener {
     public void onCashSpent(CashSpentEvent event) throws IOException {
         cashSession.getCash().setPrice(cashSession.getCash().getPrice().subtract(event.getPrice()));
         assetsRepository.save(cashSession.getCash());
-        
+        portfolioSession.getCurrentPortfolio().updateAsset(cashSession.getCash());
+        userSession.getCurrentUser().updatePortfolio(portfolioSession.getCurrentPortfolio());
+        portfolioRepository.save(portfolioSession.getCurrentPortfolio());
+        userRepository.save(userSession.getCurrentUser());
+        logger.info("Cash spent_event: " + event.getPrice());
     }
     @EventListener
     public void onCashEarned(CashEarnedEvent event) throws IOException {
         cashSession.getCash().setPrice(cashSession.getCash().getPrice().add(event.getPrice()));
         assetsRepository.save(cashSession.getCash());
+        portfolioSession.getCurrentPortfolio().updateAsset(cashSession.getCash());
+        userSession.getCurrentUser().updatePortfolio(portfolioSession.getCurrentPortfolio());
+        portfolioRepository.save(portfolioSession.getCurrentPortfolio());
+        userRepository.save(userSession.getCurrentUser());
+        logger.info("Cash earned_event: " + event.getPrice());
     }
 
     @EventListener
