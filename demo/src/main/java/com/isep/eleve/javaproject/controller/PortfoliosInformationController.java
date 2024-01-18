@@ -43,8 +43,12 @@ public class PortfoliosInformationController {
         sb.append("User Name: " + userSession.getCurrentUser().getUserName() + "\n");
         List<Portfolio> portfolios = userSession.getCurrentUser().getPortfolios();
         PieChartUtils pieChartUtils = new PieChartUtils(pieChart);
+        userPortfolio.setText("");
         for (Portfolio portfolio : portfolios) {
             List<Asset> assets = portfolio.getAssets();
+            if (!portfolio.getPortfolioName().equals(portfolioChoiceBox.getValue())) {
+                continue;
+            }
             sb.append("Portfolio Name: " + portfolio.getPortfolioName() + "\n");
             sb.append("Portfolio Value: " + portfolio.getValue() + "\n");
             sb.append("Portfolio Assets: " + "\n");

@@ -26,7 +26,7 @@ public class PieChartUtils {
 
     public void showChart() {
         pieChart.setData(pieChartData);
-        setTitle("Portfolio Pie Chart");
+        //setTitle("Portfolio Pie Chart");
         setMarkVisible(true);
     }
 
