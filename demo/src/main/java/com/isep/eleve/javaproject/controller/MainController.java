@@ -79,9 +79,9 @@ public class MainController implements Initializable {
 
 		String pagePath = "";
 		switch (selectedItem.getValue()) {
-			case ViewConfig.MAIN_TREE_HEADER:
-				pagePath = ViewConfig.HOME_VIEW_PATH;
-				break;
+			//case ViewConfig.MAIN_TREE_HEADER:
+			//	pagePath = ViewConfig.HOME_VIEW_PATH;
+			//	break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM1:
 				pagePath = ViewConfig.ANALYSIS_VIEW_PATH;
 				break;

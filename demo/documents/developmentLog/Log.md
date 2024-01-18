@@ -75,8 +75,11 @@ Switch page fait dans App, App extends dans HomeController, BuyAssetController, 
 SellCryptoController et AnalysisController pour les swtch page effectifs.
 
 **12/01/2024** Chen
-Essayer de faire la parite de AddAssetController, mais vu quelque,
-bug. J'ai refaire les event
+Essayer de faire la partie de AddAssetController, mais vu quelques
+bug. J'ai refait les event
+
+**14/01/2024** Rémi
+BuyAsset et SellAssetController faits
 
 **16/01/2024** Chen
 Fini les tests de Controleur, et puis toutes les erreurs sont commentées.
@@ -87,4 +90,10 @@ Fini les tests de Controleur, et puis toutes les erreurs sont commentées.
 4. Données historiques sur les actions via des graphiques linéaires
 5. Afficher les détails des actifs sélectionnés dans l'interface utilisateur
 Afficher des informations sur l'utilisateur
-Déconnexion
+
+**17/01/2024** Rémi
+Ajout de fonction au controller BuyAsset
+changement des pages fxml
+
+**18/01/2024** Rémi
+Déconnexion faite
