@@ -66,7 +66,7 @@ public class BuyAssetController {
     public void initialize() {
         List<String> portfolioNames = userSession.getCurrentUser().getPortfolios().stream().map(portfolio -> portfolio.getPortfolioName()).collect(java.util.stream.Collectors.toList());
         //System.err.println(portfolioNames);
-        assetToBuyChoiceBox.setItems(FXCollections.observableArrayList("BTC", "AAPL", "FIXED_DEPOSIT"));
+        assetToBuyChoiceBox.setItems(FXCollections.observableArrayList("AAPL", "FIXED_DEPOSIT"));
         portfolioOfAssetToBuyChoiceBox.setItems(FXCollections.observableArrayList(portfolioNames));
     }
 
