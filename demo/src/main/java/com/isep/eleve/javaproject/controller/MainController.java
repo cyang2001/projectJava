@@ -71,7 +71,7 @@ public class MainController implements Initializable {
 	}
 
 
-	public void mainTreeViewClick() throws IOException {
+	public void mainTreeViewClick() throws Exception {
 		logger.log(Level.INFO, "Click on the main tree view");
 
 		TreeItem<String> selectedItem = main_treeview.getSelectionModel().getSelectedItem();
@@ -119,7 +119,7 @@ public class MainController implements Initializable {
 				pagePath = ViewConfig.USER_INFORMATION_VIEW_PATH;
 				break;
 			case ViewConfig.MAIN_TREE_HEADER_ITEM13:
-				pagePath = ViewConfig.LOGIN_VIEW_PATH;
+				App.switchToLogin();
 				break;
 		}
 		
